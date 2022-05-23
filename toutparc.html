@@ -1,12 +1,3 @@
-<?php
-
-// Start the session
-session_start();
-require("traitement.php");
-
-?>
-
-
 <!doctype html>
 
 
@@ -178,22 +169,24 @@ require("traitement.php");
                                                           });
                                                       });
                                                   </script>
-                                         
-                                                  <div class="col align-self-auto" style="width: 400px;">
+                                          <div class="col-xl-2" style="width: 500px; ">
+
+                                            <h1> Liste de creneaux disponibles</h1>
+                                            <h4> Veuillez choisir un horaire disponible :</h4>
                                                     <ul class="list-group">
-                                                        <li class="list-group-item active">Active item</li>
-                                                        <li class="list-group-item">Click me to active item</li>
-                                                        <li class="list-group-item">Click me too active item item</li>
+                                                        <li class="list-group-item">RDV1</li>
+                                                        <li class="list-group-item">RDV2</li>
+                                                        <li class="list-group-item">RDV3</li>
                                                     </ul>
+                                                    <div class="col-sm-12" style="margin-top: 25px ;" >
+                                                      <button type="button" class="btn btn-info">Prendre Rendez-vous</button>
+                                                  </div>
                                                   </div>
                                 </div>
                             </div>
                     </div>
 </div>
 
-                      <div class="col-sm-2" >
-                        <button type="button" class="btn btn-info">Prendre Rendez-vous</button>
-                    </div>
                         <div class="modal-footer">
                           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                         </div>
@@ -337,21 +330,48 @@ require("traitement.php");
                                                       });
                                                   </script>
                                          
-                                                  <div class="col align-self-auto" style="width: 400px;">
-                                                    <ul class="list-group">
-                                                        <li class="list-group-item active">Active item</li>
-                                                        <li class="list-group-item">Click me to active item</li>
-                                                        <li class="list-group-item">Click me too active item item</li>
-                                                    </ul>
-                                                  </div>
+                                         <div class="col-xl-2" style="width: 500px; ">
+
+<h1> Liste de creneaux disponibles</h1>
+<h4> Veuillez choisir un horaire disponible :</h4>
+
+                                          <ul class="list-group">
+                                              <li class="list-group-item">RDV1</li>
+                                              <li class="list-group-item">RDV2</li>
+                                              <li class="list-group-item">RDV3</li>
+                                              <li class="list-group-item">RDV1</li>
+                                              <li class="list-group-item">RDV2</li>
+                                              <li class="list-group-item">RDV3</li>
+                                              <li class="list-group-item">RDV1</li>
+                                              <li class="list-group-item">RDV2</li>
+                                              <li class="list-group-item">RDV3</li>
+                                              <li class="list-group-item">RDV1</li>
+                                              <li class="list-group-item">RDV2</li>
+                                              <li class="list-group-item">RDV3</li>
+                                              <li class="list-group-item">RDV1</li>
+                                              <li class="list-group-item">RDV2</li>
+                                              <li class="list-group-item">RDV3</li>
+                                              <li class="list-group-item">RDV1</li>
+                                              <li class="list-group-item">RDV2</li>
+                                              <li class="list-group-item">RDV3</li>
+                                              <li class="list-group-item">RDV1</li>
+                                              <li class="list-group-item">RDV2</li>
+                                              <li class="list-group-item">RDV3</li>
+                                              <li class="list-group-item">RDV1</li>
+                                              <li class="list-group-item">RDV2</li>
+                                              <li class="list-group-item">RDV3</li>
+                                              <li class="list-group-item">RDV1</li>
+                                              <li class="list-group-item">RDV2</li>
+                                              <li class="list-group-item">RDV3</li>
+                                          </ul>
+                                          <div class="col-sm-12" style="margin-top: 25px ;" >
+                                            <button type="button" class="btn btn-info">Prendre Rendez-vous</button>
+                                        </div>
+                                        </div>
                                 </div>
                             </div>
                     </div>
 </div>
-       
-                      <div class="col-sm-2" >
-                        <button type="button" class="btn btn-info">Prendre Rendez-vous</button>
-                    </div>
                         <div class="modal-footer">
                           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                         </div>
@@ -382,13 +402,13 @@ require("traitement.php");
                         </div>
                         <div class="modal-body">
                             <div class="list-group">
-                                <a href="#" class="list-group-item list-group-item-action" aria-current="true">
+                                <a data-bs-toggle="modal" href="#mod3" class="list-group-item list-group-item-action" aria-current="true">
                                   <div class="d-flex w-100 justify-content-between">
                                     <h5 class="mb-1">Prise de sang</h5>
                                   </div>
                                   
                                 </a>
-                                <a href="#" class="list-group-item list-group-item-action" aria-current="true">
+                                <a data-bs-toggle="modal" href="#mod3" class="list-group-item list-group-item-action" aria-current="true">
                                     <div class="d-flex w-100 justify-content-between">
                                       <h5 class="mb-1">Depistage COVID-19</h5>
                                     </div>
@@ -401,6 +421,87 @@ require("traitement.php");
                       </div>
                     </div>
                   </div>
+
+
+                  <div class="modal fade" id="mod3" tabindex="-1" aria-labelledby="mod3Label" aria-hidden="true">
+                    <div class="modal-dialog  modal-xl">
+                      <div class="modal-content">
+                        <div class="modal-header">  
+                          <h5 class="modal-title" style=" color: #000;" id="mod3Label">Laboratoire</h5>
+                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body" style=" color: #000;">
+                          
+                          <div class="page-content page-container" id="page-content" >
+                            <div class="padding">
+                                <div class="row container d-flex">
+                                            <div class="col-xl-6 col-md-12" style="height: 600px;">
+                                                                        <div class="card user-card-full flex-column "  style="height: 600px; width: 300px;">
+                                                                            <div class="row m-l-0 m-r-0">
+                                                                                <div class="col-sm-12 bg-c-lite-green user-profile">
+                                                                                    <div class="card-block text-center text-black">
+                                                                                        <div class="m-b-25">
+                                                                                            <img src="https://img.icons8.com/bubbles/100/000000/user.png" class="img-radius" alt="User-Profile-Image">
+                                                                                        </div>
+                                                                                        <h6 class="f-w-600"style=" color: #000; ">NOM LABO</h6>
+                                                                                        <i class=" mdi mdi-square-edit-outline feather icon-edit m-t-10 f-16"></i>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="col-sm-12" style="padding-left: 30px;">
+                                                                                    <div class="card-block">
+                                                                                        <h6 class="m-b-20 p-b-5 b-b-default f-w-600">Information</h6>
+                                                                                        <div class="row">
+                                                                                            <div class="col-sm-12">
+                                                                                                <p class="m-b-10 f-w-600">Email</p>
+                                                                                                <h6 class="text-muted f-w-400">aaaaa@gmail.com</h6>
+                                                                                            </div>
+                                                                                            <div class="col-sm-12">
+                                                                                                <p class="m-b-10 f-w-600">Telephone</p>
+                                                                                                <h6 class="text-muted f-w-400">06 00 00 00 00</h6>
+                                                                                            </div>
+
+                                                                                            <div class="col-sm-12" style="padding-top: 260px; padding-left: 100px;">
+                                                                                              <button type="button" class="btn btn-info">Contact</button>
+                                                                                          </div>
+                                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <script>
+                                                      $(document).ready(function() {
+                                                          $('li').click(function() {
+                                                              $('li.list-group-item.active').removeClass("active");
+                                                              $(this).addClass("active");
+                                                          });
+                                                      });
+                                                  </script>
+                                        <div class="col-xl-2" style="width: 500px; ">
+
+                                          <h1> Liste de creneaux disponibles</h1>
+                                          <h4> Veuillez choisir un horaire disponible :</h4>
+                                          <ul class="list-group">
+                                              <li class="list-group-item">RDV1</li>
+                                              <li class="list-group-item">RDV2</li>
+                                              <li class="list-group-item">RDV3</li>
+                                          </ul>
+                                          <div class="col-sm-12" style="margin-top: 25px ;" >
+                                            <button type="button" class="btn btn-info">Prendre Rendez-vous</button>
+                                        </div>
+                                        </div>
+                                </div>
+                            </div>
+                    </div>
+</div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
               </div>
             </div>
           </div>
