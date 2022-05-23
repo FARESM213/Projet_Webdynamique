@@ -38,7 +38,7 @@
                 </a>
                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                   <li><a class="dropdown-item" href="profil.html">Profil</a></li>
-                  <li><a class="dropdown-item" href="profil.html">Mes RDV</a></li>
+                  <li><a class="dropdown-item" href="mesRdv.html">Mes RDV</a></li>
                   <li><hr class="dropdown-divider"></li>
                   <li><a class="dropdown-item" href="index.html">Log out</a></li>
                 </ul>
@@ -173,6 +173,35 @@
 
                                             <h1> Liste de creneaux disponibles</h1>
                                             <h4> Veuillez choisir un horaire disponible :</h4>
+
+                                            
+<div style="margin-top: 50px; margin-bottom: 25px;">
+  <label for="start">Date :</label>
+  
+  <input type="date" id="datefield" name="dateRdv"
+         value="min"
+         min="2018-01-01" max="2025-12-31">
+  
+         
+  <script>  
+    var today = new Date();
+    var dd = today.getDate();
+    var mm = today.getMonth() + 1; //January is 0!
+    var yyyy = today.getFullYear();
+    
+    if (dd < 10) {
+       dd = '0' + dd;
+    }
+    
+    if (mm < 10) {
+       mm = '0' + mm;
+    } 
+        
+    today = yyyy + '-' + mm + '-' + dd;
+    document.getElementById("datefield").setAttribute("min", today);
+    
+    </script>
+  </div>
                                                     <ul class="list-group">
                                                         <li class="list-group-item">RDV1</li>
                                                         <li class="list-group-item">RDV2</li>
@@ -335,6 +364,36 @@
 <h1> Liste de creneaux disponibles</h1>
 <h4> Veuillez choisir un horaire disponible :</h4>
 
+<div style="margin-top: 50px; margin-bottom: 25px;">
+<label for="start">Date :</label>
+
+<input type="date" id="datefield" name="dateRdv"
+       value="min"
+       min="2018-01-01" max="2025-12-31">
+
+       
+<script>  
+  var today = new Date();
+  var dd = today.getDate();
+  var mm = today.getMonth() + 1; //January is 0!
+  var yyyy = today.getFullYear();
+  
+  if (dd < 10) {
+     dd = '0' + dd;
+  }
+  
+  if (mm < 10) {
+     mm = '0' + mm;
+  } 
+      
+  today = yyyy + '-' + mm + '-' + dd;
+  document.getElementById("datefield").setAttribute("min", today);
+  
+  </script>
+</div>
+
+
+
                                           <ul class="list-group">
                                               <li class="list-group-item">RDV1</li>
                                               <li class="list-group-item">RDV2</li>
@@ -482,6 +541,35 @@
 
                                           <h1> Liste de creneaux disponibles</h1>
                                           <h4> Veuillez choisir un horaire disponible :</h4>
+
+                                          
+<div style="margin-top: 50px; margin-bottom: 25px;">
+  <label for="start">Date :</label>
+  
+  <input type="date" id="datefield" name="dateRdv"
+         value="min"
+         min="2018-01-01" max="2025-12-31">
+  
+         
+  <script>  
+    var today = new Date();
+    var dd = today.getDate();
+    var mm = today.getMonth() + 1; //January is 0!
+    var yyyy = today.getFullYear();
+    
+    if (dd < 10) {
+       dd = '0' + dd;
+    }
+    
+    if (mm < 10) {
+       mm = '0' + mm;
+    } 
+        
+    today = yyyy + '-' + mm + '-' + dd;
+    document.getElementById("datefield").setAttribute("min", today);
+    
+    </script>
+  </div>
                                           <ul class="list-group">
                                               <li class="list-group-item">RDV1</li>
                                               <li class="list-group-item">RDV2</li>
@@ -515,4 +603,35 @@
       <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</p>
       <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</p>
 </body>
+
+<footer class="fixed-bottom bg-light">
+  <!-- Grid container -->
+  <div class="container p-4">
+    <!--Grid row-->
+    <div class="row">
+      <!--Grid column-->
+      <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+        <h5 class="text-uppercase">Contact</h5>
+
+        <ul class="list-unstyled mb-0">
+          <li>
+            <a href="omnessante@omnes.com!" class="text-dark">Mail : omnessante@omnes.com</a>
+          </li>
+          <li>
+            <a href="#!" class="text-dark">Telephone : 01 00 00 00 00</a>
+          </li>
+          <li>
+            <a href="https://www.google.com/maps/place/ECE+Paris/@48.8517668,2.2864819,15z/data=!4m2!3m1!1s0x0:0x167f5a60fb94aa76?sa=X&ved=2ahUKEwjq5cC_s_T3AhUP_4UKHX_KATsQ_BJ6BQi_ARAF!" class="text-dark">Adresse : 37 Quai de Grenelle, 75015 Paris</a>
+          </li>
+        </ul>
+      </div>
+      <!--Grid column-->
+
+  <!-- Copyright -->
+  <div class="text-center p-3" style="background-color: rgb(164, 231, 252);">
+    © 2022 Copyright:
+    <a class="text-dark" href="index.html">OMNESSante.com</a>
+  </div>
+  <!-- Copyright -->
+</footer>
 </html>
