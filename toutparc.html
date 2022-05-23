@@ -1,14 +1,28 @@
+<?php
+
+// Start the session
+session_start();
+require("traitement.php");
+
+?>
+
+
 <!doctype html>
+
+
 <html lang="en">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Catégories des Services</title>
+    <script src="
+    https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js">
+        </script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
   </head>
   <body>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
-    
+   
     <nav class="navbar" style="background-color: #d3e2ed;">          
         <div class="container-fluid">
           <a class="navbar-brand" href="index.html">
@@ -78,20 +92,21 @@
                                   </div>
                                   <p class="mb-1">Medecin Généraliste.</p>
                                 </a>
+              <!-- A faire : RECUP UN ID DE DOCTEUR EN CLIQUANT SUR UN DES DOC PROPOSES, REMPLIR LA LISTE DYNAMIQUEMENT DEPUIS DATABASE-->
 
-                                <a href="#" class="list-group-item list-group-item-action" aria-current="true">
+                                <a data-bs-toggle="modal" href="#mod1" class="list-group-item list-group-item-action" aria-current="true">
                                     <div class="d-flex w-100 justify-content-between">
                                       <h5 class="mb-1">Dr. ABC DEF</h5>
                                     </div>
                                     <p class="mb-1">Medecin Généraliste.</p>
                                   </a>
-                                  <a href="#" class="list-group-item list-group-item-action" aria-current="true">
+                                  <a data-bs-toggle="modal" href="#mod1" class="list-group-item list-group-item-action" aria-current="true">
                                     <div class="d-flex w-100 justify-content-between">
                                       <h5 class="mb-1">Dr. ABC DEF</h5>
                                     </div>
                                     <p class="mb-1">Medecin Généraliste.</p>
                                   </a>
-                                  <a href="#" class="list-group-item list-group-item-action" aria-current="true">
+                                  <a data-bs-toggle="modal" href="#mod1" class="list-group-item list-group-item-action" aria-current="true">
                                     <div class="d-flex w-100 justify-content-between">
                                       <h5 class="mb-1">Dr. ABC DEF</h5>
                                     </div>
@@ -106,6 +121,8 @@
                     </div>
                   </div>
 
+                <!-- Modal 1 Docteur Generaliste, a faire : RECUP INFORMATIONS DES DOC A PARTIR DU CLICK CHOIX PRECEDENT-->
+
                   <div class="modal fade" id="mod1" tabindex="-1" aria-labelledby="mod1Label" aria-hidden="true">
                     <div class="modal-dialog  modal-xl">
                       <div class="modal-content">
@@ -119,7 +136,7 @@
                             <div class="padding">
                                 <div class="row container d-flex">
                                             <div class="col-xl-6 col-md-12" style="height: 600px;">
-                                                                        <div class="card user-card-full flex-column"  style="height: 600px; width: 300px;">
+                                                                        <div class="card user-card-full flex-column "  style="height: 600px; width: 300px;">
                                                                             <div class="row m-l-0 m-r-0">
                                                                                 <div class="col-sm-12 bg-c-lite-green user-profile">
                                                                                     <div class="card-block text-center text-black">
@@ -152,19 +169,37 @@
                                                             </div>
                                                         </div>
                                                     </div>
+
+                                                    <script>
+                                                      $(document).ready(function() {
+                                                          $('li').click(function() {
+                                                              $('li.list-group-item.active').removeClass("active");
+                                                              $(this).addClass("active");
+                                                          });
+                                                      });
+                                                  </script>
+                                         
+                                                  <div class="col align-self-auto" style="width: 400px;">
+                                                    <ul class="list-group">
+                                                        <li class="list-group-item active">Active item</li>
+                                                        <li class="list-group-item">Click me to active item</li>
+                                                        <li class="list-group-item">Click me too active item item</li>
+                                                    </ul>
+                                                  </div>
                                 </div>
                             </div>
-                     </div>
+                    </div>
+</div>
 
-
-                        </div>
+                      <div class="col-sm-2" >
+                        <button type="button" class="btn btn-info">Prendre Rendez-vous</button>
+                    </div>
                         <div class="modal-footer">
                           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                         </div>
                       </div>
                     </div>
                   </div>
-                  
               </div>
             </div>
           </div>
@@ -188,49 +223,49 @@
                         </div>
                         <div class="modal-body">
                             <div class="list-group">
-                                <a href="#" class="list-group-item list-group-item-action" aria-current="true">
+                                <a data-bs-toggle="modal" href="#mod2" class="list-group-item list-group-item-action" aria-current="true">
                                   <div class="d-flex w-100 justify-content-between">
                                     <h5 class="mb-1">Addictologie</h5>
                                   </div>
                                   <p class="mb-1">Médecine consacrée à l’étude et la prise en charge des addictions.</p>
                                 </a>
-                                <a href="#" class="list-group-item list-group-item-action" aria-current="true">
+                                <a data-bs-toggle="modal" href="#mod2" class="list-group-item list-group-item-action" aria-current="true">
                                     <div class="d-flex w-100 justify-content-between">
                                       <h5 class="mb-1">Andrologie</h5>
                                     </div>
                                     <p class="mb-1">Médecin spécialiste des fonctions sexuelles et reproductives de l’homme.</p>
                                   </a>
-                                  <a href="#" class="list-group-item list-group-item-action" aria-current="true">
+                                  <a data-bs-toggle="modal" href="#mod2" class="list-group-item list-group-item-action" aria-current="true">
                                     <div class="d-flex w-100 justify-content-between">
                                       <h5 class="mb-1">Cardiologie</h5>
                                     </div>
                                     <p class="mb-1">Médecine qui étudie le cœur et les vaisseaux.</p>
                                   </a>
-                                  <a href="#" class="list-group-item list-group-item-action" aria-current="true">
+                                  <a data-bs-toggle="modal" href="#mod2" class="list-group-item list-group-item-action" aria-current="true">
                                     <div class="d-flex w-100 justify-content-between">
                                       <h5 class="mb-1">Dermatologie</h5>
                                     </div>
                                     <p class="mb-1">Médecine qui s’intéresse à l’étude de la peau, des cheveux, des poils et des ongles.</p>
                                   </a>
-                                  <a href="#" class="list-group-item list-group-item-action" aria-current="true">
+                                  <a data-bs-toggle="modal" href="#mod2" class="list-group-item list-group-item-action" aria-current="true">
                                     <div class="d-flex w-100 justify-content-between">
                                       <h5 class="mb-1">Gastro-Hepato-Enterologie</h5>
                                     </div>
                                     <p class="mb-1">Médecine qui s’intéresse aux organes de la digestion, leurs fonctionnements, leurs maladies et les moyens de les soigner.</p>
                                   </a>
-                                  <a href="#" class="list-group-item list-group-item-action" aria-current="true">
+                                  <a data-bs-toggle="modal" href="#mod2" class="list-group-item list-group-item-action" aria-current="true">
                                     <div class="d-flex w-100 justify-content-between">
                                       <h5 class="mb-1">Gynecologie</h5>
                                     </div>
                                     <p class="mb-1">Domaine médical qui étudie et traite les différentes pathologies de l’appareil génital de la femme et les troubles hormonaux féminins</p>
                                   </a>
-                                  <a href="#" class="list-group-item list-group-item-action" aria-current="true">
+                                  <a data-bs-toggle="modal" href="#mod2" class="list-group-item list-group-item-action" aria-current="true">
                                     <div class="d-flex w-100 justify-content-between">
                                       <h5 class="mb-1">I.S.T.</h5>
                                     </div>
                                     <p class="mb-1">Infections Sexuellement Transmissibles.</p>
                                   </a>
-                                  <a href="#" class="list-group-item list-group-item-action" aria-current="true">
+                                  <a data-bs-toggle="modal" href="#mod2" class="list-group-item list-group-item-action" aria-current="true">
                                     <div class="d-flex w-100 justify-content-between">
                                       <h5 class="mb-1">Osteopathie</h5>
                                     </div>
@@ -244,6 +279,87 @@
                       </div>
                     </div>
                   </div>
+
+
+                  <div class="modal fade" id="mod2" tabindex="-1" aria-labelledby="mod2Label" aria-hidden="true">
+                    <div class="modal-dialog  modal-xl">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title" style=" color: #000;" id="mod2Label">Medecin Specialiste 1</h5>
+                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body" style=" color: #000;">
+                          
+                          <div class="page-content page-container" id="page-content" >
+                            <div class="padding">
+                                <div class="row container d-flex">
+                                            <div class="col-xl-6 col-md-12" style="height: 600px;">
+                                                                        <div class="card user-card-full flex-column "  style="height: 600px; width: 300px;">
+                                                                            <div class="row m-l-0 m-r-0">
+                                                                                <div class="col-sm-12 bg-c-lite-green user-profile">
+                                                                                    <div class="card-block text-center text-black">
+                                                                                        <div class="m-b-25">
+                                                                                            <img src="https://img.icons8.com/bubbles/100/000000/user.png" class="img-radius" alt="User-Profile-Image">
+                                                                                        </div>
+                                                                                        <h6 class="f-w-600"style=" color: #000; ">NOM Prenom</h6>
+                                                                                        <i class=" mdi mdi-square-edit-outline feather icon-edit m-t-10 f-16"></i>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="col-sm-12" style="padding-left: 30px;">
+                                                                                    <div class="card-block">
+                                                                                        <h6 class="m-b-20 p-b-5 b-b-default f-w-600">Information</h6>
+                                                                                        <div class="row">
+                                                                                            <div class="col-sm-12">
+                                                                                                <p class="m-b-10 f-w-600">Email</p>
+                                                                                                <h6 class="text-muted f-w-400">aaaaa@gmail.com</h6>
+                                                                                            </div>
+                                                                                            <div class="col-sm-12">
+                                                                                                <p class="m-b-10 f-w-600">Telephone</p>
+                                                                                                <h6 class="text-muted f-w-400">06 00 00 00 00</h6>
+                                                                                            </div>
+
+                                                                                            <div class="col-sm-12" style="padding-top: 260px; padding-left: 100px;">
+                                                                                              <button type="button" class="btn btn-info">Contact</button>
+                                                                                          </div>
+                                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <script>
+                                                      $(document).ready(function() {
+                                                          $('li').click(function() {
+                                                              $('li.list-group-item.active').removeClass("active");
+                                                              $(this).addClass("active");
+                                                          });
+                                                      });
+                                                  </script>
+                                         
+                                                  <div class="col align-self-auto" style="width: 400px;">
+                                                    <ul class="list-group">
+                                                        <li class="list-group-item active">Active item</li>
+                                                        <li class="list-group-item">Click me to active item</li>
+                                                        <li class="list-group-item">Click me too active item item</li>
+                                                    </ul>
+                                                  </div>
+                                </div>
+                            </div>
+                    </div>
+</div>
+       
+                      <div class="col-sm-2" >
+                        <button type="button" class="btn btn-info">Prendre Rendez-vous</button>
+                    </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+
               </div>
             </div>
           </div>
