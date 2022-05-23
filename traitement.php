@@ -1,51 +1,66 @@
+
 <?php
 
-/// Funcction
 
 function vide($required)
 {
 	// Loop over field names, make sure each one exists and is not empty
 	$error = false;
-	foreach($required as $field) {
-	  if (empty($_POST[$field])) {
+	foreach($required as $field) 
+	{
+	  if (empty($_POST[$field])) 
+	  {
 	    $error = true;
 	  }
 	}
-
-	if ($error) {
-	  echo "Tout les champs sont requis ! <br> <br>";
-	} 
 	return $error;
 }
 
+function message_erreur($required)
+{
+	foreach($required as $field) 
+	{
+	  if (empty($_POST[$field])) 
+	  {
+	  	if ($field=="Mdplog")
+	  	{
+	  		 echo "Le champ mot de passe n'as pas ete rempli ! <br> <br>";
+	  	}
+	  	else if ($field=="Emaillog")
+	  	{
+	  		echo "Le champ Email n'as pas ete rempli ! <br> <br>";
+	  	}
+	  	else
+	  	{
+	    	echo "Le champ $field n'as pas ete rempli ! <br> <br>";
 
- function verification($adress,$db_id,$db_mdp,$db,$db_handle) 
+	  	}
+	   
+	  }
+	}
+}
+
+
+ function verification($adress,$db_id,$db_mdp,$db,$db_handle,$data) 
      {
 		// Connect to BDD "BDD"
 		$db_found=mysqli_select_db($db_handle,$db);
 
 		if($db_found)
-		{
-				echo "Connexion reussi <br> <br>";
-				return true;
-		}
-
+			return true;
 		else
-		{
-			echo " Connexion echouée <br> <br>"; 
 			return false;
-		}
      }
 
 function connexion($db_handle,$table) 
      {
 		if (isset($_POST['Connexion']))
 		{
-			if(!vide(['Email','Mdp']))
+			if(!vide(['Emaillog','Mdplog']))
 			{
 
-				$email = $_POST['Email'] ;
-				$mdp = $_POST['Mdp'] ;
+				$email = $_POST['Emaillog'] ;
+				$mdp = $_POST['Mdplog'] ;
 				$genre='';
 
 				if($table=='medecin')
@@ -63,42 +78,88 @@ function connexion($db_handle,$table)
 
 				$sql="SELECT * FROM $table WHERE email='$email' AND $genre='$mdp' ";
 
+				echo $sql;
+
 				$res= mysqli_query($db_handle,$sql);
 				if(mysqli_num_rows($res)>0)
+				{
+					return "Connexion validee";
+				}
+				else
+				{
+					$sql="SELECT * FROM $table WHERE email='$email' ";
+					//echo $sql;
+					$res= mysqli_query($db_handle,$sql);
+					if(mysqli_num_rows($res)>0)
 					{
-						echo "Connexion validee";
+						return " Mot de passe incorrect ";
 					}
 					else
+
 					{
-						echo "Connexion refusee, veuillez reesayer";
+						return "Aucun compte '$email' present dans nos fichiers";
 					}
+
+				}
+			}
+			else
+			{
+				message_erreur(['Emaillog','Mdplog']);
 			}
      	}
  }
 
 
-function ajouter_patient($db_handle) 
+function ajouter_patient($db_handle,$message) 
      {
 		if (isset($_POST['insert']))
 		{
-			if(!vide(['Id','Nom','Login','Mdp','Email']))
+			if(!vide(['Nom','Login','Mdp','Email']))
 			{
-				$id = $_POST['Id'] ;
+				$sql="SELECT * FROM patient";
+				$res= mysqli_query($db_handle,$sql);
+				$id = mysqli_num_rows($res)+1;
 				$nom = $_POST['Nom'] ;
 				$login = $_POST['Login'] ;
 				$mdp = $_POST['Mdp'] ;
 				$email = $_POST['Email'] ;
-				$sql="INSERT INTO patient(`patno`, `patname`, `patlogin`, `patpassword`, `email`) VALUES('$id','$nom','$login','$mdp','$email')";
 
+				$sql="SELECT * FROM patient WHERE email='$email'";
 				$res= mysqli_query($db_handle,$sql);
-				if($res)
+
+				if(mysqli_num_rows($res)>0)
 					{
-						echo "Clear insertion ";
+						echo "L'adresse mail ' $email ' est deja presente dans nos fichiers";
+						return false;
 					}
 					else
 					{
-						echo "Unable to insert ";
+						$sql="INSERT INTO patient(`patno`, `patname`, `patlogin`, `patpassword`, `email`) VALUES('$id','$nom','$login','$mdp','$email')";
+
+						$res= mysqli_query($db_handle,$sql);
+						if($res)
+							{
+
+								    $to = '$email';
+								    $subject = "Creation d'un compte chez ECE-DOC";
+								    $message = "Nous vous souhaitons la bienvenue dans la grande equipe d'ECE-DOC :
+								                Nous vous communiquons votre numero de client : '$id'. Attention, ne le communiquez a personne, ce numero pourra vous etre utile en cas de Mot de passe oublié";
+								    $headers = 'From: projetinfo.gr7.2022@gmail.com';
+								mail($to, $subject, $message, $headers);
+								echo" Felicitation la creation de votre compte est confirmée "; // Faire un pop up 
+								return true;
+							}
+							else
+							{
+								echo "Nous rencontrons un leger soucis, veuillez reesayer"; // faire un pop up 
+								return false;
+							}
 					}
+				
+			}
+			else
+			{
+				message_erreur(['Id','Nom','Login','Mdp','Email']);
 			}
 
      	}
@@ -146,7 +207,7 @@ function ajouter_rdv($db_handle)
 				$rdv_date = $_POST['rdv_date'] ;
 				$rdv_motif = $_POST['rdv_motif'] ;
 				$rdv_duree = $_POST['rdv_duree'];
-				$rdv_horaire ,= $_POST['rdv_horaire'];
+				$rdv_horaire = $_POST['rdv_horaire'];
 				$loc = $_POST['loc'] ;
 				$etat = $_POST['etatetat'];
 				$Type = $_POST['Type'];
@@ -218,12 +279,13 @@ $db_id="root";
 $adress="localhost";
 $db_mdp=""; 
 $db_handle=mysqli_connect($adress,$db_id,$db_mdp,$db);
+$data="";
 
 
 
 //Connect to MysQL
 
-if(verification($adress,$db_id,$db_mdp,$db,$db_handle) )
+if(verification($adress,$db_id,$db_mdp,$db,$db_handle,$data) )
 {
 
 	//ajouter_patient($db_handle);
