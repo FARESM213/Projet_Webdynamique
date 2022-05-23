@@ -4,48 +4,41 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Votre Profil</title>
+    <script src="
+    https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js">
+        </script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
   </head>
   <body>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
   
-    <nav class="navbar" style="background-color: #d3e2ed;">          
-        <div class="container-fluid">
-          <a class="navbar-brand" href="index.html">
-            <img src="logo.PNG" alt="" width="270" height="70">
-          </a>
-
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-         
-          <div class="collapse navbar-collapse" style="background-color: #a2b9cd; padding-top: 5px; padding-bottom: 5px;" id="navbarSupportedContent">
-            <ul class="nav nav-pills nav- justify-content-center">
-                <li class="nav-item">
-                    <a class="nav-link" aria-current="page" href="index.html">Accueil</a>
-                  </li>
-              <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="toutparc.html">Tout Parcourir</a>
-              </li>
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  Votre compte
-                </a>
-                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <li><a class="dropdown-item" href="profil.html">Profil</a></li>
-                  <li><a class="dropdown-item" href="mesRdv.html">Mes RDV</a></li>
-                  <li><hr class="dropdown-divider"></li>
-                  <li><a class="dropdown-item" href="index.html">Log out</a></li>
-                </ul>
-              </li>
-              <form class="d-flex" style= "padding-left: 190px;"role="search">
-                <input class="form-control me-2 " type="search" placeholder="Recherche" aria-label="Search">
-                <button class="btn btn-outline-success" type="submit">Rechercher</button>
-              </form>
-            </ul>
+    <nav class="navbar navbar-expand-lg bg-white navbar-light shadow-sm px-5 py-3 py-lg-0">
+      <a href="index.html" class="navbar-brand p-0">
+          <img src="logo2.PNG" alt="" width="270" height="70">
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+          <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarCollapse">
+          <div class="navbar-nav ms-auto py-0">
+              <a href="index.html" class="nav-item nav-link active">Accueil</a>
+              <a href="toutparc.html" class="nav-item nav-link">Tout Parcourir</a>
+              <div class="nav-item dropdown">
+                  <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Profil</a>
+                  <div class="dropdown-menu m-0">
+                      <a href="login.html" class="dropdown-item">Se connecter</a>
+                  </div>
+              </div>
+              <a href="contact.html" class="nav-item nav-link">Contact</a>
           </div>
-        </div>
-      </nav>
+          <button type="button" class="btn text-dark" data-bs-toggle="modal" data-bs-target="#searchModal"><i class="fa fa-search"></i></button>
+          <a href="rdv.html" class="btn btn-primary py-2 px-4 ms-3">Prendre un Rendez-vous</a>
+          <form class="d-flex" style= "padding-left: 190px;"role="search">
+            <input class="form-control me-2 " type="search" placeholder="Recherche" aria-label="Search">
+            <button class="btn btn-outline-success" type="submit">Rechercher</button>
+          </form>
+      </div>
+  </nav>
 
     <div class="page-content page-container" id="page-content" style="margin-top: 50px; margin-left: 250px;">
         <div class="padding">
@@ -106,7 +99,7 @@
       <div class="row">
         <!--Grid column-->
         <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
-          <h5 class="text-uppercase">Contact</h5>
+          <h5 class="text-uppercase">A propos de nous</h5>
   
           <ul class="list-unstyled mb-0">
             <li>
