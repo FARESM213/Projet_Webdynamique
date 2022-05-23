@@ -8,7 +8,7 @@ session_start();
 <?php
 
 	require("traitement.php");
-
+// WESH
 ?>
 
 <!DOCTYPE html>
