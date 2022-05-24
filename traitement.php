@@ -1,5 +1,7 @@
 <?php
 
+header('Content-Type: text/html; charset=UTF-8');
+
 function vide($required)
 {
 	// Loop over field names, make sure each one exists and is not empty
@@ -43,6 +45,7 @@ function message_erreur($required)
      {
 		// Connect to BDD "BDD"
 		$db_found=mysqli_select_db($db_handle,$db);
+
 
 		if($db_found)
 			return true;
@@ -103,6 +106,23 @@ function connexion($db_handle,$table)
 			}
      	}
  }
+
+ function test ($db_handle,$message) 
+     {
+		$sql="SELECT * FROM patient";
+		$res= mysqli_query($db_handle,$sql);
+		while ($row = mysqli_fetch_row($res)) 
+		{
+			echo "  <a data-bs-toggle='modal' href='#mod1' class='list-group-item list-group-item-action' aria-current='true'>
+                            <div class='d-flex w-100 justify-content-between'>
+                              <h5 class='mb-1' id=''>".utf8_encode($row[1])."</h5>
+                            </div>
+                            <p class='mb-1'>Medecin Généraliste.</p>
+                          </a>
+			";
+		}
+		
+	}
 
 
 function ajouter_patient($db_handle,$message) 

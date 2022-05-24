@@ -3,6 +3,8 @@
 // Start the session
 session_start();
 require("traitement.php");
+header( 'content-type: text/html; charset=utf-8' );
+
 
 ?>
 
@@ -74,32 +76,15 @@ require("traitement.php");
 
                       <div class="list-group">
 
-                          <a data-bs-toggle="modal" href="#mod1" class="list-group-item list-group-item-action" aria-current="true">
-                            <div class="d-flex w-100 justify-content-between">
-                              <h5 class="mb-1">Dr. ABC DEF</h5>
-                            </div>
-                            <p class="mb-1">Medecin Généraliste.</p>
-                          </a>
-        <!-- A faire : RECUP UN ID DE DOCTEUR EN CLIQUANT SUR UN DES DOC PROPOSES, REMPLIR LA LISTE DYNAMIQUEMENT DEPUIS DATABASE-->
+                    <<?php 
 
-                          <a data-bs-toggle="modal" href="#mod1" class="list-group-item list-group-item-action" aria-current="true">
-                              <div class="d-flex w-100 justify-content-between">
-                                <h5 class="mb-1">Dr. ABC DEF</h5>
-                              </div>
-                              <p class="mb-1">Medecin Généraliste.</p>
-                            </a>
-                            <a data-bs-toggle="modal" href="#mod1" class="list-group-item list-group-item-action" aria-current="true">
-                              <div class="d-flex w-100 justify-content-between">
-                                <h5 class="mb-1">Dr. ABC DEF</h5>
-                              </div>
-                              <p class="mb-1">Medecin Généraliste.</p>
-                            </a>
-                            <a data-bs-toggle="modal" href="#mod1" class="list-group-item list-group-item-action" aria-current="true">
-                              <div class="d-flex w-100 justify-content-between">
-                                <h5 class="mb-1">Dr. ABC DEF</h5>
-                              </div>
-                              <p class="mb-1">Médecin Généraliste.</p>
-                            </a>
+                    $message="";
+                    test($db_handle,$message);
+
+                     ?>
+
+
+
                         </div>             
                      </div>
                     <div class="modal-footer">

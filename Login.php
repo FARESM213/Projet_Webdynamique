@@ -8,7 +8,7 @@ session_start();
 <?php
 // Set session variables (variables globales)
 $_SESSION["Client"] = "";
-$_SESSION["Type"] = "void";
+$_SESSION["Type"] = "";
 ?>
 
 
