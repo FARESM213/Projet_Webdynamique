@@ -1,6 +1,4 @@
-
 <?php
-
 
 function vide($required)
 {
@@ -230,7 +228,7 @@ function ajouter_rdv($db_handle)
 
 
 
- function update_element($db_handle,$table,$element,$email,$valeur) 
+ function update_element($db_handle,$table,$element,$email,$valeur,&$message)
      {
 		if (isset($_POST['Update']))
 		{
@@ -239,18 +237,59 @@ function ajouter_rdv($db_handle)
 			$res= mysqli_query($db_handle,$sql);
 			if($res)
 				{
-					echo "Changement effectuer ";
+				$message ="Changement effectuer ";
 				}
 				else
 				{
-					echo "Changement impossible ";
+					$message ="Changement impossible ";
 				}
      	}
  }
 
 
+ function changer_mdp($db_handle,&$message) 
+     {
+		if (isset($_POST['Update']))
+		{
 
- function supprimer_element($db_handle,$table,$id,$valeur) 
+			$login = $_POST['LoginC'] ;
+			$email = $_POST['EmailC'] ;
+
+			$Mdp1 = $_POST['Mdp1'] ;
+			$Mdp2 = $_POST['Mdp2'] ;	
+
+			$sql="SELECT patno FROM patient WHERE email='$email' AND patlogin='$login'";
+			$res= mysqli_query($db_handle,$sql);
+
+			if(mysqli_num_rows($res)>0)
+			{
+				if ($Mdp1==$Mdp2)
+				{
+					update_element($db_handle,'patient','patpassword',$email,$Mdp1,$message);
+					return true;
+				}
+				else
+				{
+					$message= " Les deux mots de passe sont diffenrents ";
+					return false;
+				}
+			}
+			else
+			{
+				$message="Impossible de recuperer les donnees du compte";
+				return false;
+
+			}
+
+     	}
+ }
+
+
+
+
+
+
+ function supprimer_element($db_handle,$table,$id,$valeur,$message) 
      {
 		if (isset($_POST['Update']))
 		{
@@ -259,14 +298,16 @@ function ajouter_rdv($db_handle)
 			$res= mysqli_query($db_handle,$sql);
 			if($res)
 				{
-					echo "Changement effectuer ";
+					$message = "Changement effectué ";
 				}
 				else
 				{
-					echo "Changement impossible ";
+					$message= "Changement impossible ";
 				}
      	}
  }
+
+
 
 
 

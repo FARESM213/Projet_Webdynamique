@@ -15,6 +15,7 @@ require("traitement.php");
 		
 	</title>
 </head>
+
 <body>
 
 	<div>
@@ -23,32 +24,40 @@ require("traitement.php");
 
 
 			<label> Login </label>		
-			<input type="text" name="Login"> <br> <br>
+			<input type="text" name="LoginC"> <br> <br>
 			<label> Email </label>		
-			<input type="Email" name="Email"  placeholder="fares.messaoudi@edu.ece.Fr" required> <br> <br>
+			<input type="Email" name="EmailC"  placeholder="fares.messaoudi@edu.ece.Fr" required> <br> <br>			
 
-			<input type="submit" name= "insert" value=" Insert Value"> 
-
-
-
-		<div>
 			<label style="color:blue;"> Nouveau Mdp</label>
-	    	<input type="password" name="Mdp1" id="Mdp2" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*_=+-]).{8,16}$"> <br> <br>
+	    	<input type="password" name="Mdp1" id="Mdp1" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*_=+-]).{8,16}$"> <br> <br>
 		    <label style="color:blue;">Confirmer le Nouveau Mdp</label>
 	    	<input type="password" name="Mdp2" id="Mdp2" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*_=+-]).{8,16}$"> <br> <br>
 
-			<button type="submit" name="re_password">Submit</button>
+			<button type="submit" name="Update" id="hold">Changer</button>
 
 			
 		</div>
 
-			    
-			
 			<?php 
-			$message="";
+				$message="";
+			    changer_mdp($db_handle,$message);
+				if ($message=="Changement effectuer ")
+				{   
+					if (isset($_POST['Update']))
+					{
+						echo '<script>
+						alert(" Mot de passe modifié ! Redirection vers Login ");
+						window.location.href="Login.php";
+						</script>';
+					}
+					
+				} 
+				else if ($message!="")
+				{
+				  echo "<script>alert('$message');</script>";
 
-			
-			
+				}
+
 			?>
 
 

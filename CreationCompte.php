@@ -8,7 +8,7 @@ session_start();
 <?php
 
 	require("traitement.php");
-// WESH
+
 ?>
 
 <!DOCTYPE html>
@@ -68,8 +68,8 @@ session_start();
 
 			if(ajouter_patient($db_handle,$message))
 				{
-					//header("Location: Login.php");
-					//die();
+					header("Location: Login.php");
+					die();
 				}
 			?>
 		</p>
