@@ -14,6 +14,14 @@ p{
     font-size: 2px; 
 }
 
+label
+{
+    color:#ffffff; 
+    font-size: 15px; 
+    margin-left: 5px;
+
+}
+
 
 .box{ 
     width:500px ; 
@@ -55,6 +63,7 @@ p{
     border-color:#ffffff;
 }
 
+
 .box input[ type = "submit" ]{
 
     border:0;
@@ -83,6 +92,14 @@ p{
     cursor:pointer;
     display: none;
 }
+.box input[type="radio"]{
+
+
+    text-align:center;
+    margin-left: -10px;
+
+
+}
 
 .box input[type="submit"]:hover{
     background: #ffffff ;
@@ -93,6 +110,13 @@ p{
     text-transform:uppercase;
     font-size: 25px;;
     color: #5d5d60ec;
+    margin-bottom: -5px;
+}
+.box a{ 
+    margin-left: 20px;
+    color: #56BCE9;
+    font-size: 13px;;
+
 }
 
 h3{

@@ -97,26 +97,15 @@ $_SESSION["Type"] = "void";
             </div>
           </div>
 
-            <div class="row justify-content-center my-4">
-              <div class="col-3">
-                <h3>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="Genre" id="inlineRadio1" value="patient"> 
+            <label class="form-check-label" for="inlineRadio1">Patient</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="Genre" id="inlineRadio2" value="Admin">    
+            <label class="form-check-label" for="inlineRadio2">Admin</label>
+          </div>
 
-                  <input type="radio" name="Genre" value="patient" checked="checked"> Patient 
-
-                </h3>
-              </div>
-
-              <div class="col-3">
-                <h3>
-
-                  <input type="radio" name="Genre" value="Admin"> Admin    
-              
-                </h3>
-              </div>
-            </div>
-
-
-          <p>
             <?php 
 
             if(get_radio()!=false)
@@ -135,38 +124,38 @@ $_SESSION["Type"] = "void";
             }
 
             ?>
-          </p>
-
 
           <div class="row">
             <div class="col d-flex justify-content-center">
               <div>
 
-                <input type="submit" name= "Connexion" value="Connexion" onclick="ValidMail(document.form1.Emaillog)">
-                <a href="Changementinfo.php" > Mot de passe oublié ?</a>
+                <input type="submit" name= "Connexion" value="Connexion" onclick="ValidMail(document.form1.Emaillog)">         
 
-              </div>
+                <h2> --------------------------- </h2>
+
             </div>
           </div> 
+
         </form>  
     
-        <div class="row my-3">
-          <div class="col d-flex justify-content-center">
-            <h2> --------------------------- </h2>
 
-          </div>
-        </div>
-        
         <div class="row mb-4">
           <div class="col d-flex justify-content-center">
             <div>
+              <a href="Changementinfo.php" > Mot de passe oublié </a>
 
-              <a href="Creationcompte.php"> Creer un compte</a>
+              <a href="Creationcompte.php"> Creer un compte   </a>               
 
-              
             </div>
           </div>
         </div>
+        <div class="row">
+            <div class="col d-flex justify-content-center">
+              <div>
+
+            </div>
+          </div> 
+
     </div>
   </body>
 </html>
