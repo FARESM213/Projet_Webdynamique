@@ -227,49 +227,49 @@ document.getElementById("datefield1").setAttribute("min", today);
                   </div>
                   <div class="modal-body">
                       <div class="list-group">
-                          <a data-bs-toggle="modal" href="#mod2" class="list-group-item list-group-item-action" aria-current="true">
+                          <a data-bs-toggle="modal" href="#modDocs" class="list-group-item list-group-item-action" aria-current="true">
                             <div class="d-flex w-100 justify-content-between">
                               <h5 class="mb-1">Addictologie</h5>
                             </div>
                             <p class="mb-1">Médecine consacrée à l’étude et la prise en charge des addictions.</p>
                           </a>
-                          <a data-bs-toggle="modal" href="#mod2" class="list-group-item list-group-item-action" aria-current="true">
+                          <a data-bs-toggle="modal" href="#modDocs" class="list-group-item list-group-item-action" aria-current="true">
                               <div class="d-flex w-100 justify-content-between">
                                 <h5 class="mb-1">Andrologie</h5>
                               </div>
                               <p class="mb-1">Médecin spécialiste des fonctions sexuelles et reproductives de l’homme.</p>
                             </a>
-                            <a data-bs-toggle="modal" href="#mod2" class="list-group-item list-group-item-action" aria-current="true">
+                            <a data-bs-toggle="modal" href="#modDocs" class="list-group-item list-group-item-action" aria-current="true">
                               <div class="d-flex w-100 justify-content-between">
                                 <h5 class="mb-1">Cardiologie</h5>
                               </div>
                               <p class="mb-1">Médecine qui étudie le cœur et les vaisseaux.</p>
                             </a>
-                            <a data-bs-toggle="modal" href="#mod2" class="list-group-item list-group-item-action" aria-current="true">
+                            <a data-bs-toggle="modal" href="#modDocs" class="list-group-item list-group-item-action" aria-current="true">
                               <div class="d-flex w-100 justify-content-between">
                                 <h5 class="mb-1">Dermatologie</h5>
                               </div>
                               <p class="mb-1">Médecine qui s’intéresse à l’étude de la peau, des cheveux, des poils et des ongles.</p>
                             </a>
-                            <a data-bs-toggle="modal" href="#mod2" class="list-group-item list-group-item-action" aria-current="true">
+                            <a data-bs-toggle="modal" href="#modDocs" class="list-group-item list-group-item-action" aria-current="true">
                               <div class="d-flex w-100 justify-content-between">
                                 <h5 class="mb-1">Gastro-Hepato-Enterologie</h5>
                               </div>
                               <p class="mb-1">Médecine qui s’intéresse aux organes de la digestion, leurs fonctionnements, leurs maladies et les moyens de les soigner.</p>
                             </a>
-                            <a data-bs-toggle="modal" href="#mod2" class="list-group-item list-group-item-action" aria-current="true">
+                            <a data-bs-toggle="modal" href="#modDocs" class="list-group-item list-group-item-action" aria-current="true">
                               <div class="d-flex w-100 justify-content-between">
                                 <h5 class="mb-1">Gynecologie</h5>
                               </div>
                               <p class="mb-1">Domaine médical qui étudie et traite les différentes pathologies de l’appareil génital de la femme et les troubles hormonaux féminins</p>
                             </a>
-                            <a data-bs-toggle="modal" href="#mod2" class="list-group-item list-group-item-action" aria-current="true">
+                            <a data-bs-toggle="modal" href="#modDocs" class="list-group-item list-group-item-action" aria-current="true">
                               <div class="d-flex w-100 justify-content-between">
                                 <h5 class="mb-1">I.S.T.</h5>
                               </div>
                               <p class="mb-1">Infections Sexuellement Transmissibles.</p>
                             </a>
-                            <a data-bs-toggle="modal" href="#mod2" class="list-group-item list-group-item-action" aria-current="true">
+                            <a data-bs-toggle="modal" href="#modDocs" class="list-group-item list-group-item-action" aria-current="true">
                               <div class="d-flex w-100 justify-content-between">
                                 <h5 class="mb-1">Osteopathie</h5>
                               </div>
@@ -283,6 +283,39 @@ document.getElementById("datefield1").setAttribute("min", today);
                 </div>
               </div>
             </div>
+
+
+
+            <div class="modal fade" id="modDocs" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="modDocsLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modDocsLabel">Modal title</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+      <div class="list-group">
+                          <a data-bs-toggle="modal" href="#mod2" class="list-group-item list-group-item-action" aria-current="true">
+                            <div class="d-flex w-100 justify-content-between">
+                              <h5 class="mb-1">MED1</h5>
+                            </div>
+                            <p class="mb-1">ASDASDASD.</p>
+                          </a>
+                          <a data-bs-toggle="modal" href="#mod2" class="list-group-item list-group-item-action" aria-current="true">
+                              <div class="d-flex w-100 justify-content-between">
+                                <h5 class="mb-1">MED2</h5>
+                              </div>
+                              <p class="mb-1">SDFGSDFGSD.</p>
+                            </a>
+                        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Understood</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 
             <div class="modal fade" id="mod2" tabindex="-1" aria-labelledby="mod2Label" aria-hidden="true">
