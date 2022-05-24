@@ -7,12 +7,13 @@ header( 'content-type: text/html; charset=utf-8' );
 
 
 ?>
+
 <!doctype html>
 <html lang="en">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Votre Profil</title>
+    <title>Rendez Vous</title>
     <script src="
     https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js">
         </script>
@@ -22,7 +23,7 @@ header( 'content-type: text/html; charset=utf-8' );
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
   
     <nav class="navbar navbar-expand-lg bg-white navbar-light shadow-sm px-5 py-3 py-lg-0">
-      <a href="index.php" class="navbar-brand p-0">
+      <a href="index.html" class="navbar-brand p-0">
           <img src="logo2.PNG" alt="" width="270" height="70">
       </a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
@@ -35,85 +36,59 @@ header( 'content-type: text/html; charset=utf-8' );
               <div class="nav-item dropdown">
                   <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Profil</a>
                   <div class="dropdown-menu m-0">
-                      <a href="login.php" class="dropdown-item">Se connecter</a>
+                      <a href="login.html" class="dropdown-item">Se connecter</a>
                   </div>
               </div>
-              <a href="contact.php" class="nav-item nav-link">Contact</a>
+              <a href="contact.html" class="nav-item nav-link">Contact</a>
           </div>
           <button type="button" class="btn text-dark" data-bs-toggle="modal" data-bs-target="#searchModal"><i class="fa fa-search"></i></button>
-          <a href="rdv.php" class="btn btn-primary py-2 px-4 ms-3">Prendre un Rendez-vous</a>
+          <a href="rdv.html" class="btn btn-primary py-2 px-4 ms-3">Prendre un Rendez-vous</a>
           <form class="d-flex" style= "padding-left: 190px;"role="search">
             <input class="form-control me-2 " type="search" placeholder="Recherche" aria-label="Search">
             <button class="btn btn-outline-success" type="submit">Rechercher</button>
           </form>
       </div>
   </nav>
-      <div class="row container d-flex">
-        <div class="col-xl-6 col-md-12" style="height: 300px; margin-top: 25px;">
-            <div class="card user-card-full flex-column "  style="height: 300px; width: 300px;">
-                <div class="row m-l-0 m-r-0">
-                    <div class="col-sm-12 bg-c-lite-green user-profile">
-                        <div class="card-block text-center text-black">
-                            <div class="m-b-25">
-                                <img src="https://img.icons8.com/bubbles/100/000000/user.png" class="img-radius" alt="User-Profile-Image">
-                            </div>
-                            <h6 class="f-w-600"style=" color: #000; ">NOM Prenom</h6>
-                            <i class=" mdi mdi-square-edit-outline feather icon-edit m-t-10 f-16"></i>
-                        </div>
-                    </div>
-                    <div class="col-sm-12" style="padding-left: 30px;">
-                        <div class="card-block">
-                            <h6 class="m-b-20 p-b-5 b-b-default f-w-600">Information</h6>
-                            <div class="row">
-                                <div class="col-sm-12">
-                                    <p class="m-b-10 f-w-600">Email</p>
-                                    <h6 class="text-muted f-w-400">aaaaa@gmail.com</h6>
-                                </div>
-                                <div class="col-sm-12">
-                                    <p class="m-b-10 f-w-600">Telephone</p>
-                                    <h6 class="text-muted f-w-400">06 00 00 00 00</h6>
-                                </div>
-                            </div>
-        </div>
-    </div>
-</div>
-</div>
-</div>
 
-<script>
-    $(document).ready(function() {
-        $('li').click(function() {
-            $('li.list-group-item.active').removeClass("active");
-            $(this).addClass("active");
-        });
-    });
-</script>
 
-<div class="col-xl-12" style="width: 500px; ">
+          <div class="col-md-4">
+              <form>
+                <h4>Docteur</h4>
+                  <select class="form-control"  id='firstList' name='firstList'>
+                  <option> - Choisir un Docteur -</option>
+                        <?php
 
-<h1>Vos Rendez-vous</h1>
-<h4> Vous pouvez annuler un rendez vous </h4>
+                        $sql="SELECT * FROM medecin WHERE medjob='Generale'";
+                        $res = mysqli_query($db_handle,$sql);
 
-<ul class="list-group">
-<li class="list-group-item">RDV1</li>
-<li class="list-group-item">RDV2</li>
-<li class="list-group-item">RDV3</li>
-<li class="list-group-item">RDV1</li>
-<li class="list-group-item">RDV2</li>
-<li class="list-group-item">RDV3</li>
-<li class="list-group-item">RDV1</li>
-<li class="list-group-item">RDV2</li>
-<li class="list-group-item">RDV3</li>
-<li class="list-group-item">RDV1</li>
-<li class="list-group-item">RDV2</li>
-<li class="list-group-item">RDV3</li>
-</ul>
-<div class="col-sm-12" style="margin-top: 25px ;" >
-<button type="button" class="btn btn-danger">Annuler RDV</button>
-</div>
-        
-</div>
+                        while ($row = mysqli_fetch_array($res)) {
+                            echo "<option value='" . $row[1] . "'>" . $row[1] . "</option>
+                            ";
+                        }
+                        $selected1 = $_POST['firstList'];
+                        ?>
+                  </select>
 
+
+
+                <h4>Horaires Disponibles</h4>
+                  <select class="form-control"  id='secondList' name='secondList' >
+                  <option> - Choisir un horaire -</option>
+                        <?php
+          
+                      //  $sql1="SELECT medno FROM medecin WHERE medname='$selected1'";
+                       // $res1= mysqli_query($db_handle,$sql1);
+
+                        $sql2="SELECT rdv_horaire FROM rendez_vous WHERE medno='$res1'";
+                        $res2 = mysqli_query($db_handle,$sql2);
+
+                        while ($row = mysqli_fetch_array($res2)) {
+                            echo "<option value='" . $row['rdv_horaire'] . "'>" . $row['rdv_horaire'] . "</option>";
+                        }
+                        ?>
+                  </select>          
+              </form>
+          </div>
 
 </body>
 
@@ -143,7 +118,7 @@ header( 'content-type: text/html; charset=utf-8' );
     <!-- Copyright -->
     <div class="text-center p-3" style="background-color: rgb(164, 231, 252);">
       © 2022 Copyright:
-      <a class="text-dark" href="index.php">OMNESSante.com</a>
+      <a class="text-dark" href="index.html">OMNESSante.com</a>
     </div>
     <!-- Copyright -->
   </footer>

@@ -125,6 +125,7 @@ function connexion($db_handle,$table)
 	}
 
 
+
 function ajouter_patient($db_handle,$message) 
      {
 		if (isset($_POST['insert']))
