@@ -75,9 +75,6 @@ function connexion($db_handle,$table)
 				}
 
 				$sql="SELECT * FROM $table WHERE email='$email' AND $genre='$mdp' ";
-
-				echo $sql;
-
 				$res= mysqli_query($db_handle,$sql);
 				if(mysqli_num_rows($res)>0)
 				{
@@ -138,12 +135,12 @@ function ajouter_patient($db_handle,$message)
 						if($res)
 							{
 
-								    $to = '$email';
+								   /* $to = '$email';
 								    $subject = "Creation d'un compte chez ECE-DOC";
 								    $message = "Nous vous souhaitons la bienvenue dans la grande equipe d'ECE-DOC :
 								                Nous vous communiquons votre numero de client : '$id'. Attention, ne le communiquez a personne, ce numero pourra vous etre utile en cas de Mot de passe oublié";
 								    $headers = 'From: projetinfo.gr7.2022@gmail.com';
-								mail($to, $subject, $message, $headers);
+								mail($to, $subject, $message, $headers);*/
 								echo" Felicitation la creation de votre compte est confirmée "; // Faire un pop up 
 								return true;
 							}
@@ -321,6 +318,7 @@ $adress="localhost";
 $db_mdp=""; 
 $db_handle=mysqli_connect($adress,$db_id,$db_mdp,$db);
 $data="";
+
 
 
 
