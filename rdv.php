@@ -208,6 +208,23 @@ $_SESSION['Select']="Void";
               });     
     })
 
+    $('#datefield3').on("change",function()
+      {      
+          var date = $(this).val();         
+           $.ajax({
+                      url :"action.php",           // Valeur va etre renvoyée a action.php
+                      type:"POST",                 
+                      cache:false,                          // jsp ce que c'est 
+                      data:{Test2:date},   // la en gros bah quand on va essayer de recuperer la valeur dans action.php, faudra mettre ca 
+                      success:function(data)
+                      {
+                            $("#Rdv2").html(data);           // Avoir la valeur renvoyé par action.php de ce que j'ai compris  qu'on met dans horaire
+                      }
+                  });     
+
+           closeDate(this);
+      });
+
 
       $('#mod3').on('show.bs.modal', function(event) 
       {
@@ -789,11 +806,14 @@ document.getElementById("datefield3").setAttribute("min", today);
 
 </script>
 </div>
-                                    <ul class="list-group">
-                                        <li class="list-group-item">RDV1</li>
-                                        <li class="list-group-item">RDV2</li>
-                                        <li class="list-group-item">RDV3</li>
-                                    </ul>
+                                   
+
+
+
+                              <div class='list-group' id="Rdv2"> </div>
+
+
+
                                     <div class="col-sm-12" style="margin-top: 25px ;" >
                                          <a href="confirmation.php" class="btn btn-info " id="Confirmer" name="Confirmer">Prendre Rendez-vous</a>
                                   </div>

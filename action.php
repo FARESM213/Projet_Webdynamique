@@ -276,4 +276,39 @@ if (isset($_POST['Mail3']) && !empty($_POST['Mail3']))  // Du coup la on verifie
 
 }
 
+if (isset($_POST['Test2']) && !empty($_POST['Test2']))  // Du coup la on verifie bien qu'on a post MedecinId avec javascript
+{
+    $data=$_SESSION['Id'];
+    $data2=$_POST['Test2'];
+    $query = " SELECT * FROM labordv WHERE laboID='$data' AND rdv_date='$data2' AND dispo='0'ORDER BY rdv_date ASC,rdvNo ASC"; 
+    $result = $con->query($query);
+	echo $query;
+
+    if ($result->num_rows > 0)
+     {
+        while ($row = $result->fetch_assoc()) 
+        {
+        echo " <a data-bs-toggle='modal' data-target='#fin' href='#fin' class='list-group-item list-group-item-action' aria-current='true' data-id='".$row['laboID']."'value='".$row['rdv_horaire']."'> ".$row['rdv_horaire']."h";
+        }
+
+        echo " <script>                 
+					      $('.list-group-item list-group-item-action').on('click', function()
+					      { 
+								      var button = $(event.relatedTarget) // Button that triggered the modal
+			      					  var getID = button.data('id')
+							          $('.active').removeClass('active');
+							          $(this).addClass('active');					
+							          alert(getID);
+
+						  }); 
+
+
+				</script>";
+    } 
+    else 
+    {
+        echo " <a class='list-group-item list-group-item-action' aria-current='true''> Aucun Rendez-vous disponible";
+    }
+}
+
 ?>
