@@ -115,7 +115,7 @@ $_SESSION["Specialite"] = "";
                   $_SESSION["Client"] =$_POST['Emaillog'] ;
                   $_SESSION["Type"] = get_radio();
                   $_SESSION["Num"]= $_POST['Emaillog'];
-                  header("Location: Profil.php");
+                  header("Location: profil.php");
                   die();
                 }
                 else if (!vide(['Emaillog','Mdplog']))

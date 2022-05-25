@@ -5,6 +5,9 @@ session_start();
 require("traitement.php");
 include('db_config.php');
 
+echo $_SESSION['Select'];
+echo $_SESSION['Id'];
+
 ?>
 
 <!doctype html>

@@ -16,6 +16,23 @@ function vide($required)
 	return $error;
 }
 
+function test2 ($db_handle) 
+    {
+       $sql="SELECT * FROM labo";
+       $res= mysqli_query($db_handle,$sql);
+       while ($row = mysqli_fetch_row($res)) 
+       {
+           echo "  <a data-bs-toggle='modal'   data-id='".$row[0]."' href='#mod3' class='list-group-item list-group-item-action' aria-current='true'>
+           <div class='d-flex w-100 justify-content-between'>
+             <h5 class='mb-1'>".utf8_encode($row[1])."</h5>
+           </div>
+           <p class='mb-1'>".$row[4]."</p>
+         </a>
+           ";
+       }
+
+   }
+
 function message_erreur($required)
 {
 	foreach($required as $field) 
@@ -110,7 +127,7 @@ function connexion($db_handle,$table)
 
  function test ($db_handle,$message) 
      {
-		$sql="SELECT * FROM medecin WHERE medjob='Generale' ";
+		$sql="SELECT * FROM medecin WHERE medjob='Generale'";
 		$res= mysqli_query($db_handle,$sql);
 		while ($row = mysqli_fetch_row($res)) 
 		{

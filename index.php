@@ -30,7 +30,7 @@ header( 'content-type: text/html; charset=utf-8' );
             <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
 
             <nav class="navbar navbar-expand-lg bg-white navbar-light shadow-sm px-5 py-3 py-lg-0">
-              <a href="index.php" class="navbar-brand p-0">
+              <a href="index.html" class="navbar-brand p-0">
                   <img src="logo2.PNG" alt="" width="270" height="70">
               </a>
               <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
@@ -38,18 +38,18 @@ header( 'content-type: text/html; charset=utf-8' );
               </button>
               <div class="collapse navbar-collapse" id="navbarCollapse">
                   <div class="navbar-nav ms-auto py-0">
-                      <a href="index.php" class="nav-item nav-link active">Accueil</a>
-                      <a href="toutparc.php" class="nav-item nav-link">Tout Parcourir</a>
+                      <a href="index.html" class="nav-item nav-link active">Accueil</a>
+                      <a href="toutparc.html" class="nav-item nav-link">Tout Parcourir</a>
                       <div class="nav-item dropdown">
                           <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Profil</a>
                           <div class="dropdown-menu m-0">
-                              <a href="login.php" class="dropdown-item">Se connecter</a>
+                              <a href="login.html" class="dropdown-item">Se connecter</a>
                           </div>
                       </div>
                       <a href="#contactUs" class="nav-item nav-link">Contact</a>
                   </div>
                   <button type="button" class="btn text-dark" data-bs-toggle="modal" data-bs-target="#searchModal"><i class="fa fa-search"></i></button>
-                  <a href="rdv.php" class="btn btn-primary py-2 px-4 ms-3">Prendre un Rendez-vous</a>
+                  <a href="rdv.html" class="btn btn-primary py-2 px-4 ms-3">Prendre un Rendez-vous</a>
                   <form class="d-flex" style= "padding-left: 190px;"role="search">
                     <input class="form-control me-2 " type="search" placeholder="Recherche" aria-label="Search">
                     <button class="btn btn-outline-success" type="submit">Rechercher</button>
@@ -188,7 +188,7 @@ header( 'content-type: text/html; charset=utf-8' );
   <!-- Copyright -->
   <div class="text-center p-3" style="background-color: rgb(164, 231, 252);">
     © 2022 Copyright:
-    <a class="text-dark" href="index.php">OMNESSante.com</a>
+    <a class="text-dark" href="index.html">OMNESSante.com</a>
   </div>
   <!-- Copyright -->
 </footer>

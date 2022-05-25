@@ -5,9 +5,8 @@ session_start();
 require("traitement.php");
 header( 'content-type: text/html; charset=utf-8' );
 include('db_config.php');
-
 $_SESSION['Id']="";
-
+$_SESSION['Select']="Void";
 
 ?>
 
@@ -27,8 +26,7 @@ $_SESSION['Id']="";
   <script type='text/javascript'>
 
 
-
-    $(document).ready(function()
+  $(document).ready(function()
    {
 
           $('#clear').on('click', function(event) {
@@ -55,6 +53,32 @@ $_SESSION['Id']="";
               });     
     })
 
+    $('#Confirmer').on('click', function(event) 
+      {
+        var button = $(event.relatedTarget) // Button that triggered the modal
+        var oui = button.data('id')
+
+         $.ajax({
+                    url :"action.php",           // Valeur va etre renvoyée a action.php
+                    type:"POST",                 
+                    cache:false,                          // jsp ce que c'est 
+                    data:{Confirmer:oui},          // la en gros bah quand on va essayer de recuperer la valeur dans action.php, faudra mettre ca 
+                    success:function(data)
+                    {
+                        // $("#Retour").html(data);           // Avoir la valeur renvoyé par action.php de ce que j'ai compris  qu'on met dans horaire
+                    }
+                });     
+    })
+
+      $('#mod2').on('hidden.bs.modal', function () {
+
+          const  ul = document.getElementById("Rdv");
+          ul.innerHTML="";
+
+
+        // do something…
+      })
+
 
 
       $('#mod2').on('show.bs.modal', function(event) 
@@ -77,6 +101,8 @@ $_SESSION['Id']="";
 
           });
 
+
+
       $('#datefield2').on("change",function()
       {      
           var date = $(this).val();         
@@ -94,12 +120,123 @@ $_SESSION['Id']="";
            closeDate(this);
       });
 
-      $('#').on("change",function()
-      {   
+      $('#fin').on('show.bs.modal', function(event) 
+      {
           var button = $(event.relatedTarget) // Button that triggered the modal
           var Info = button.data('id')
-          alert(Info);
-      });
+           $.ajax({
+                      url :"action.php",           // Valeur va etre renvoyée a action.php
+                      type:"POST",                 
+                      cache:false,                          // jsp ce que c'est 
+                      data:{Finition:Info},   // la en gros bah quand on va essayer de recuperer la valeur dans action.php, faudra mettre ca 
+                      success:function(data)
+                      {
+                            $("#finito").html(data);           // Avoir la valeur renvoyé par action.php de ce que j'ai compris  qu'on met dans horaire
+                      }
+                  });     
+
+                const  ul = document.getElementById("Rdv");
+                ul.innerHTML="";
+
+          });
+
+
+
+      $('#medGen').on('show.bs.modal', function(event) 
+      {
+      var button = $(event.relatedTarget) // Button that triggered the modal
+      var getID = 'Generale'
+
+       $.ajax({
+                  url :"action.php",           // Valeur va etre renvoyée a action.php
+                  type:"POST",                 
+                  cache:false,                          // jsp ce que c'est 
+                  data:{getID:getID},          // la en gros bah quand on va essayer de recuperer la valeur dans action.php, faudra mettre ca 
+                  success:function(data)
+                  {
+                       $("#medGeneral").html(data);           // Avoir la valeur renvoyé par action.php de ce que j'ai compris  qu'on met dans horaire
+                  }
+              });     
+    })
+
+
+
+      $('#mod1').on('show.bs.modal', function(event) 
+      {
+          var button2 = $(event.relatedTarget) // Button that triggered the modal
+          var Info2 = button2.data('id')
+           $.ajax({
+                      url :"action.php",           // Valeur va etre renvoyée a action.php
+                      type:"POST",                 
+                      cache:false,                          // jsp ce que c'est 
+                      data:{Info2:Info2,Nom2:Info2,Mail2:Info2},   // la en gros bah quand on va essayer de recuperer la valeur dans action.php, faudra mettre ca 
+                      }).done(function(response) {
+                      {
+                          var splitted = response.split("|"); // RESULT
+                           $("#Info2").html(splitted[0]);   // Avoir la valeur renvoyé par action.php de ce que j'ai compris  qu'on met dans horaire
+                           $("#Nom2").html(splitted[1]);    // Avoir la valeur renvoyé par action.php de ce que j'ai compris  qu'on met dans horaire
+                           $("#Mail2").html(splitted[2]);    // Avoir la valeur renvoyé par action.php de ce que j'ai compris  qu'on met dans horaire
+                      }
+                  });     
+
+          });
+
+
+       $('#mod1').on('hidden.bs.modal', function () {
+
+          const  ul = document.getElementById("Rdv");
+          ul.innerHTML="";
+
+        // do something…
+      })
+
+
+          $('#labo').on('show.bs.modal', function(event) 
+      {
+      var button = $(event.relatedTarget) // Button that triggered the modal
+      var getLabo1 = button.data('id')
+
+       $.ajax({
+                  url :"action.php",           // Valeur va etre renvoyée a action.php
+                  type:"POST",                 
+                  cache:false,                          // jsp ce que c'est 
+                  data:{getLabo1:getLabo1},          // la en gros bah quand on va essayer de recuperer la valeur dans action.php, faudra mettre ca 
+                  success:function(data)
+                  {
+                       $("#listeLabo").html(data);           // Avoir la valeur renvoyé par action.php de ce que j'ai compris  qu'on met dans horaire
+                  }
+              });     
+    })
+
+
+      $('#mod3').on('show.bs.modal', function(event) 
+      {
+          var button3 = $(event.relatedTarget) // Button that triggered the modal
+          var Info3 = button3.data('id')
+           $.ajax({
+                      url :"action.php",           // Valeur va etre renvoyée a action.php
+                      type:"POST",                 
+                      cache:false,                          // jsp ce que c'est 
+                      data:{Info3:Info3,Nom3:Info3,Mail3:Info3},   // la en gros bah quand on va essayer de recuperer la valeur dans action.php, faudra mettre ca 
+                      }).done(function(response) {
+                      {
+                          var splitted = response.split("|"); // RESULT
+                           $("#Info3").html(splitted[0]);   // Avoir la valeur renvoyé par action.php de ce que j'ai compris  qu'on met dans horaire
+                           $("#Nom3").html(splitted[1]);    // Avoir la valeur renvoyé par action.php de ce que j'ai compris  qu'on met dans horaire
+                           $("#Mail3").html(splitted[2]);    // Avoir la valeur renvoyé par action.php de ce que j'ai compris  qu'on met dans horaire
+                      }
+                  });     
+
+          });
+
+       $('#mod3').on('hidden.bs.modal', function () {
+
+          const  ul = document.getElementById("Rdv");
+          ul.innerHTML="";
+
+
+        // do something…
+      })
 
   });
 
@@ -160,14 +297,9 @@ $_SESSION['Id']="";
                   </div>
                   <div class="modal-body">
 
-                    <div class="list-group">
+                    <div class="list-group" id = "medGeneral">
 
-                    <<?php 
-                    $message="";
-                    test($db_handle,$message);
-
-                     ?>
-                        </div>             
+                    </div>             
                      </div>
                     <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
@@ -198,7 +330,7 @@ $_SESSION['Id']="";
                                                                                   <div class="m-b-25">
                                                                                       <img src="https://img.icons8.com/bubbles/100/000000/user.png" class="img-radius" alt="User-Profile-Image">
                                                                                   </div>
-                                                                                  <h6 class="f-w-600"style=" color: #000; ">NOM Prenom</h6>
+                                                                                  <h6 class="f-w-600"style=" color: #000; " id="Nom2"></h6>
                                                                                   <i class=" mdi mdi-square-edit-outline feather icon-edit m-t-10 f-16"></i>
                                                                               </div>
                                                                           </div>
@@ -208,7 +340,7 @@ $_SESSION['Id']="";
                                                                                   <div class="row">
                                                                                       <div class="col-sm-12">
                                                                                           <p class="m-b-10 f-w-600">Email</p>
-                                                                                          <h6 class="text-muted f-w-400">aaaaa@gmail.com</h6>
+                                                                                          <h6 class="text-muted f-w-400" id="Mail2"></h6>
                                                                                       </div>
                                                                                       <div class="col-sm-12">
                                                                                           <p class="m-b-10 f-w-600">Téléphone</p>
@@ -263,7 +395,6 @@ if (mm < 10) {
   
 today = yyyy + '-' + mm + '-' + dd;
 document.getElementById("datefield1").setAttribute("min", today);
-
 </script>
 </div>
                                               <ul class="list-group">
@@ -272,7 +403,7 @@ document.getElementById("datefield1").setAttribute("min", today);
                                                   <li class="list-group-item">RDV3</li>
                                               </ul>
                                               <div class="col-sm-12" style="margin-top: 25px ;" >
-                                                <button type="button" class="btn btn-info">Prendre Rendez-vous</button>
+                                              <a href="confirmation.php" class="btn btn-info " id="Confirmer" name="Confirmer">Prendre Rendez-vous</a>
                                             </div>
                                             </div>
                           </div>
@@ -300,7 +431,7 @@ document.getElementById("datefield1").setAttribute("min", today);
               <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#medSpe">Plus d'informations</button>
           </ul>
 
-          <div class="modal fade" id="medSpe" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="medSpeLabel" aria-hidden="true">
+          <div class="modal fade" id="medSpe" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="medSpeLabel"aria-hidden="true">
               <div class="modal-dialog modal-dialog-scrollable">
                 <div class="modal-content">
                   <div class="modal-header">
@@ -488,16 +619,11 @@ document.getElementById("datefield1").setAttribute("min", today);
   </script>
 
 </div>
-                                      <div class='list-group' id="Rdv">              
-                                         <div id="list"> </div>
+                        <div class='list-group' id="Rdv"> </div>
 
-                                      </div>
                                   
 
-
-                                    <div class='col-sm-12' style='margin-top: 25px ;' >
-                                      <button type='button' class='btn btn-info'>Prendre Rendez-vous</button>
-                                  </div>
+      
                                   </div>
                           </div>
                       </div>
@@ -514,6 +640,31 @@ document.getElementById("datefield1").setAttribute("min", today);
         </div>
       </div>
     </div>
+
+
+
+
+
+     <div class="modal fade" id="fin" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="finDocsLabel" aria-hidden="true">
+                                  <div class="modal-dialog">
+                                    <div class="modal-content">
+                                      <div class="modal-header">
+                                        <h5 class="modal-title" id="finDocsLabel">Modal title</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                      </div>
+                                      <div class="modal-body">
+                                      <div class="list-group" id="finito"> 
+
+                                      </div>
+                                      </div>
+
+                                      <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                         <a href="confirmation.php" class="btn btn-info " id="Confirmer" name="Confirmer">Prendre Rendez-vous</a>
+                                        </div>
+                                    </div>
+                                  </div>
+          </div> 
 
     <div class="col">
       <div class="card card-cover h-100 overflow-hidden text-white bg-dark rounded-4 shadow-lg" style="background-image: url('labo.jpg');  background-size: cover;">
@@ -533,17 +684,12 @@ document.getElementById("datefield1").setAttribute("min", today);
                   </div>
                   <div class="modal-body">
                       <div class="list-group">
-                          <a data-bs-toggle="modal" href="#mod3" class="list-group-item list-group-item-action" aria-current="true">
-                            <div class="d-flex w-100 justify-content-between">
-                              <h5 class="mb-1">Prise de sang</h5>
-                            </div>
-                            
-                          </a>
-                          <a data-bs-toggle="modal" href="#mod3" class="list-group-item list-group-item-action" aria-current="true">
-                              <div class="d-flex w-100 justify-content-between">
-                                <h5 class="mb-1">Dépistage COVID-19</h5>
-                              </div>
-                            </a>
+
+                        <?php
+
+                        test2($db_handle);
+                         ?>
+                         
                         </div>
                   </div>
                   <div class="modal-footer">
@@ -575,7 +721,7 @@ document.getElementById("datefield1").setAttribute("min", today);
                                                                                   <div class="m-b-25">
                                                                                       <img src="https://img.icons8.com/bubbles/100/000000/user.png" class="img-radius" alt="User-Profile-Image">
                                                                                   </div>
-                                                                                  <h6 class="f-w-600"style=" color: #000; ">NOM LABO</h6>
+                                                                                  <h6 class="f-w-600"style=" color: #000;" id="Nom3">NOM LABO</h6>
                                                                                   <i class=" mdi mdi-square-edit-outline feather icon-edit m-t-10 f-16"></i>
                                                                               </div>
                                                                           </div>
@@ -585,7 +731,7 @@ document.getElementById("datefield1").setAttribute("min", today);
                                                                                   <div class="row">
                                                                                       <div class="col-sm-12">
                                                                                           <p class="m-b-10 f-w-600">Email</p>
-                                                                                          <h6 class="text-muted f-w-400">aaaaa@gmail.com</h6>
+                                                                                          <h6 class="text-muted f-w-400" id="Mail3">aaaaa@gmail.com</h6>
                                                                                       </div>
                                                                                       <div class="col-sm-12">
                                                                                           <p class="m-b-10 f-w-600">Téléphone</p>
@@ -649,7 +795,7 @@ document.getElementById("datefield3").setAttribute("min", today);
                                         <li class="list-group-item">RDV3</li>
                                     </ul>
                                     <div class="col-sm-12" style="margin-top: 25px ;" >
-                                      <button type="button" class="btn btn-info">Prendre Rendez-vous</button>
+                                         <a href="confirmation.php" class="btn btn-info " id="Confirmer" name="Confirmer">Prendre Rendez-vous</a>
                                   </div>
                                   </div>
                           </div>

@@ -20,7 +20,8 @@ $sql="SELECT $data3 AS count FROM $data2 WHERE email='$data'";
 
 $result= mysqli_query($db_handle,$sql);
 $row = mysqli_fetch_assoc($result); 
-$id = $row['count'];            
+$id = $row['count'];         
+
 ?>
 
 <!doctype html>
@@ -172,7 +173,7 @@ function ResizeImage() {
                                                                     <h6 class="m-b-20 m-t-40 p-b-5 b-b-default f-w-600">Rendez Vous</h6>
                                                                     <div class="row">
                                                                         <div class="col-sm-6">
-                                                                            <p class="m-b-10 f-w-600"><?php //Dernier_Rdv($db_handle,$id) ;?></p>
+                                                                            <p class="m-b-10 f-w-600"><?php Dernier_Rdv($db_handle,$id) ;?></p>
                                                                         </div>
 
                                                                     </div>
