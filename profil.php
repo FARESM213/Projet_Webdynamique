@@ -5,11 +5,98 @@ session_start();
 require("traitement.php");
 header( 'content-type: text/html; charset=utf-8' );
 
+$data=$_SESSION['Client'];
+$data2=$_SESSION['Type'];
 
+if ($_SESSION['Type']=='Admin')
+{
+     $data3='adno';
+}
+else   if ($_SESSION['Type']=='patient')
+{
+     $data3='patno';
+}
+$sql="SELECT $data3 AS count FROM $data2 WHERE email='$data'";
+
+$result= mysqli_query($db_handle,$sql);
+$row = mysqli_fetch_assoc($result); 
+$id = $row['count'];            
 ?>
 
 <!doctype html>
 <html lang="en">
+
+
+<script type="text/javascript">
+
+    $(document).ready(function() {
+
+    $('#userImage').change(function(evt) {
+
+        var files = evt.target.files;
+        var file = files[0];
+
+        if (file) {
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                document.getElementById("preview").src = e.target.result;
+            };
+            reader.readAsDataURL(file);
+        }
+    });
+});
+
+function ResizeImage() {
+    if (window.File && window.FileReader && window.FileList && window.Blob) {
+        var filesToUploads = document.getElementById('userImage').files;
+        var file = filesToUploads[0];
+        if (file) {
+
+            var reader = new FileReader();
+            // Set the image once loaded into file reader
+            reader.onload = function(e) {
+
+                var img = document.createElement("img");
+                img.src = e.target.result;
+
+                var canvas = document.createElement("canvas");
+                var ctx = canvas.getContext("2d");
+                ctx.drawImage(img, 0, 0);
+
+                var MAX_WIDTH = 200;
+                var MAX_HEIGHT = 200;
+                var width = img.width;
+                var height = img.height;
+
+                if (width > height) {
+                    if (width > MAX_WIDTH) {
+                        height *= MAX_WIDTH / width;
+                        width = MAX_WIDTH;
+                    }
+                } else {
+                    if (height > MAX_HEIGHT) {
+                        width *= MAX_HEIGHT / height;
+                        height = MAX_HEIGHT;
+                    }
+                }
+                canvas.width = width;
+                canvas.height = height;
+                var ctx = canvas.getContext("2d");
+                ctx.drawImage(img, 0, 0, width, height);
+
+                dataurl = canvas.toDataURL(file.type);
+                document.getElementById('output').src = dataurl;
+            }
+            reader.readAsDataURL(file);
+
+        }
+
+    } else {
+        alert('The File APIs are not fully supported in this browser.');
+    }
+}
+    
+</script>
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -23,7 +110,7 @@ header( 'content-type: text/html; charset=utf-8' );
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
   
     <nav class="navbar navbar-expand-lg bg-white navbar-light shadow-sm px-5 py-3 py-lg-0">
-      <a href="index.php" class="navbar-brand p-0">
+      <a href="index.html" class="navbar-brand p-0">
           <img src="logo2.PNG" alt="" width="270" height="70">
       </a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
@@ -31,18 +118,18 @@ header( 'content-type: text/html; charset=utf-8' );
       </button>
       <div class="collapse navbar-collapse" id="navbarCollapse">
           <div class="navbar-nav ms-auto py-0">
-              <a href="index.php" class="nav-item nav-link active">Accueil</a>
-              <a href="toutparc.php" class="nav-item nav-link">Tout Parcourir</a>
+              <a href="index.html" class="nav-item nav-link active">Accueil</a>
+              <a href="toutparc.html" class="nav-item nav-link">Tout Parcourir</a>
               <div class="nav-item dropdown">
                   <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Profil</a>
                   <div class="dropdown-menu m-0">
-                      <a href="login.php" class="dropdown-item">Se connecter</a>
+                      <a href="login.html" class="dropdown-item">Se connecter</a>
                   </div>
               </div>
-              <a href="contact.php" class="nav-item nav-link">Contact</a>
+              <a href="contact.html" class="nav-item nav-link">Contact</a>
           </div>
           <button type="button" class="btn text-dark" data-bs-toggle="modal" data-bs-target="#searchModal"><i class="fa fa-search"></i></button>
-          <a href="rdv.php" class="btn btn-primary py-2 px-4 ms-3">Prendre un Rendez-vous</a>
+          <a href="rdv.html" class="btn btn-primary py-2 px-4 ms-3">Prendre un Rendez-vous</a>
           <form class="d-flex" style= "padding-left: 190px;"role="search">
             <input class="form-control me-2 " type="search" placeholder="Recherche" aria-label="Search">
             <button class="btn btn-outline-success" type="submit">Rechercher</button>
@@ -58,20 +145,24 @@ header( 'content-type: text/html; charset=utf-8' );
                                                         <div class="row m-l-0 m-r-0">
                                                             <div class="col-sm-4 bg-c-lite-green user-profile">
                                                                 <div class="card-block text-center text-white">
-                                                                    <div class="m-b-25">
-                                                                        <img src="https://img.icons8.com/bubbles/100/000000/user.png" class="img-radius" alt="User-Profile-Image">
+                                                                    <div class="m-b-25">  
+
+                                                                        <?php image_display($db_handle,$id); ?> <br> <br>
+                                                                     
                                                                     </div>
                                                                     <h6 class="f-w-600">NOM Prenom</h6>
                                                                     <i class=" mdi mdi-square-edit-outline feather icon-edit m-t-10 f-16"></i>
                                                                 </div>
                                                             </div>
+
+
                                                             <div class="col-sm-8">
                                                                 <div class="card-block">
                                                                     <h6 class="m-b-20 p-b-5 b-b-default f-w-600">Information</h6>
                                                                     <div class="row">
                                                                         <div class="col-sm-6">
                                                                             <p class="m-b-10 f-w-600">Email</p>
-                                                                            <h6 class="text-muted f-w-400">aaaaa@gmail.com</h6>
+                                                                            <h6 class="text-muted f-w-400"><?php echo $_SESSION['Client'];?></h6>
                                                                         </div>
                                                                         <div class="col-sm-6">
                                                                             <p class="m-b-10 f-w-600">Telephone</p>
@@ -81,7 +172,7 @@ header( 'content-type: text/html; charset=utf-8' );
                                                                     <h6 class="m-b-20 m-t-40 p-b-5 b-b-default f-w-600">Rendez Vous</h6>
                                                                     <div class="row">
                                                                         <div class="col-sm-6">
-                                                                            <p class="m-b-10 f-w-600">Recents</p>
+                                                                            <p class="m-b-10 f-w-600"><?php //Dernier_Rdv($db_handle,$id) ;?></p>
                                                                         </div>
 
                                                                     </div>
@@ -97,7 +188,41 @@ header( 'content-type: text/html; charset=utf-8' );
                                 </div>
             </div>
         </div>
+
+<!--
+
+        <label> Login :</label>
+        <input type="text" name="Login"> <br>
+        <label> Mot de passe :</label>
+        <input type="password" name="Login"> <br>
+
+        <label> Login :</label>
+
+        <input type="text" name="Login"><br>
+        <input type="text" name="Login"><br>
+        <input type="text" name="Login"><br>
+        <input type="text" name="Login"><br> -->
+
+        
+   
+    <img src="" id="preview">
+
+    <form action="" method="post" enctype="multipart/form-data">
+
+        <label>Upload the image file:</label><br /> 
+        <input name="userImage" type="file" class="imageFile"  accept="image/*"   id="userImage " onchange="ResizeImage()"/> 
+
+        <input type="submit" value="Upload" name= "Upload" onchange="ResizeImage()" />
+
+        <?php charger_image($db_handle,$id); ?>
+
+
+    </form>
+
+
+
  </div>
+
 
 
 </body>
@@ -128,7 +253,7 @@ header( 'content-type: text/html; charset=utf-8' );
     <!-- Copyright -->
     <div class="text-center p-3" style="background-color: rgb(164, 231, 252);">
       © 2022 Copyright:
-      <a class="text-dark" href="index.php">OMNESSante.com</a>
+      <a class="text-dark" href="index.html">OMNESSante.com</a>
     </div>
     <!-- Copyright -->
   </footer>

@@ -79,7 +79,7 @@ function connexion($db_handle,$table)
 
 				$sql="SELECT * FROM $table WHERE email='$email' AND $genre='$mdp' ";
 				$res= mysqli_query($db_handle,$sql);
-				if(mysqli_num_rows($res)>0)
+				if($row=mysqli_num_rows($res)>0)
 				{
 					return "Connexion validee";
 				}
@@ -90,6 +90,7 @@ function connexion($db_handle,$table)
 					$res= mysqli_query($db_handle,$sql);
 					if(mysqli_num_rows($res)>0)
 					{
+
 						return " Mot de passe incorrect ";
 					}
 					else
@@ -109,7 +110,7 @@ function connexion($db_handle,$table)
 
  function test ($db_handle,$message) 
      {
-		$sql="SELECT * FROM patient";
+		$sql="SELECT * FROM medecin WHERE medjob='Generale' ";
 		$res= mysqli_query($db_handle,$sql);
 		while ($row = mysqli_fetch_row($res)) 
 		{
@@ -124,6 +125,30 @@ function connexion($db_handle,$table)
 		
 	}
 
+
+	function affich_spe ($db_handle) 
+     {
+     	if ($_SESSION["Specialite"]!="")
+     	{  
+     		$job=$_SESSION["Specialite"];
+	     	$sql="SELECT * FROM medecin WHERE medjob='$job'";
+			$res= mysqli_query($db_handle,$sql);
+
+			echo $sql;
+
+			while ($row = mysqli_fetch_row($res)) 
+			{
+				echo "  <a data-bs-toggle='modal' href='#mod2' class='list-group-item list-group-item-action' aria-current='true'>
+	                            <div class='d-flex w-100 justify-content-between'>
+	                              <h5 class='mb-1' id=''>".utf8_encode($row[1])."</h5>
+	                            </div>
+	                            <p class='mb-1'>".$job."</p>
+	                          </a>
+				";
+			}
+     	}
+		
+	}
 
 
 function ajouter_patient($db_handle,$message) 
@@ -326,6 +351,134 @@ function ajouter_rdv($db_handle)
  }
 
 
+ function Dernier_Rdv($db_handle,$id) 
+     {
+     	if ($_SESSION['Type']=='Admin')
+     	{
+     		$data='adno';
+     	}
+     	else   if ($_SESSION['Type']=='patient')
+     	{
+     		   $data='patno';
+     	}
+		$sql="SELECT * FROM rendez_vous WHERE $data='$id'";
+		$res= mysqli_query($db_handle,$sql);
+		//echo "<div class='modal-body'> <div class='list-group'>";
+
+		if ($_SESSION['Type']=='Admin')
+     	{
+     		$data='adno';
+     	}
+     	else   if ($_SESSION['Type']=='patient')
+     	{
+     		   $data='patno';
+     	} 
+     	else if ($_SESSION['Type']=='medecin') 
+     	{
+
+     	}
+
+		echo " 
+		<table class='table table-striped'>
+			  <thead>
+			    <tr>
+			      <th scope='col'>#</th>
+			      <th scope='col'>Num Medecin </th>
+			      <th scope='col'>Num Patient</th>
+			      <th scope='col'>Date </th>
+			      <th scope='col'>Horaire </th>
+			      <th scope='col'>Localité </th>
+			    </tr>
+			  </thead>  
+
+			  <tbody>
+
+ 		 ";
+                       
+		while ($row = mysqli_fetch_row($res)) 
+		{
+
+			echo " 		 
+			    <tr>
+			      <th scope='row'>".utf8_encode($row[0])."</th>
+			      <td>".utf8_encode($row[1])."</td>
+			      <td>".utf8_encode($row[2])."</td>
+			      <td>".utf8_encode($row[3])."</td>
+			      <td>".utf8_encode($row[6])."</td>
+			      <td>".utf8_encode($row[7])."</td>
+			    </tr>
+			    ";
+		}  
+		echo " </tbody></table>";
+                        
+ }
+
+
+function charger_image ($db_handle,$id)
+{
+		if(isset($_POST["Upload"]))
+		{
+			if (!empty($_FILES["userImage"]["tmp_name"]))
+			{
+
+				 $b = getimagesize($_FILES["userImage"]["tmp_name"]);
+		    //Check if the user has selected an image
+		    if($b !== false)
+		    {
+		        //Get the contents of the image
+		        $file = $_FILES['userImage']['tmp_name'];
+		        $image = addslashes(file_get_contents($file));
+		        echo "<img style=' margin-left :10px;'src='data:image/png;base64',".base64_encode($image)."/>";
+
+
+		     	$sql="UPDATE patient SET Image ='$image' WHERE 1";
+				$res= mysqli_query($db_handle,$sql);
+		        //Insert the image into the database
+		        if($res)
+		        {
+		            echo "File uploaded successfully.";
+		        }
+		        else
+		        {
+		            echo "File upload failed.";
+		        } 
+		    }
+		    else
+		    {
+		        echo "Please select an image to upload.";
+		    }
+
+		    	//image_display($db_handle,$id);
+
+			}
+		   
+		}
+
+}
+
+function image_display($db_handle,$id)
+{
+		if(!empty($id))
+		{
+			$result= mysqli_query($db_handle," SELECT Image AS count FROM patient WHERE patno='$id'");
+			$row = mysqli_fetch_assoc($result); 
+			if ($row)
+			{
+				$img = $row['count'];     
+			//	
+				echo " <img style='width: 120px' class='img-radius' alt='User-Profile-Image'";
+		    	echo 'src="data:image/png;base64,'.base64_encode( $row['count'] ).'"/>';
+			}
+			else
+			{
+				echo "Probleme ";
+			}
+		  
+		}
+
+
+}
+
 
 
 
@@ -339,9 +492,6 @@ $adress="localhost";
 $db_mdp=""; 
 $db_handle=mysqli_connect($adress,$db_id,$db_mdp,$db);
 $data="";
-
-
-
 
 //Connect to MysQL
 

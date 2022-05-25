@@ -1,8 +1,8 @@
 <?php
 
 // Start the session
-//session_start();
-//require("traitement.php");
+session_start();
+require("traitement.php");
 include('db_config.php');
 
 ?>
@@ -70,7 +70,7 @@ include('db_config.php');
             $result = $con->query($query);
             if ($result->num_rows > 0) 
             {
-                while ($row = $result->fetch_assoc()) 
+                while ($row=$result->fetch_assoc()) 
                 {
                     echo '<option value="'.$row['medno'].'">'.$row['medname'].'</option>'; // Ici on met la "valeur du medecin "egale a son id 
                 }
