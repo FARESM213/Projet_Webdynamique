@@ -246,11 +246,12 @@ echo $_SESSION['Id'];
           </ul>
         </div>
         <!--Grid column-->
+
   
     <!-- Copyright -->
     <div class="text-center p-3" style="background-color: rgb(164, 231, 252);">
       © 2022 Copyright:
-      <a class="text-dark" href="index.html">OMNESSante.com</a>
+      <a class="text-dark" href="index.php">OMNESSante.com</a>
     </div>
     <!-- Copyright -->
   </footer>
