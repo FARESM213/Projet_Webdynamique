@@ -1,10 +1,9 @@
 <?php
 
 // Start the session
-session_start();
-require("traitement.php");
-header( 'content-type: text/html; charset=utf-8' );
-
+//session_start();
+//require("traitement.php");
+include('db_config.php');
 
 ?>
 
@@ -14,6 +13,10 @@ header( 'content-type: text/html; charset=utf-8' );
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Rendez Vous</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
+
     <script src="
     https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js">
         </script>
@@ -50,45 +53,78 @@ header( 'content-type: text/html; charset=utf-8' );
       </div>
   </nav>
 
+      <div class="col-md-4">
+        
+        <form> 
 
-          <div class="col-md-4">
-              <form>
-                <h4>Docteur</h4>
-                  <select class="form-control"  id='firstList' name='firstList'>
-                  <option> - Choisir un Docteur -</option>
-                        <?php
+        <!------------------ Premier Picker ------------>
 
-                        $sql="SELECT * FROM medecin WHERE medjob='Generale'";
-                        $res = mysqli_query($db_handle,$sql);
-
-                        while ($row = mysqli_fetch_array($res)) {
-                            echo "<option value='" . $row[1] . "'>" . $row[1] . "</option>
-                            ";
-                        }
-                        $selected1 = $_POST['firstList'];
-                        ?>
-                  </select>
+        <label for="Medecin">Medecin</label>
+        <select class="form-control" id="Medecin">
+          <option value="">Choisir un medecin </option>
 
 
+           <?php // Prend la valeur du premier picker
 
-                <h4>Horaires Disponibles</h4>
-                  <select class="form-control"  id='secondList' name='secondList' >
-                  <option> - Choisir un horaire -</option>
-                        <?php
-          
-                      //  $sql1="SELECT medno FROM medecin WHERE medname='$selected1'";
-                       // $res1= mysqli_query($db_handle,$sql1);
+            $query = "SELECT * FROM medecin WHERE medjob='Generale'";
+            $result = $con->query($query);
+            if ($result->num_rows > 0) 
+            {
+                while ($row = $result->fetch_assoc()) 
+                {
+                    echo '<option value="'.$row['medno'].'">'.$row['medname'].'</option>'; // Ici on met la "valeur du medecin "egale a son id 
+                }
+            }
+            else
+            {
+                  echo '<option value="">Medecin non disponible</option>'; 
+             }
 
-                        $sql2="SELECT rdv_horaire FROM rendez_vous WHERE medno='$res1'";
-                        $res2 = mysqli_query($db_handle,$sql2);
+          ?>   
 
-                        while ($row = mysqli_fetch_array($res2)) {
-                            echo "<option value='" . $row['rdv_horaire'] . "'>" . $row['rdv_horaire'] . "</option>";
-                        }
-                        ?>
-                  </select>          
-              </form>
-          </div>
+        </select>
+        <br />
+
+           <!--------------------------------------------->
+
+        <!------------------ Second Picker ------------>
+
+        <label for="Medecin">Horaire</label>
+        <select class="form-control" id="Horaire">
+          <option value="">Choisir un horaire</option>
+        </select>
+        <br />
+        <!------------------------------------------------->
+
+      </div>
+    </form>
+  </div>
+
+  <!---------------Javascript Pour changer le second picker------------------->
+
+  <script type="text/javascript">
+    $(document).ready(function()  // Fonction callback de ce que j'ai compris qui attend les " event"
+    {
+      $("#Medecin").on("change",function()     // Fonction qui se declanche au changement du champ avec l'id " Medecin"
+      {
+        var medecinId = $(this).val();         // Renvoie la valeur de Medecin ( donc en gros les informations contenu dans la balise )
+        $.ajax({
+                  url :"action.php",           // Valeur va etre renvoyée a action.php
+                  type:"POST",                 
+                  cache:false,                          // jsp ce que c'est 
+                  data:{medecinId:medecinId},          // la en gros bah quand on va essayer de recuperer la valeur dans action.php, faudra mettre ca 
+                  success:function(data)
+                  {
+                    $("#Horaire").html(data);           // Avoir la valeur renvoyé par action.php de ce que j'ai compris  qu'on met dans horaire
+                  }
+              });     
+       });
+
+      });
+
+  </script>
+
+    <!------------------------------------------------------------------------>
 
 </body>
 
