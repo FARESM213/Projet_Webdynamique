@@ -6,6 +6,8 @@ require("traitement.php");
 header( 'content-type: text/html; charset=utf-8' );
 include('db_config.php');
 
+$_SESSION['Id']="";
+
 
 ?>
 
@@ -40,7 +42,6 @@ include('db_config.php');
                   data:{getID:getID},          // la en gros bah quand on va essayer de recuperer la valeur dans action.php, faudra mettre ca 
                   success:function(data)
                   {
-
                        $("#Retour").html(data);           // Avoir la valeur renvoyé par action.php de ce que j'ai compris  qu'on met dans horaire
                   }
               });     
@@ -55,7 +56,7 @@ include('db_config.php');
                       url :"action.php",           // Valeur va etre renvoyée a action.php
                       type:"POST",                 
                       cache:false,                          // jsp ce que c'est 
-                      data:{Info:Info ,Nom:Info,Mail:Info},   // la en gros bah quand on va essayer de recuperer la valeur dans action.php, faudra mettre ca 
+                      data:{Info:Info,Nom:Info,Mail:Info},   // la en gros bah quand on va essayer de recuperer la valeur dans action.php, faudra mettre ca 
                       }).done(function(response) {
                       {
                           var splitted = response.split("|"); // RESULT
@@ -67,6 +68,22 @@ include('db_config.php');
 
           });
 
+      $('#datefield2').on("change",function()
+      {      
+          var date = $(this).val();         
+           $.ajax({
+                      url :"action.php",           // Valeur va etre renvoyée a action.php
+                      type:"POST",                 
+                      cache:false,                          // jsp ce que c'est 
+                      data:{Test:date},   // la en gros bah quand on va essayer de recuperer la valeur dans action.php, faudra mettre ca 
+                      success:function(data)
+                      {
+                            $("#Rdv").html(data);           // Avoir la valeur renvoyé par action.php de ce que j'ai compris  qu'on met dans horaire
+                      }
+                  });     
+
+           closeDate(this);
+      });
 
   });
 
@@ -425,11 +442,14 @@ document.getElementById("datefield1").setAttribute("min", today);
         <h4> Veuillez choisir un horaire disponible :</h4>
 
         <div style='margin-top: 50px; margin-bottom: 25px;'>
+
+            
         <label for='start'>Date :</label>
 
         <input type='date' id='datefield2' name='dateRdv'
         value='min'
         min='2018-01-01' max='2025-12-31'>
+
 
                 
                 <script>  
@@ -453,13 +473,13 @@ document.getElementById("datefield1").setAttribute("min", today);
 
 </div>
 
+                  <ul class='list-group' id="Rdv">
+            
+
+                  </ul>
+                                  
 
 
-                                    <ul class='list-group'>
-                                        <li class='list-group-item'>RDV1</li>
-                                        <li class='list-group-item'>RDV2</li>
-                                        <li class='list-group-item'>RDV3</li>
-                                    </ul>
                                     <div class='col-sm-12' style='margin-top: 25px ;' >
                                       <button type='button' class='btn btn-info'>Prendre Rendez-vous</button>
                                   </div>
