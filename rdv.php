@@ -30,6 +30,13 @@ $_SESSION['Id']="";
 
     $(document).ready(function()
    {
+
+          $('#clear').on('click', function(event) {
+
+          const  ul = document.getElementById("Rdv");
+          ul.innerHTML="";
+      });
+
       $('#modDocs').on('show.bs.modal', function(event) 
       {
       var button = $(event.relatedTarget) // Button that triggered the modal
@@ -489,7 +496,7 @@ document.getElementById("datefield1").setAttribute("min", today);
               </div>
 </div>
                   <div class='modal-footer'>
-                    <button type='button' class='btn btn-secondary' data-bs-dismiss='modal'>Close</button>
+                    <button type='button' class='btn btn-secondary' data-bs-dismiss='modal' id="clear" >Close</button>
                   </div>
                 </div>
               </div> 
