@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Créer un Compte</title>
+
+    <link rel="stylesheet" href="fonts/material-icon/css/material-design-iconic-font.min.css">
+
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+</head>
+<body>
+
+    <div class="main">
+
+        <section class="signup">
+            <div class="container">
+                <div class="signup-content">
+                    <div class="signup-form">
+                        <h3 class="form-title">Créer un compte (2/2)</h3>
+                        <form method="POST" class="register-form" id="register-form">
+                            <div class="form-group">
+                                <label for="AdL1"><i class="bi bi-house-fill"></i></label>
+                                <input type="text" name="AdL1" id="AdL1" placeholder="Adresse Ligne 1"/>
+                            </div>
+                            <div class="form-group">
+                                <label for="AdL2"><i class="bi bi-house-fill"></i></label>
+                                <input type="text" name="AdL2" id="AdL2" placeholder="Adresse Ligne 2"/>
+                            </div>
+                            <div class="form-group">
+                                <label for="Ville"><i class="bi bi-building"></i></label>
+                                <input type="text" name="Ville" id="Ville" placeholder="Ville"/>
+                            </div>
+                            <div class="form-group">
+                                <label for="Pays"><i class="bi bi-geo-alt-fill"></i></label>
+                                <input type="text" name="Pays" id="Pays" placeholder="Pays"/>
+                            </div>
+                            <div class="form-group">
+                                <label for="CopeP"><i class="bi bi-mailbox"></i></label>
+                                <input type="text" name="CodeP" id="CodeP" placeholder="Code Postal"/>
+                            </div>
+                            <div class="form-group">
+                                <label for="NumT"><i class="bi bi-phone"></i></label>
+                                <input type="text" name="NumT" id="NumT" placeholder="Numéro de Téléphone"/>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="CarteV"><i class="bi bi-postcard-heart-fill"></i></label>
+                                <input type="text" name="CarteV" id="CarteV" placeholder="Carte Vitale"/>
+                            </div>
+                            <div class="form-group form-button">
+                                <input type="submit" name="signup" id="signup" class="form-submit" value="Créer le compte"/>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="signup-image">
+                        <figure><img src="images/Docteur.jpg" alt="sing up image"></figure>
+                        <a href="#" class="signup-image-link">Je possède déjà un compte</a>
+                    </div>
+                </div>
+            </div>
+    </div>
+
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>
