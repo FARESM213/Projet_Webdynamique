@@ -71,7 +71,7 @@ require("traitement.php");
                   <a class="nav-link" data-bs-toggle="tab" href="#tab-2">Médecins Spécialistes</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" data-bs-toggle="tab" href="#tab-3">Hepatology</a>
+                  <a class="nav-link" data-bs-toggle="tab" href="#tab-3">Laboratoires</a>
                 </li>
               </ul>
             </div>
