@@ -199,11 +199,15 @@ if (isset($_POST['getLabo']) && !empty($_POST['getLabo']))  // Du coup la on ver
 	$data=$_POST['getLabo']; 
 	$query = " SELECT * FROM labo"; 
 	$result = $con->query($query);
+	$data2='';
+
+
 
 	if ($result->num_rows > 0)
 	 {
 		while ($row = $result->fetch_assoc()) 
 		{
+			$data2 = $row['laboID'];
 			echo " <a data-bs-toggle='modal' data-target='#mod3' href='#mod3' class='list-group-item list-group-item-action' aria-current='true' data-id='".$row['medno']."' value='".$row['medno']."'>
                               <div class='d-flex w-100 justify-content-between'>
                                 <h5 class='mb-1'>".$row['nomLab']."</h5>
@@ -212,6 +216,7 @@ if (isset($_POST['getLabo']) && !empty($_POST['getLabo']))  // Du coup la on ver
                             </a> " ;
 
 		}
+		$_SESSION['Id'] = $data2;
 	} 
 } 
 
@@ -249,6 +254,7 @@ if (isset($_POST['Info3']) && !empty($_POST['Info3']))  // Du coup la on verifie
 	$query = " SELECT * FROM labo WHERE laboID='$data'"; 
 	$result = $con->query($query);
 	$row = $result->fetch_assoc();
+	$_SESSION['Id'] = $row['laboID'];
 
 	echo "  <h5 class='modal-title' style=' color: #000;' id='mod2Label'>".$row['nomLab']." ".$row['type']."</h5> |";
 
@@ -280,9 +286,8 @@ if (isset($_POST['Test2']) && !empty($_POST['Test2']))  // Du coup la on verifie
 {
     $data=$_SESSION['Id'];
     $data2=$_POST['Test2'];
-    $query = " SELECT * FROM labordv WHERE laboID='$data' AND rdv_date='$data2' AND dispo='0'ORDER BY rdv_date ASC,rdvNo ASC"; 
+    $query = " SELECT DISTINCT * FROM labordv WHERE laboID='$data' AND rdv_date='$data2' AND dispo='0'ORDER BY rdv_date ASC,rdvNo ASC"; 
     $result = $con->query($query);
-	echo $query;
 
     if ($result->num_rows > 0)
      {
@@ -310,5 +315,6 @@ if (isset($_POST['Test2']) && !empty($_POST['Test2']))  // Du coup la on verifie
         echo " <a class='list-group-item list-group-item-action' aria-current='true''> Aucun Rendez-vous disponible";
     }
 }
+
 
 ?>

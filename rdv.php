@@ -414,14 +414,7 @@ today = yyyy + '-' + mm + '-' + dd;
 document.getElementById("datefield1").setAttribute("min", today);
 </script>
 </div>
-                                              <ul class="list-group">
-                                                  <li class="list-group-item">RDV1</li>
-                                                  <li class="list-group-item">RDV2</li>
-                                                  <li class="list-group-item">RDV3</li>
-                                              </ul>
-                                              <div class="col-sm-12" style="margin-top: 25px ;" >
-                                              <a href="confirmation.php" class="btn btn-info " id="Confirmer" name="Confirmer">Prendre Rendez-vous</a>
-                                            </div>
+                                             
                                             </div>
                           </div>
                       </div>
@@ -812,11 +805,6 @@ document.getElementById("datefield3").setAttribute("min", today);
 
                               <div class='list-group' id="Rdv2"> </div>
 
-
-
-                                    <div class="col-sm-12" style="margin-top: 25px ;" >
-                                         <a href="confirmation.php" class="btn btn-info " id="Confirmer" name="Confirmer">Prendre Rendez-vous</a>
-                                  </div>
                                   </div>
                           </div>
                       </div>
