@@ -104,7 +104,6 @@ $_SESSION['Type_Rdv']="Medecin";
           });
 
 
-
       $('#datefield2').on("change",function()
       {      
           var date = $(this).val();         
@@ -701,7 +700,7 @@ document.getElementById("datefield1").setAttribute("min", today);
                                          <a href="confirmation.php" class="btn btn-info " id="Confirmer" name="Confirmer">Prendre Rendez-vous</a>
                                         </div>
                                     </div>
-                                  </div>
+                       </div>
           </div> 
 
     <div class="col">

@@ -113,7 +113,6 @@ if (isset($_POST['Test']) && !empty($_POST['Test']))  // Du coup la on verifie b
         {
         echo " <a data-bs-toggle='modal' data-target='#fin' href='#fin' class='list-group-item list-group-item-action' aria-current='true' data-id='".$row['rdvno']."'value='".$row['rdv_horaire']."'> ".$row['rdv_horaire']."h";
         }
-
         echo " <script>                 
 					      $('.list-group-item list-group-item-action').on('click', function()
 					      { 
@@ -337,7 +336,7 @@ if (isset($_POST['Init']) && !empty($_POST['Init']))  // Du coup la on verifie b
 
 if (isset($_POST['Test2']) && !empty($_POST['Test2']))  // Du coup la on verifie bien qu'on a post MedecinId avec javascript
 {
-		$_SESSION['Type_Rdv']="Labo";
+	$_SESSION['Type_Rdv']="Labo";
 
     $data=$_SESSION['Id'];
     $data2=$_POST['Test2'];
@@ -370,6 +369,7 @@ if (isset($_POST['Test2']) && !empty($_POST['Test2']))  // Du coup la on verifie
         echo " <a class='list-group-item list-group-item-action' aria-current='true''> Aucun Rendez-vous disponible";
     }
 }
+
 
 
 ?>

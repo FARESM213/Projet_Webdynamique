@@ -7,13 +7,19 @@
 
 <?php
   // Set session variables (variables globales)
-  $_SESSION["Client"] = "";
+
+$_SESSION["Client"] = "";
 $_SESSION["IdClient"] = "";
 $_SESSION["MdpClient"]="";
 $_SESSION["LoginClient"]="";
 
 $_SESSION["Type"] = "";
 $_SESSION["Specialite"] = "";
+$_SESSION["Nom"] = "";
+
+$_SESSION['Rdv_Supp']="";
+
+
 
 ?>
 
@@ -128,6 +134,8 @@ $_SESSION["Specialite"] = "";
                    $data2="";
                    $data4="";
                     $data5="";
+                    $data6="";
+
 
 
                      if($_SESSION["Type"]=='medecin')
@@ -135,6 +143,8 @@ $_SESSION["Specialite"] = "";
                              $data2="medno";
                              $data4="medpassword";
                              $data5="medlogin";
+                            $data6="medname";
+
 
                      } 
                       else if ($_SESSION["Type"]=="patient")
@@ -142,6 +152,8 @@ $_SESSION["Specialite"] = "";
                              $data2="patno";
                              $data4="patpassword";
                              $data5="patlogin";
+                            $data6="patname";
+
 
                      }
                     else
@@ -149,6 +161,8 @@ $_SESSION["Specialite"] = "";
                       $data2="adno";
                       $data4="adpassword";
                       $data5="adlogin";
+                      $data6="adname";
+
 
                      }          
                   $query = "SELECT * FROM ".$data1." WHERE email='$data3'"; 
@@ -159,9 +173,10 @@ $_SESSION["Specialite"] = "";
                         $_SESSION["IdClient"] = $row[$data2]; 
                         $_SESSION["MdpClient"]=$row[$data4];
                         $_SESSION["LoginClient"]=$row[$data5];
+                        $_SESSION["Nom"] = $row[$data6];
                     }   
 
-                header("Location: profil.php");
+                header("Location: toutparc.php");
                 die();
                 }
                 else if (!vide(['Emaillog','Mdplog']))

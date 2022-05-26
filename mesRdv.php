@@ -5,6 +5,44 @@ session_start();
 require("traitement.php");
 header( 'content-type: text/html; charset=utf-8' );
 
+$_SESSION['Rdv_Supp']="";
+
+include('db_config.php');
+
+       if($_SESSION["Type"]=='medecin')
+              {
+                             $data4="medno";
+
+                     } 
+                      else if ($_SESSION["Type"]=="patient")
+                     {
+                             $data4="patno";
+                     
+                     }
+                    else
+                    {
+                      $data4="adno";
+             
+                     }        
+    $data="";
+    $data2=$_SESSION['IdClient']; 
+    $data3=$_SESSION['Type_Rdv'];
+    if( $_SESSION['Type_Rdv']=="Labo")
+    {
+       $data='dispo'; 
+    }
+    else
+    {
+       $data='etat';  
+
+    }
+    $dbhost = "localhost";
+  $dbuser = "root";
+  $dbpass = "";
+  $db = "BDD";
+  $con = mysqli_connect($dbhost, $dbuser, $dbpass , $db) or die($con);
+    $query = " SELECT DISTINCT * FROM rendez_vous WHERE etat='1' AND $data4='$data2' ORDER BY rdv_date ASC,rdvno ASC"; 
+    $result = $con->query($query);
 
 ?>
 <!doctype html>
@@ -85,9 +123,9 @@ header( 'content-type: text/html; charset=utf-8' );
                     <div class="col-sm-12 bg-c-lite-green user-profile">
                         <div class="card-block text-center text-black">
                             <div class="m-b-25">
-                                <img src="https://img.icons8.com/bubbles/100/000000/user.png" class="img-radius" alt="User-Profile-Image">
+                                <?php image_display($db_handle,$_SESSION['IdClient']) ?></img>
                             </div>
-                            <h6 class="f-w-600"style=" color: #000; ">NOM Prenom</h6>
+                            <h6 class="f-w-600"style=" color: #000; "><?php echo $_SESSION['Nom']; ?></h6>
                             <i class=" mdi mdi-square-edit-outline feather icon-edit m-t-10 f-16"></i>
                         </div>
                     </div>
@@ -97,7 +135,7 @@ header( 'content-type: text/html; charset=utf-8' );
                             <div class="row">
                                 <div class="col-sm-12">
                                     <p class="m-b-10 f-w-600">Email</p>
-                                    <h6 class="text-muted f-w-400">aaaaa@gmail.com</h6>
+                                    <h6 class="text-muted f-w-400"> <?php echo $_SESSION['Client']; ?></h6>
                                 </div>
                                 <div class="col-sm-12">
                                     <p class="m-b-10 f-w-600">Telephone</p>
@@ -112,38 +150,121 @@ header( 'content-type: text/html; charset=utf-8' );
 
 <script>
     $(document).ready(function() {
-        $('li').click(function() {
-            $('li.list-group-item.active').removeClass("active");
-            $(this).addClass("active");
-        });
+
+       $('li').click(function() 
+          {
+               $(this).addClass('active').siblings().removeClass('active');
+          });
+  
     });
+
+      function Supp()
+      {
+          var interest = $('ul#MesRDV').find('li.active').data('id');
+
+           $.ajax({
+                      url :"Traitement.php",           // Valeur va etre renvoyée a action.php
+                      type:"POST",                 
+                      cache:false,                          // jsp ce que c'est 
+                      data:{interest:interest},   // la en gros bah quand on va essayer de recuperer la valeur dans action.php, faudra mettre ca 
+                      success:function(data)
+                      {
+                            $("#finito").html(data);           // Avoir la valeur renvoyé par action.php de ce que j'ai compris  qu'on met dans horaire
+                      }
+                  });     
+      }
+
+      function Supprimer()
+      {
+          var Supprimer = $('ul#MesRDV').find('li.active').data('id');
+           $.ajax({
+                      url :"Traitement.php",           // Valeur va etre renvoyée a action.php
+                      type:"POST",                 
+                      cache:false,                          // jsp ce que c'est 
+                      data:{Supprimer:Supprimer},   // la en gros bah quand on va essayer de recuperer la valeur dans action.php, faudra mettre ca 
+                      success:function(data)
+                      {
+                            $("#finito2").html(data);           // Avoir la valeur renvoyé par action.php de ce que j'ai compris  qu'on met dans horaire
+                                // Avoir la valeur renvoyé par action.php de ce que j'ai compris  qu'on met dans horaire
+                      }
+              });     
+      }
+
+
 </script>
+
 
 <div class="col-xl-12" style="width: 500px; ">
 
 <h1>Vos Rendez-vous</h1>
 <h4> Vous pouvez annuler un rendez vous </h4>
 
-<ul class="list-group">
-<li class="list-group-item">RDV1</li>
-<li class="list-group-item">RDV2</li>
-<li class="list-group-item">RDV3</li>
-<li class="list-group-item">RDV1</li>
-<li class="list-group-item">RDV2</li>
-<li class="list-group-item">RDV3</li>
-<li class="list-group-item">RDV1</li>
-<li class="list-group-item">RDV2</li>
-<li class="list-group-item">RDV3</li>
-<li class="list-group-item">RDV1</li>
-<li class="list-group-item">RDV2</li>
-<li class="list-group-item">RDV3</li>
-</ul>
+
+  <div >
+    <ul class="list-group" id="MesRDV" name="MesRDV">
+    <?php 
+    while ($row = $result->fetch_assoc()) { ?>
+
+        <li class='list-group-item list-group-item-action' aria-current='true' data-id='<?php echo $row['rdvno'] ?>' value='<?php echo $row['rdv_horaire'] ?> '> <?php echo $row['rdv_horaire'];?> h  <?php echo $row['rdvno'];  ?></li>
+        
+      <?php }; ?>
+
+    </ul>
+
+
+  </div>
+
 <div class="col-sm-12" style="margin-top: 25px ;" >
-<button type="button" class="btn btn-danger">Annuler RDV</button>
+<button data-bs-toggle='modal' data-target='#fin' href='#fin' type="button" class="btn btn-danger" onclick="Supp();">Annuler RDV</button>
 </div>
         
 </div>
+      
 
+    <form action="" method="post" enctype="multipart/form-data">
+     <div class="modal fade" id="fin" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="finDocsLabel" aria-hidden="true">
+                                  <div class="modal-dialog">
+                                    <div class="modal-content">
+                                      <div class="modal-header">
+                                        <h5 class="modal-title" id="finDocsLabel">Modal title</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                      </div>
+                                      <div class="modal-body">
+                                      <div class="list-group" id="finito"> 
+
+                                      </div>
+                                      </div>
+
+                                      <div class="modal-footer">
+
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                       <a href="mesRDV.php" class="btn btn-danger" id="Suppression" name="Suppression"  onclick="Supprimer();">Prendre Rendez-vous</a>
+                                        </div>
+                                    </div>
+                       </div>
+          </div> 
+
+     <div class="modal fade" id="fin2" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="finDocsLabel" aria-hidden="true">
+                                  <div class="modal-dialog">
+                                    <div class="modal-content">
+                                      <div class="modal-header">
+                                        <h5 class="modal-title" id="finDocsLabel">Modal title</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                      </div>
+                                      <div class="modal-body">
+                                      <div class="list-group" id="finito2"> 
+
+                                      </div>
+                                      </div>
+
+                                      <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>                                      
+                                        </div>
+                                    </div>
+                       </div>
+          </div> 
+
+</form>
 
 </body>
 

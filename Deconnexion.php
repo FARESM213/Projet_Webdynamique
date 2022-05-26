@@ -26,6 +26,9 @@
 		$_SESSION["LoginClient"]="";
 		$_SESSION["Type"] = "";
 		$_SESSION["Specialite"] = "";
+	    $_SESSION["Num"] = "";
+	    $_SESSION["Nom"] = "";
+
 
 	 ?>
 

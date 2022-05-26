@@ -10,6 +10,7 @@ $data2=$_SESSION['Type'];
 $id = $_SESSION["IdClient"];      
 
 
+
 $sql="SELECT * FROM $data2 WHERE email='$data'";
 
 
@@ -246,7 +247,7 @@ function ResizeImage() {
 
         <input name="userImage" type="file" class="imageFile"  accept="image/*"   id="userImage " onchange="ResizeImage()"/> 
 
-        <input   class="btn btn-primary py-2 px-4 ms-3"  type="submit" value="Modifier" name="Upload" id ="Modifier" onchange="ResizeImage()"> </input>
+        <input  class="btn btn-primary py-2 px-4 ms-3"  type="submit" value="Modifier" name="Upload" id ="Modifier" onchange="ResizeImage()"> </input>
 
     </form>
 

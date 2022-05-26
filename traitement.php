@@ -2,7 +2,7 @@
 
 header('Content-Type: text/html; charset=UTF-8');
 
-
+include('db_config.php');
 
 
 /// Main 
@@ -493,6 +493,8 @@ function image_display($db_handle,$id)
 			{
 				$img = $row['count'];     
 
+				$_SESSION['Image']=$img;
+
 				echo " <img style='width: 120px' class='img-radius' alt='User-Profile-Image'";
 		    	echo 'src="data:image/png;base64,'.base64_encode( $row['count'] ).'"/>';
 			}
@@ -577,5 +579,101 @@ if(isset($_POST["Upload"])&& !empty($_POST['Upload']))
 
 		  
 }
+
+
+
+
+
+function Mesrdv()  // Du coup la on verifie bien qu'on a post MedecinId avec javascript
+{
+	
+	     if($_SESSION["Type"]=='medecin')
+              {
+                             $data4="medno";
+
+                     } 
+                      else if ($_SESSION["Type"]=="patient")
+                     {
+                             $data4="patno";
+                     
+                     }
+                    else
+                    {
+                      $data4="adno";
+             
+                     }        
+    $data="";
+    $data2=$_SESSION['IdClient'];	
+    $data3=$_SESSION['Type_Rdv'];
+    if( $_SESSION['Type_Rdv']=="Labo")
+    {
+    	 $data='dispo';	
+    }
+    else
+    {
+    	 $data='etat';	
+
+    }
+    $dbhost = "localhost";
+	$dbuser = "root";
+	$dbpass = "";
+	$db = "BDD";
+	$con = mysqli_connect($dbhost, $dbuser, $dbpass , $db) or die($con);
+    $query = " SELECT DISTINCT * FROM rendez_vous WHERE etat='1' AND $data4='$data2' ORDER BY rdv_date ASC,rdvno ASC"; 
+    $result = $con->query($query);
+   if ($result->num_rows > 0)
+     {
+        while ($row = $result->fetch_assoc()) 
+        {
+       		 echo " <a data-bs-toggle='modal' data-target='#fin' href='#fin' class='list-group-item list-group-item-action' aria-current='true' data-id='".$row['rdvno']."'value='".$row['rdv_horaire']."'> ".$row['rdv_horaire']."h";
+        }
+
+        echo " <script>                 
+					      $('.list-group-item list-group-item-action').on('click', function()
+					      { 
+								      var button = $(event.relatedTarget) // Button that triggered the modal
+			      					  var getID = button.data('id')
+							          $('.active').removeClass('active');
+							          $(this).addClass('active');					
+							          alert(getID);
+						  }); 
+
+				</script>";
+    } 
+    else 
+    {
+        echo " <a class='list-group-item list-group-item-action' aria-current='true''> Aucun Rendez-vous disponible";
+    }
+}
+
+
+
+
+if(isset($_POST["interest"])&& !empty($_POST['interest']))
+{
+
+	$_SESSION['Rdv_Supp']=$_POST["interest"];
+		  
+}
+
+if(isset($_POST["Supprimer"])&& !empty($_POST['Supprimer']))
+{
+
+	$valeur= $_POST["Supprimer"];		
+    $sql="UPDATE rendez_vous SET etat ='0' WHERE rdvno='$valeur'";
+	$res= mysqli_query($db_handle,$sql);
+	if($res)
+	{
+		$message = "Changement effectué ";
+		header("Location: mesRdv.php");
+	}
+	else
+	{
+		$message= "Changement impossible ";
+	}
+
+}
+
+
 
 ?>
