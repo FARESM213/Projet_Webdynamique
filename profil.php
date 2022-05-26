@@ -7,20 +7,11 @@ header( 'content-type: text/html; charset=utf-8' );
 
 $data=$_SESSION['Client'];
 $data2=$_SESSION['Type'];
+$id = $_SESSION["IdClient"];      
 
-if ($_SESSION['Type']=='Admin')
-{
-     $data3='adno';
-}
-else   if ($_SESSION['Type']=='patient')
-{
-     $data3='patno';
-}
-$sql="SELECT $data3 AS count FROM $data2 WHERE email='$data'";
 
-$result= mysqli_query($db_handle,$sql);
-$row = mysqli_fetch_assoc($result); 
-$id = $row['count'];         
+$sql="SELECT * FROM $data2 WHERE email='$data'";
+
 
 ?>
 
@@ -29,6 +20,7 @@ $id = $row['count'];
 
 
 <script type="text/javascript">
+
 
     $(document).ready(function() {
 
@@ -45,6 +37,7 @@ $id = $row['count'];
             reader.readAsDataURL(file);
         }
     });
+
 });
 
 function ResizeImage() {
@@ -146,7 +139,7 @@ function ResizeImage() {
                                                         <div class="row m-l-0 m-r-0">
                                                             <div class="col-sm-4 bg-c-lite-green user-profile">
                                                                 <div class="card-block text-center text-white">
-                                                                    <div class="m-b-25">  
+                                                                    <div class="m-b-25" id="Image">  
 
                                                                         <?php image_display($db_handle,$id); ?> <br> <br>
                                                                      
@@ -173,7 +166,7 @@ function ResizeImage() {
                                                                     <h6 class="m-b-20 m-t-40 p-b-5 b-b-default f-w-600">Rendez Vous</h6>
                                                                     <div class="row">
                                                                         <div class="col-sm-6">
-                                                                            <p class="m-b-10 f-w-600"><?php Dernier_Rdv($db_handle,$id) ;?></p>
+                                                                            <p class="m-b-10 f-w-600"><?php //Dernier_Rdv($db_handle,$id) ;?></p>
                                                                         </div>
 
                                                                     </div>
@@ -181,46 +174,54 @@ function ResizeImage() {
                                                                         <li><a href="#!" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="facebook" data-abc="true"><i class="mdi mdi-facebook feather icon-facebook facebook" aria-hidden="true"></i></a></li>
                                                                         <li><a href="#!" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="twitter" data-abc="true"><i class="mdi mdi-twitter feather icon-twitter twitter" aria-hidden="true"></i></a></li>
                                                                         <li><a href="#!" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="instagram" data-abc="true"><i class="mdi mdi-instagram feather icon-instagram instagram" aria-hidden="true"></i></a></li>
-                                                                    </ul>
-                                                </div>
-                                            </div>
+                                                                            </ul>
+                                                        </div>
+                                                    </div>
                                         </div>
                                     </div>
                                 </div>
             </div>
         </div>
 
-<!--
 
-        <label> Login :</label>
-        <input type="text" name="Login"> <br>
+
+    <form action="" method="post" enctype="multipart/form-data">
+
+        <label> Login : </label>
+        <input type="text" name="Login"  value="<?php echo $_SESSION['LoginClient'];?>"> <br>
         <label> Mot de passe :</label>
-        <input type="password" name="Login"> <br>
 
-        <label> Login :</label>
 
+  <input type="password" name="password" id="password" value="<?php echo $_SESSION['MdpClient'];?>" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*_=+-]).{8,16}$">
+
+  <br> <br> <a  href="Supp.php" class="btn btn-primary py-2 px-4 ms-3">Modifier informations supplementaire</a>
+
+
+        <!--
+        <label> Adresse :</label>
         <input type="text" name="Login"><br>
+        <label> Ville :</label>
         <input type="text" name="Login"><br>
+        <label> Code Postal :</label>
         <input type="text" name="Login"><br>
+        <label> Pays:</label>
+        <input type="text" name="Login"><br> 
+        <label> Numero telephone:</label>
+        <input type="text" name="Login"><br> 
+        <label> Carte Vitale:</label>
         <input type="text" name="Login"><br> -->
+
 
         
    
     <img src="" id="preview">
 
-    <form action="" method="post" enctype="multipart/form-data">
 
-        <label>Upload the image file:</label><br /> 
         <input name="userImage" type="file" class="imageFile"  accept="image/*"   id="userImage " onchange="ResizeImage()"/> 
 
-        <input type="submit" value="Upload" name= "Upload" onchange="ResizeImage()" />
-
-        <?php charger_image($db_handle,$id); ?>
-
+        <input   class="btn btn-primary py-2 px-4 ms-3"  type="submit" value="Modifier" name="Upload" id ="Modifier" onchange="ResizeImage()"> </input>
 
     </form>
-
-
 
  </div>
 

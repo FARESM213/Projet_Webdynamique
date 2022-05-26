@@ -2,6 +2,33 @@
 
 header('Content-Type: text/html; charset=UTF-8');
 
+
+
+
+/// Main 
+
+
+$db="BDD";
+$db_id="root";
+$adress="localhost";
+$db_mdp=""; 
+$db_handle=mysqli_connect($adress,$db_id,$db_mdp,$db);
+$data="";
+
+//Connect to MysQL
+
+if(verification($adress,$db_id,$db_mdp,$db,$db_handle,$data) )
+{
+
+	//ajouter_patient($db_handle);
+	//ajouter_medecin($db_handle);
+	//connexion($db_handle,'Admin');
+	//update_element($db_handle,'patient','patlogin','fares.messaoudi@edu.ece.fr','fafff');
+
+}
+
+
+
 function vide($required)
 {
 	// Loop over field names, make sure each one exists and is not empty
@@ -77,7 +104,7 @@ function connexion($db_handle,$table)
 			if(!vide(['Emaillog','Mdplog']))
 			{
 
-				$email = $_POST['Emaillog'] ;
+				$email =$_POST['Emaillog'] ;
 				$mdp = $_POST['Mdplog'] ;
 				$genre='';
 
@@ -94,7 +121,9 @@ function connexion($db_handle,$table)
 					$genre='adpassword';
 				}
 
-				$sql="SELECT * FROM $table WHERE email='$email' AND $genre='$mdp' ";
+				$sql="SELECT * FROM $table WHERE email='$email'AND $genre='$mdp' ";
+
+				echo $sql;
 				$res= mysqli_query($db_handle,$sql);
 				if($row=mysqli_num_rows($res)>0)
 				{
@@ -166,8 +195,6 @@ function connexion($db_handle,$table)
      	}
 		
 	}
-
-
 function ajouter_patient($db_handle,$message) 
      {
 		if (isset($_POST['insert']))
@@ -176,7 +203,7 @@ function ajouter_patient($db_handle,$message)
 			{
 				$sql="SELECT * FROM patient";
 				$res= mysqli_query($db_handle,$sql);
-				$id = mysqli_num_rows($res)+1;
+				$id =mysqli_num_rows($res)+2;
 				$nom = $_POST['Nom'] ;
 				$login = $_POST['Login'] ;
 				$mdp = $_POST['Mdp'] ;
@@ -185,6 +212,7 @@ function ajouter_patient($db_handle,$message)
 				$sql="SELECT * FROM patient WHERE email='$email'";
 				$res= mysqli_query($db_handle,$sql);
 
+
 				if(mysqli_num_rows($res)>0)
 					{
 						echo "L'adresse mail ' $email ' est deja presente dans nos fichiers";
@@ -192,18 +220,22 @@ function ajouter_patient($db_handle,$message)
 					}
 					else
 					{
-						$sql="INSERT INTO patient(`patno`, `patname`, `patlogin`, `patpassword`, `email`) VALUES('$id','$nom','$login','$mdp','$email')";
 
+						$db="BDD";
+						$db_id="root";
+						$adress="localhost";
+						$db_mdp=""; 
+						$db_handle=mysqli_connect($adress,$db_id,$db_mdp,$db);
+						$data="";
+
+
+						$sql="INSERT INTO patient(patno, patname, patlogin, patpassword, email) VALUES('$id','$nom','$login','$mdp','$email') ";
 						$res= mysqli_query($db_handle,$sql);
-						if($res)
+				          
+
+					    	if($res)
 							{
 
-								   /* $to = '$email';
-								    $subject = "Creation d'un compte chez ECE-DOC";
-								    $message = "Nous vous souhaitons la bienvenue dans la grande equipe d'ECE-DOC :
-								                Nous vous communiquons votre numero de client : '$id'. Attention, ne le communiquez a personne, ce numero pourra vous etre utile en cas de Mot de passe oublié";
-								    $headers = 'From: projetinfo.gr7.2022@gmail.com';
-								mail($to, $subject, $message, $headers);*/
 								echo" Felicitation la creation de votre compte est confirmée "; // Faire un pop up 
 								return true;
 							}
@@ -222,7 +254,6 @@ function ajouter_patient($db_handle,$message)
 
      	}
  }
-
  function ajouter_medecin($db_handle) 
      {
 		if (isset($_POST['insert']))
@@ -290,7 +321,7 @@ function ajouter_rdv($db_handle)
 
  function update_element($db_handle,$table,$element,$email,$valeur,&$message)
      {
-		if (isset($_POST['Update']))
+		if ((isset($_POST['Update']))||(isset($_POST['Upload'])))
 		{
 
 			$sql="UPDATE $table SET $element ='$valeur' WHERE email='$email'";
@@ -431,58 +462,37 @@ function ajouter_rdv($db_handle)
  }
 
 
-function charger_image ($db_handle,$id)
-{
-		if(isset($_POST["Upload"]))
-		{
-			if (!empty($_FILES["userImage"]["tmp_name"]))
-			{
-
-				 $b = getimagesize($_FILES["userImage"]["tmp_name"]);
-		    //Check if the user has selected an image
-		    if($b !== false)
-		    {
-		        //Get the contents of the image
-		        $file = $_FILES['userImage']['tmp_name'];
-		        $image = addslashes(file_get_contents($file));
-		        echo "<img style=' margin-left :10px;'src='data:image/png;base64',".base64_encode($image)."/>";
-
-
-		     	$sql="UPDATE patient SET Image ='$image' WHERE 1";
-				$res= mysqli_query($db_handle,$sql);
-		        //Insert the image into the database
-		        if($res)
-		        {
-		            echo "File uploaded successfully.";
-		        }
-		        else
-		        {
-		            echo "File upload failed.";
-		        } 
-		    }
-		    else
-		    {
-		        echo "Please select an image to upload.";
-		    }
-
-		    	//image_display($db_handle,$id);
-
-			}
-		   
-		}
-
-}
 
 function image_display($db_handle,$id)
 {
 		if(!empty($id))
 		{
-			$result= mysqli_query($db_handle," SELECT Image AS count FROM patient WHERE patno='$id'");
+			$table=$_SESSION['Type'];
+			$data2="";
+
+                  if($_SESSION["Type"]=='medecin')
+                     {
+                             $data2="medno";
+
+                     } 
+                      else if ($_SESSION["Type"]=="patient")
+                     {
+                             $data2="patno";
+                     }
+                    else
+                    {
+                      $data2="adno";
+                     }        
+
+
+
+			$result= mysqli_query($db_handle," SELECT Image AS count FROM $table WHERE $data2='$id'");
+
 			$row = mysqli_fetch_assoc($result); 
 			if ($row)
 			{
 				$img = $row['count'];     
-			//	
+
 				echo " <img style='width: 120px' class='img-radius' alt='User-Profile-Image'";
 		    	echo 'src="data:image/png;base64,'.base64_encode( $row['count'] ).'"/>';
 			}
@@ -499,28 +509,73 @@ function image_display($db_handle,$id)
 
 
 
-
-/// Main 
-
-
-$db="BDD";
-$db_id="root";
-$adress="localhost";
-$db_mdp=""; 
-$db_handle=mysqli_connect($adress,$db_id,$db_mdp,$db);
-$data="";
-
-//Connect to MysQL
-
-if(verification($adress,$db_id,$db_mdp,$db,$db_handle,$data) )
+if(isset($_POST["Upload"])&& !empty($_POST['Upload']))
 {
+	if($_SESSION["Type"]=='medecin')
+                     {
+                             $data4="medpassword";
+                             $data5="medlogin";
+                             $data6="medno";
 
-	//ajouter_patient($db_handle);
-	//ajouter_medecin($db_handle);
-	//connexion($db_handle,'Admin');
-	//update_element($db_handle,'patient','patlogin','fares.messaoudi@edu.ece.fr','fafff');
+                     } 
+                      else if ($_SESSION["Type"]=="patient")
+                     {
+                             $data4="patpassword";
+                             $data5="patlogin";
+                             $data6="patno";
 
+
+                     }
+                    else
+                    {
+                      $data4="adpassword";
+                      $data5="adlogin";
+                      $data6="adno";
+
+
+                     }       
+
+			if (!empty($_FILES["userImage"]["tmp_name"]))
+			{
+			    $b = getimagesize($_FILES["userImage"]["tmp_name"]);
+			     //Check if the user has selected an image
+			    if($b !== false)
+			    {
+			        //Get the contents of the image
+			        $file = $_FILES['userImage']['tmp_name'];
+			        $image = addslashes(file_get_contents($file));
+			        $Type=$_SESSION["Type"];
+			        $num= $_SESSION['IdClient'];
+			     	$sql="UPDATE $Type SET Image ='$image' WHERE $data6='$num'";
+					$res= mysqli_query($db_handle,$sql);
+			        //Insert the image into the database
+			        if($res)
+			        {
+			            echo "File uploaded successfully.";
+			        }
+			        else
+			        {
+			            echo "File upload failed.";
+			        } 
+			    }
+			    else
+			    {
+			        echo "Please select an image to upload.";
+			    }
+
+			}
+
+			  
+
+          $message="";
+
+		 update_element($db_handle,$_SESSION['Type'],$data5,$_SESSION['Client'],$_POST['Login'],$message);
+		 update_element($db_handle,$_SESSION['Type'],$data4,$_SESSION['Client'],$_POST['password'],$message);
+		 $_SESSION['LoginClient']=$_POST['Login'];
+		 $_SESSION['MdpClient']=$_POST['password'];
+
+
+		  
 }
-
 
 ?>

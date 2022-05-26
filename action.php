@@ -24,6 +24,8 @@ if (isset($_POST['medecinId']) && !empty($_POST['medecinId']))  // Du coup la on
 
 } 
 
+
+
 if (isset($_POST['getID']) && !empty($_POST['getID']))  // Du coup la on verifie bien qu'on a post MedecinId avec javascript
 {
 	$data=$_POST['getID']; 
@@ -53,7 +55,7 @@ if (isset($_POST['Info']) && !empty($_POST['Info']))  // Du coup la on verifie b
 
 	$data=$_POST['Info']; 
 	$query = " SELECT * FROM medecin WHERE medno='$data'"; 
-		$_SESSION['Type_Rdv']="Medecin";
+	$_SESSION['Type_Rdv']="Medecin";
 
 	$result = $con->query($query);
 	$row = $result->fetch_assoc();
@@ -296,6 +298,42 @@ if (isset($_POST['Mail3']) && !empty($_POST['Mail3']))  // Du coup la on verifie
 	 echo $row['email']."|";
 
 }
+
+
+if (isset($_POST['Init']) && !empty($_POST['Init']))  // Du coup la on verifie bien qu'on a post MedecinId avec javascript
+{
+
+	$data=$_SESSION['Client'];
+	$data2=$_SESSION['Type'];
+	$data3="";
+	$data4="";
+
+	$query="SELECT * FROM $data2 WHERE email='$data'";
+	$result = $con->query($query);
+	$row = $result->fetch_assoc();
+
+		if ($_SESSION['Type']=='Admin')
+		{
+		     $data3='adlogin';
+		     $data4='adpassword';
+
+		}
+		else   if ($_SESSION['Type']=='patient')
+		{
+		     $data3='patlogin';
+		     $data4='patpassword';
+		}
+		else
+		{
+		    $data3='medlogin';
+		    $data4='medpassword';
+		}
+
+	echo $row[$data3]."|";
+	echo $row[$data4]."|";
+
+}
+
 
 if (isset($_POST['Test2']) && !empty($_POST['Test2']))  // Du coup la on verifie bien qu'on a post MedecinId avec javascript
 {
