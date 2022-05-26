@@ -42,14 +42,41 @@ header( 'content-type: text/html; charset=utf-8' );
                       <a href="toutparc.php" class="nav-item nav-link">Tout Parcourir</a>
                       <div class="nav-item dropdown">
                           <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Profil</a>
+
                           <div class="dropdown-menu m-0">
-                              <a href="login.php" class="dropdown-item">Se connecter</a>
+                              <?php 
+                                      if($_SESSION['Client']=="")
+                                      {
+                                        echo " <a href='login.php'class='dropdown-item'>Se connecter</a> " ;//// 
+                                      }  
+                                      else
+                                      {                                        
+                                         echo " <a href='profil.php'class='dropdown-item'>Mon profil</a> " ;//// 
+                                         echo " <a href='mesRdv.php'class='dropdown-item'>Mes Rendez-vous </a> " ;//// 
+                                         echo " <a href='Deconnexion.php'class='dropdown-item'>Se deconnecter </a> " ;//// 
+
+                                      }
+
+                              ?>
                           </div>
+
                       </div>
                       <a href="#contactUs" class="nav-item nav-link">Contact</a>
                   </div>
                   <button type="button" class="btn text-dark" data-bs-toggle="modal" data-bs-target="#searchModal"><i class="fa fa-search"></i></button>
-                  <a href="rdv.php" class="btn btn-primary py-2 px-4 ms-3">Prendre un Rendez-vous</a>
+
+                   <?php 
+                                      if($_SESSION['Client']=="")
+                                      {
+                                          echo "<a href='Login.php' class='btn btn-primary py-2 px-4 ms-3'>Prendre un Rendez-vous</a>";
+                                      }  
+                                      else
+                                      {                                        
+                                          echo "<a href='rdv.php' class='btn btn-primary py-2 px-4 ms-3'>Prendre un Rendez-vous</a>";
+                                      }
+
+                              ?>
+
                   <form class="d-flex" style= "padding-left: 190px;"role="search">
                     <input class="form-control me-2 " type="search" placeholder="Recherche" aria-label="Search">
                     <button class="btn btn-outline-success" type="submit">Rechercher</button>

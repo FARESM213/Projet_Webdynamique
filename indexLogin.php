@@ -36,13 +36,24 @@ header( 'content-type: text/html; charset=utf-8' );
                       <div class="nav-item dropdown">
                           <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Profil</a>
                           <div class="dropdown-menu m-0">
-                              <a href="login.php" class="dropdown-item">Se connecter</a>
+
+                            <?php if($_SESSION['Clien']=="")
+                            {
+
+                              echo " <a href='login.php' class='dropdown-item'>Se connecter</a> " //// 
+
+
+                            }  
+
+                            ?>
+
                           </div>
                       </div>
                       <a href="contact.php" class="nav-item nav-link">Contact</a>
                   </div>
                   <button type="button" class="btn text-dark" data-bs-toggle="modal" data-bs-target="#searchModal"><i class="fa fa-search"></i></button>
-                  <a href="rdv.php" class="btn btn-primary py-2 px-4 ms-3">Prendre un Rendez-vous</a>
+                  <a href="rdv.php" class="btn btn-primary py-2 px-4 ms-3">Prendre un Rendez-vous</a> <!-- //// -->
+
                   <form class="d-flex" style= "padding-left: 190px;"role="search">
                     <input class="form-control me-2 " type="search" placeholder="Recherche" aria-label="Search">
                     <button class="btn btn-outline-success" type="submit">Rechercher</button>

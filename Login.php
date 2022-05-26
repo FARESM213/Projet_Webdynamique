@@ -12,8 +12,8 @@ $_SESSION["IdClient"] = "";
 $_SESSION["MdpClient"]="";
 $_SESSION["LoginClient"]="";
 
-  $_SESSION["Type"] = "";
-  $_SESSION["Specialite"] = "";
+$_SESSION["Type"] = "";
+$_SESSION["Specialite"] = "";
 
 ?>
 
