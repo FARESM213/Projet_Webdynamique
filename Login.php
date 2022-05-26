@@ -8,6 +8,8 @@ session_start();
 <?php
 // Set session variables (variables globales)
 $_SESSION["Client"] = "";
+$_SESSION["IdClient"] = "";
+
 $_SESSION["Type"] = "";
 $_SESSION["Specialite"] = "";
 ?>
@@ -115,6 +117,17 @@ $_SESSION["Specialite"] = "";
                   $_SESSION["Client"] =$_POST['Emaillog'] ;
                   $_SESSION["Type"] = get_radio();
                   $_SESSION["Num"]= $_POST['Emaillog'];
+
+
+                  $data3=$_SESSION['Client'];
+                    $result= mysqli_query($db_handle," SELECT patno AS num FROM patient WHERE email='$data3'");
+                    $row = mysqli_fetch_assoc($result); 
+                    if ($row)
+                    {
+                        $_SESSION["IdClient"] = $row['num']; 
+
+                    }   
+
                   header("Location: profil.php");
                   die();
                 }

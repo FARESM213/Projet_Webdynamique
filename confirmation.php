@@ -5,8 +5,22 @@ session_start();
 require("traitement.php");
 include('db_config.php');
 
-echo $_SESSION['Select'];
-echo $_SESSION['Id'];
+
+$data1=$_SESSION['Select'];
+$data2=$_SESSION['Id'];
+$data3=$_SESSION["IdClient"];
+
+$sql="UPDATE rendez_vous SET etat=1 ,patno='$data3' WHERE rdvno='$data1' ";
+$res= mysqli_query($db_handle,$sql);
+if($res)
+{
+     $message ="Changement effectuer ";   
+}
+ else
+{
+     $message ="Changement impossible ";
+ }
+ 
 
 ?>
 
