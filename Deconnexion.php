@@ -12,7 +12,7 @@
 
 	  //header("Location: toutparc.php");
 	   echo '<script>
-						alert("Vous avez été déconnecté);
+						alert("Vous avez été déconnecté");
 						window.location.href="toutparc.php";
 						</script>';	   
 		sleep(2);
@@ -24,7 +24,6 @@
 		$_SESSION["IdClient"] = "";
 		$_SESSION["MdpClient"]="";
 		$_SESSION["LoginClient"]="";
-
 		$_SESSION["Type"] = "";
 		$_SESSION["Specialite"] = "";
 
