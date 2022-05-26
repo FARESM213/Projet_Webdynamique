@@ -21,6 +21,7 @@ if (isset($_POST['medecinId']) && !empty($_POST['medecinId']))  // Du coup la on
 	{
 		echo '<option value="">Aucun Rendez-vous </option>'; 
 	}
+
 } 
 
 if (isset($_POST['getID']) && !empty($_POST['getID']))  // Du coup la on verifie bien qu'on a post MedecinId avec javascript
@@ -28,6 +29,8 @@ if (isset($_POST['getID']) && !empty($_POST['getID']))  // Du coup la on verifie
 	$data=$_POST['getID']; 
 	$query = " SELECT * FROM medecin WHERE medjob='$data'"; 
 	$result = $con->query($query);
+	$_SESSION['Type_Rdv']="Medecin";
+
 
 	if ($result->num_rows > 0)
 	 {
@@ -50,6 +53,8 @@ if (isset($_POST['Info']) && !empty($_POST['Info']))  // Du coup la on verifie b
 
 	$data=$_POST['Info']; 
 	$query = " SELECT * FROM medecin WHERE medno='$data'"; 
+		$_SESSION['Type_Rdv']="Medecin";
+
 	$result = $con->query($query);
 	$row = $result->fetch_assoc();
 	echo "  <h5 class='modal-title' style=' color: #000;' id='mod2Label'>".$row['medname']." ".$row['medjob']."</h5> |";
@@ -143,6 +148,8 @@ if (isset($_POST['Info2']) && !empty($_POST['Info2']))  // Du coup la on verifie
 
     $data=$_POST['Info2']; 
     $query = " SELECT * FROM medecin WHERE medno='$data'"; 
+     $_SESSION['Type_Rdv']="Medecin";
+
     $result = $con->query($query);
     $row = $result->fetch_assoc();
 
@@ -198,6 +205,8 @@ if (isset($_POST['getLabo']) && !empty($_POST['getLabo']))  // Du coup la on ver
 {
 	$data=$_POST['getLabo']; 
 	$query = " SELECT * FROM labo"; 
+	$_SESSION['Type_Rdv']="Labo";
+
 	$result = $con->query($query);
 	$data2='';
 
@@ -228,6 +237,8 @@ if (isset($_POST['Confirmer']) && !empty($_POST['Confirmer']))  // Du coup la on
 
 if (isset($_POST['getLabo1']) && !empty($_POST['getLabo1']))  // Du coup la on verifie bien qu'on a post MedecinId avec javascript
 {
+	$_SESSION['Type_Rdv']="Labo";
+
 	$data=$_POST['getLabo1']; 
 	$query = " SELECT * FROM labo";  
 	$result = $con->query($query);
@@ -249,6 +260,7 @@ if (isset($_POST['getLabo1']) && !empty($_POST['getLabo1']))  // Du coup la on v
 
 if (isset($_POST['Info3']) && !empty($_POST['Info3']))  // Du coup la on verifie bien qu'on a post MedecinId avec javascript
 {
+		$_SESSION['Type_Rdv']="Labo";
 
 	$data=$_POST['Info3']; 
 	$query = " SELECT * FROM labo WHERE laboID='$data'"; 
@@ -262,6 +274,8 @@ if (isset($_POST['Info3']) && !empty($_POST['Info3']))  // Du coup la on verifie
 
 if (isset($_POST['Nom3']) && !empty($_POST['Nom3']))  // Du coup la on verifie bien qu'on a post MedecinId avec javascript
 {
+		$_SESSION['Type_Rdv']="Labo";
+
 
 	$data=$_POST['Nom3']; 
 	$query = " SELECT * FROM labo WHERE laboID='$data'"; 
@@ -273,6 +287,7 @@ if (isset($_POST['Nom3']) && !empty($_POST['Nom3']))  // Du coup la on verifie b
 
 if (isset($_POST['Mail3']) && !empty($_POST['Mail3']))  // Du coup la on verifie bien qu'on a post MedecinId avec javascript
 {
+	$_SESSION['Type_Rdv']="Labo";
 
 	$data=$_POST['Mail3']; 
 	$query = " SELECT * FROM labo WHERE laboID='$data'"; 
@@ -284,6 +299,8 @@ if (isset($_POST['Mail3']) && !empty($_POST['Mail3']))  // Du coup la on verifie
 
 if (isset($_POST['Test2']) && !empty($_POST['Test2']))  // Du coup la on verifie bien qu'on a post MedecinId avec javascript
 {
+		$_SESSION['Type_Rdv']="Labo";
+
     $data=$_SESSION['Id'];
     $data2=$_POST['Test2'];
     $query = " SELECT DISTINCT * FROM labordv WHERE laboID='$data' AND rdv_date='$data2' AND dispo='0'ORDER BY rdv_date ASC,rdvNo ASC"; 

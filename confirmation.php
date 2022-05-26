@@ -10,7 +10,18 @@ $data1=$_SESSION['Select'];
 $data2=$_SESSION['Id'];
 $data3=$_SESSION["IdClient"];
 
-$sql="UPDATE rendez_vous SET etat=1 ,patno='$data3' WHERE rdvno='$data1' ";
+$sql="";
+
+if ($_SESSION['Type_Rdv']=="Medecin")
+{
+    $sql="UPDATE rendez_vous SET etat=1 ,patno='$data3' WHERE rdvno='$data1' ";
+}
+else
+{
+    $sql="UPDATE labordv SET dispo=1 ,patNo='$data3' WHERE rdvNo='$data1' ";
+
+}
+
 $res= mysqli_query($db_handle,$sql);
 if($res)
 {

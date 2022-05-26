@@ -7,6 +7,8 @@ header( 'content-type: text/html; charset=utf-8' );
 include('db_config.php');
 $_SESSION['Id']="";
 $_SESSION['Select']="Void";
+$_SESSION['Type_Rdv']="Medecin";
+
 
 ?>
 

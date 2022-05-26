@@ -9,9 +9,9 @@ session_start();
 // Set session variables (variables globales)
 $_SESSION["Client"] = "";
 $_SESSION["IdClient"] = "";
-
 $_SESSION["Type"] = "";
 $_SESSION["Specialite"] = "";
+
 ?>
 
 <?php
