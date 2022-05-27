@@ -195,6 +195,8 @@ function connexion($db_handle,$table)
      	}
 		
 	}
+	
+
 function ajouter_patient($db_handle,$message) 
      {
 		if (isset($_POST['insert']))
@@ -229,21 +231,13 @@ function ajouter_patient($db_handle,$message)
 						$data="";
 
 
-						$sql="INSERT INTO patient(patno, patname, patlogin, patpassword, email) VALUES('$id','$nom','$login','$mdp','$email') ";
-						$res= mysqli_query($db_handle,$sql);
-				          
+						$_SESSION['NomCreation']=$nom;
+						$_SESSION['PseudoCreation']=$login;
+						$_SESSION['MailCreation']=$email;
+						$_SESSION['MdpCreation']=$mdp;
 
-					    	if($res)
-							{
 
-								echo" Felicitation la creation de votre compte est confirmée "; // Faire un pop up 
-								return true;
-							}
-							else
-							{
-								echo "Nous rencontrons un leger soucis, veuillez reesayer"; // faire un pop up 
-								return false;
-							}
+						return true;
 					}
 				
 			}
@@ -254,6 +248,59 @@ function ajouter_patient($db_handle,$message)
 
      	}
  }
+
+
+////////////////////// A FAIRE ///////
+
+ function ajouter_patient2($db_handle,$message) 
+     {
+		if (isset($_POST['signup']))
+		{
+			if(!vide(['AdL1','AdL2','Ville','Pays','CodeP','NumT','CarteV']))
+			{
+
+				$sql="SELECT * FROM patient";
+
+				$result= mysqli_query($db_handle,"SELECT MAX(patno) AS maximum FROM patient");
+				$row = mysqli_fetch_array($result); 
+				$id = $row['maximum']+1;
+
+
+				$Nom=$_SESSION['NomCreation'];
+				$Pseudo=$_SESSION['PseudoCreation'];
+				$Mail=$_SESSION['MailCreation'];
+				$Mdp=$_SESSION['MdpCreation'];
+
+				$AdL1=$_POST['AdL1'];
+				$AdL2=$_POST['AdL2'];
+				$Ville=$_POST['Ville'];
+				$Pays=$_POST['Pays'];
+				$CodeP=$_POST['CodeP'];
+				$NumT=$_POST['NumT'];
+				$CarteV=$_POST['CarteV'];
+				
+
+				$sql="INSERT INTO `patient`(`patno`, `patname`, `patlogin`, `patpassword`, `email`,`addresse1`, `adresse2`, `ville`, `Pays`, `CodePostal`, `Telephone`, `CarteVitale`) VALUES ('$id','$Nom','$Pseudo','$Mdp','$Mail','$AdL1','$AdL2','$Ville','$Pays','$CodeP','$NumT','$CarteV')";
+				$res= mysqli_query($db_handle,$sql);
+				if($res)
+				{
+						echo "Clear insertion ";
+				}
+				else
+				{
+						echo "Unable to insert ";
+				}
+				
+			}
+			else
+			{
+				message_erreur(['AdL1','AdL2','Ville','Pays','CodeP','NumT','CarteV']);
+			}
+
+     	}
+ }
+
+
  function ajouter_medecin($db_handle) 
      {
 		if (isset($_POST['insert']))
@@ -342,7 +389,6 @@ function ajouter_rdv($db_handle)
      {
 		if (isset($_POST['Update']))
 		{
-
 			$login = $_POST['LoginC'] ;
 			$email = $_POST['EmailC'] ;
 
@@ -357,7 +403,7 @@ function ajouter_rdv($db_handle)
 				if ($Mdp1==$Mdp2)
 				{
 					update_element($db_handle,'patient','patpassword',$email,$Mdp1,$message);
-					return true;
+				    return true;
 				}
 				else
 				{
@@ -647,19 +693,77 @@ function Mesrdv()  // Du coup la on verifie bien qu'on a post MedecinId avec jav
 }
 
 
-
-
 if(isset($_POST["interest"])&& !empty($_POST['interest']))
 {
-
 	$_SESSION['Rdv_Supp']=$_POST["interest"];
-		  
+
+	$dbhost = "localhost";
+	$dbuser = "root";
+	$dbpass = "";
+	$db = "BDD";
+	$con = mysqli_connect($dbhost, $dbuser, $dbpass , $db) or die($con);
+
+	$data=$_POST["interest"];
+	$Type=$_POST["type"];
+
+	if ($Type=="Labo")
+	{
+
+		 $query = " SELECT DISTINCT * FROM labordv WHERE rdvNo='$data'"; 
+			    $result = $con->query($query);
+			   if ($result->num_rows > 0)
+			     {
+			     	  while ($row = $result->fetch_assoc()) 
+			        {
+
+			     		echo " Ecrire les infotmations de la meme maniere que Horaire : ".$row['rdv_horaire']. " h ";
+			     	}
+
+			  }
+	}
+	else
+	{
+			   $query = " SELECT DISTINCT * FROM rendez_vous WHERE rdvno='$data'"; 
+			    $result = $con->query($query);
+			   if ($result->num_rows > 0)
+			     {
+			     	  while ($row = $result->fetch_assoc()) 
+			        {
+
+			     		echo " Ecrire les infotmations de la meme maniere que Horaire : ".$row['rdv_horaire']. " h ";
+			     	}
+
+			     }
+
+
+	}
+   
 }
 
 if(isset($_POST["Supprimer"])&& !empty($_POST['Supprimer']))
 {
 
 	$valeur= $_POST["Supprimer"];		
+	$Type=$_POST["type"];
+
+	if ($Type=="Labo")
+	{
+
+	$sql="UPDATE labordv SET dispo ='0' WHERE rdvNo='$valeur'";
+	$res= mysqli_query($db_handle,$sql);
+	if($res)
+	{
+		$message = "Changement effectué ";
+		header("Location: mesRdv.php");
+	}
+	else
+	{
+		$message= "Changement impossible ";
+	}
+	}
+	else
+	{
+			 
     $sql="UPDATE rendez_vous SET etat ='0' WHERE rdvno='$valeur'";
 	$res= mysqli_query($db_handle,$sql);
 	if($res)
@@ -671,6 +775,10 @@ if(isset($_POST["Supprimer"])&& !empty($_POST['Supprimer']))
 	{
 		$message= "Changement impossible ";
 	}
+
+
+	}
+
 
 }
 

@@ -10,6 +10,12 @@ session_start();
 	require("traitement.php");
 	include('db_config.php');
 
+	$_SESSION['NomCreation']="";
+	$_SESSION['PseudoCreation']="";
+	$_SESSION['MailCreation']="";
+	$_SESSION['MdpCreation']="";
+
+
 ?>
 
 <!DOCTYPE html>
@@ -29,23 +35,6 @@ session_start();
     <!-- Main css -->
     <link rel="stylesheet" href="LoginAndRegisterRessources/css/style.css">
    
-	<script type="text/JavaScript">
-		function ValidateEmail(inputText)
-		{
-			var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-			if(inputText.value.match(mailformat))
-			{
-				return true;
-			}
-			else
-			{
-			document.form1.Email.focus();
-			return false;
-			}
-		}
-	
-</script>
-
 </head>
 	<body>
 
@@ -56,7 +45,7 @@ session_start();
             <div class="container">
                 <div class="signup-content">
                     <div class="signup-form">
-                        <h2 class="form-title">Sign up</h2>
+                        <h2 class="form-title">Créer un compte (1/2)</h2>
                         <form method="POST" class="register-form" id="register-form">
 							<div class="form-group">
 								<label for="Nom"><i class="zmdi zmdi-account material-icons-name"></i></label>
@@ -78,15 +67,15 @@ session_start();
 							<a href="Login.php" class="signup-image-link">Je suis déjà membre</a> 
 							</div>
                             <div class="form-group form-button">
-							<input type="submit" name="insert" id="signup" class="form-submit" value="Valider"/>
+							<input type="submit" name="insert" id="signup" class="form-submit" value="Continuer"/>
                             </div>
 							<p>
 								<?php 
 								$message="";
 
-								if(ajouter_patient($db_handle,$message))
+								 if(ajouter_patient($db_handle,$message))
 									{
-										header("Location: Login.php");
+										header("Location: CreerCompte2.php");
 										die();
 									}
 								?>

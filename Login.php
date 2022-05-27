@@ -19,8 +19,6 @@ $_SESSION["Nom"] = "";
 
 $_SESSION['Rdv_Supp']="";
 
-
-
 ?>
 
 <?php

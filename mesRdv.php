@@ -27,21 +27,13 @@ include('db_config.php');
     $data="";
     $data2=$_SESSION['IdClient']; 
     $data3=$_SESSION['Type_Rdv'];
-    if( $_SESSION['Type_Rdv']=="Labo")
-    {
-       $data='dispo'; 
-    }
-    else
-    {
-       $data='etat';  
-
-    }
+  
     $dbhost = "localhost";
   $dbuser = "root";
   $dbpass = "";
   $db = "BDD";
   $con = mysqli_connect($dbhost, $dbuser, $dbpass , $db) or die($con);
-    $query = " SELECT DISTINCT * FROM rendez_vous WHERE etat='1' AND $data4='$data2' ORDER BY rdv_date ASC,rdvno ASC"; 
+    $query = " SELECT DISTINCT * FROM rendez_vous WHERE etat='1' AND $data4='$data2' ORDER BY rdv_date ASC,rdv_horaire ASC"; 
     $result = $con->query($query);
 
 ?>
@@ -161,12 +153,12 @@ include('db_config.php');
       function Supp()
       {
           var interest = $('ul#MesRDV').find('li.active').data('id');
-
+          var type= $('ul#MesRDV').find('li.active').data('type');
            $.ajax({
                       url :"Traitement.php",           // Valeur va etre renvoyée a action.php
                       type:"POST",                 
                       cache:false,                          // jsp ce que c'est 
-                      data:{interest:interest},   // la en gros bah quand on va essayer de recuperer la valeur dans action.php, faudra mettre ca 
+                      data:{interest:interest,type:type},   // la en gros bah quand on va essayer de recuperer la valeur dans action.php, faudra mettre ca 
                       success:function(data)
                       {
                             $("#finito").html(data);           // Avoir la valeur renvoyé par action.php de ce que j'ai compris  qu'on met dans horaire
@@ -177,11 +169,13 @@ include('db_config.php');
       function Supprimer()
       {
           var Supprimer = $('ul#MesRDV').find('li.active').data('id');
+          var type= $('ul#MesRDV').find('li.active').data('type');
+
            $.ajax({
                       url :"Traitement.php",           // Valeur va etre renvoyée a action.php
                       type:"POST",                 
                       cache:false,                          // jsp ce que c'est 
-                      data:{Supprimer:Supprimer},   // la en gros bah quand on va essayer de recuperer la valeur dans action.php, faudra mettre ca 
+                      data:{Supprimer:Supprimer,type:type},   // la en gros bah quand on va essayer de recuperer la valeur dans action.php, faudra mettre ca 
                       success:function(data)
                       {
                             $("#finito2").html(data);           // Avoir la valeur renvoyé par action.php de ce que j'ai compris  qu'on met dans horaire
@@ -205,9 +199,41 @@ include('db_config.php');
     <?php 
     while ($row = $result->fetch_assoc()) { ?>
 
-        <li class='list-group-item list-group-item-action' aria-current='true' data-id='<?php echo $row['rdvno'] ?>' value='<?php echo $row['rdv_horaire'] ?> '> <?php echo $row['rdv_horaire'];?> h  <?php echo $row['rdvno'];  ?></li>
+        <li class='list-group-item list-group-item-action' aria-current='true' data-type='Rendez-vous' data-id='<?php echo $row['rdvno'] ?>' value='<?php echo $row['rdv_horaire'] ?> '> <?php echo $row['rdv_horaire'];?> h  <?php echo $row['rdvno'];  ?> </li>
         
-      <?php }; ?>
+      <?php }; 
+
+
+            if($_SESSION["Type"]=='medecin')
+              {
+                             $data4="medno";
+
+                 } 
+                      else if ($_SESSION["Type"]=="patient")
+                     {
+                             $data4="patno";
+                     
+                     }
+                    else
+                    {
+                      $data4="adno";
+             
+                     }        
+          $data2=$_SESSION['IdClient']; 
+          $data3=$_SESSION['Type_Rdv'];
+  
+          $dbhost = "localhost";
+          $dbuser = "root";
+          $dbpass = "";
+          $db = "BDD";
+          $con = mysqli_connect($dbhost, $dbuser, $dbpass , $db) or die($con);
+          $query = " SELECT DISTINCT * FROM laboRdv WHERE dispo='1' AND patno='$data2' ORDER BY rdv_date ASC,rdv_horaire ASC"; 
+          $result = $con->query($query);
+    
+    while ($row = $result->fetch_assoc()) { ?>
+
+
+ <li class='list-group-item list-group-item-action' aria-current='true' data-type='Labo' data-id='<?php echo $row['rdvNo'] ?>' value='<?php echo $row['rdv_horaire'] ?> '> <?php echo $row['rdv_horaire'];?> h  <?php echo $row['rdvNo'];  ?> </li> <?php } ?> 
 
     </ul>
 
@@ -226,7 +252,7 @@ include('db_config.php');
                                   <div class="modal-dialog">
                                     <div class="modal-content">
                                       <div class="modal-header">
-                                        <h5 class="modal-title" id="finDocsLabel">Modal title</h5>
+                                        <h5 class="modal-title" id="finDocsLabel">Informations Supplementaires</h5>
                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                       </div>
                                       <div class="modal-body">
@@ -238,7 +264,7 @@ include('db_config.php');
                                       <div class="modal-footer">
 
                                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                       <a href="mesRDV.php" class="btn btn-danger" id="Suppression" name="Suppression"  onclick="Supprimer();">Prendre Rendez-vous</a>
+                                       <a href="mesRDV.php" class="btn btn-danger" id="Suppression" name="Suppression"  onclick="Supprimer();">Annuler ce Rendez-Vous </a>
                                         </div>
                                     </div>
                        </div>
