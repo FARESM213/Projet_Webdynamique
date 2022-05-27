@@ -91,13 +91,15 @@ $_SESSION['Type_Rdv']="Medecin";
                       url :"action.php",           // Valeur va etre renvoyée a action.php
                       type:"POST",                 
                       cache:false,                          // jsp ce que c'est 
-                      data:{Info:Info,Nom:Info,Mail:Info},   // la en gros bah quand on va essayer de recuperer la valeur dans action.php, faudra mettre ca 
+                      data:{Info:Info,Nom:Info,Mail:Info,Img:Info},   // la en gros bah quand on va essayer de recuperer la valeur dans action.php, faudra mettre ca 
                       }).done(function(response) {
                       {
                           var splitted = response.split("|"); // RESULT
                            $("#Info").html(splitted[0]);   // Avoir la valeur renvoyé par action.php de ce que j'ai compris  qu'on met dans horaire
                            $("#Nom").html(splitted[1]);    // Avoir la valeur renvoyé par action.php de ce que j'ai compris  qu'on met dans horaire
                            $("#Mail").html(splitted[2]);    // Avoir la valeur renvoyé par action.php de ce que j'ai compris  qu'on met dans horaire
+                           $("#Img").html(splitted[3]);    // Avoir la valeur renvoyé par action.php de ce que j'ai compris  qu'on met dans horaire
+
                       }
                   });     
 
@@ -142,6 +144,17 @@ $_SESSION['Type_Rdv']="Medecin";
           });
 
 
+      $('#fin').on('hidden.bs.modal', function () {
+
+          const  ul = document.getElementById("Rdv");
+          ul.innerHTML="";
+
+
+        // do something…
+      })
+
+
+
 
       $('#medGen').on('show.bs.modal', function(event) 
       {
@@ -170,13 +183,15 @@ $_SESSION['Type_Rdv']="Medecin";
                       url :"action.php",           // Valeur va etre renvoyée a action.php
                       type:"POST",                 
                       cache:false,                          // jsp ce que c'est 
-                      data:{Info2:Info2,Nom2:Info2,Mail2:Info2},   // la en gros bah quand on va essayer de recuperer la valeur dans action.php, faudra mettre ca 
+                      data:{Info2:Info2,Nom2:Info2,Mail2:Info2,Img2:Info2},   // la en gros bah quand on va essayer de recuperer la valeur dans action.php, faudra mettre ca 
                       }).done(function(response) {
                       {
                           var splitted = response.split("|"); // RESULT
                            $("#Info2").html(splitted[0]);   // Avoir la valeur renvoyé par action.php de ce que j'ai compris  qu'on met dans horaire
                            $("#Nom2").html(splitted[1]);    // Avoir la valeur renvoyé par action.php de ce que j'ai compris  qu'on met dans horaire
                            $("#Mail2").html(splitted[2]);    // Avoir la valeur renvoyé par action.php de ce que j'ai compris  qu'on met dans horaire
+                           $("#Img2").html(splitted[3]);    // Avoir la valeur renvoyé par action.php de ce que j'ai compris  qu'on met dans horaire
+
                       }
                   });     
 
@@ -208,6 +223,16 @@ $_SESSION['Type_Rdv']="Medecin";
                   }
               });     
     })
+
+             $('#labo').on('hidden.bs.modal', function () {
+
+          const  ul = document.getElementById("Rdv2");
+          ul.innerHTML="";
+
+
+        // do something…
+      })
+
 
     $('#datefield3').on("change",function()
       {      
@@ -249,7 +274,7 @@ $_SESSION['Type_Rdv']="Medecin";
 
        $('#mod3').on('hidden.bs.modal', function () {
 
-          const  ul = document.getElementById("Rdv");
+          const  ul = document.getElementById("Rdv2");
           ul.innerHTML="";
 
 
@@ -371,7 +396,7 @@ $_SESSION['Type_Rdv']="Medecin";
                                                                       <div class="row m-l-0 m-r-0">
                                                                           <div class="col-sm-12 bg-c-lite-green user-profile">
                                                                               <div class="card-block text-center text-black">
-                                                                                  <div class="m-b-25">
+                                                                                  <div class="m-b-25" id="Img2">
                                                                                       <img src="https://img.icons8.com/bubbles/100/000000/user.png" class="img-radius" alt="User-Profile-Image">
                                                                                   </div>
                                                                                   <h6 class="f-w-600"style=" color: #000; " id="Nom2"></h6>
@@ -380,7 +405,7 @@ $_SESSION['Type_Rdv']="Medecin";
                                                                           </div>
                                                                           <div class="col-sm-12" style="padding-left: 30px;">
                                                                               <div class="card-block">
-                                                                                  <h6 class="m-b-20 p-b-5 b-b-default f-w-600">Information</h6>
+                                                                                  <h3 class="m-b-20 p-b-5 b-b-default f-w-600">Information</h3>
                                                                                   <div class="row">
                                                                                       <div class="col-sm-12">
                                                                                           <p class="m-b-10 f-w-600">Email</p>
@@ -579,7 +604,7 @@ document.getElementById("datefield1").setAttribute("min", today);
                                                                       <div class='row m-l-0 m-r-0'>
                                                                           <div class='col-sm-12 bg-c-lite-green user-profile'>
                                                                               <div class='card-block text-center text-black'>
-                                                                                  <div class='m-b-25'>
+                                                                                  <div class='m-b-25' id='Img'>
                                                                                       <img src='https://img.icons8.com/bubbles/100/000000/user.png' class='img-radius' alt='User-Profile-Image'>
                                                                                   </div>
                                                                                   <div id="Nom">
@@ -590,7 +615,7 @@ document.getElementById("datefield1").setAttribute("min", today);
                                                                           </div>
                                                                           <div class='col-sm-12' style='padding-left: 30px;'>
                                                                               <div class='card-block'>
-                                                                                  <h6 class='m-b-20 p-b-5 b-b-default f-w-600'>Information</h6>
+                                                                                  <h3 class='m-b-20 p-b-5 b-b-default f-w-600'>Information</h3>
                                                                                   <div class='row'>
                                                                                       <div class='col-sm-12'>
                                                                                           <p class='m-b-10 f-w-600'>Email</p>
@@ -686,7 +711,7 @@ document.getElementById("datefield1").setAttribute("min", today);
                                   <div class="modal-dialog">
                                     <div class="modal-content">
                                       <div class="modal-header">
-                                        <h5 class="modal-title" id="finDocsLabel">Modal title</h5>
+                                        <h3 class="modal-title" id="finDocsLabel">Information</h3>
                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                       </div>
                                       <div class="modal-body">
@@ -764,7 +789,7 @@ document.getElementById("datefield1").setAttribute("min", today);
                                                                           </div>
                                                                           <div class="col-sm-12" style="padding-left: 30px;">
                                                                               <div class="card-block">
-                                                                                  <h6 class="m-b-20 p-b-5 b-b-default f-w-600">Information</h6>
+                                                                                  <h3 class="m-b-20 p-b-5 b-b-default f-w-600">Information</h3>
                                                                                   <div class="row">
                                                                                       <div class="col-sm-12">
                                                                                           <p class="m-b-10 f-w-600">Email</p>

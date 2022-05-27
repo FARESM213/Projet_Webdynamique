@@ -125,7 +125,6 @@ $_SESSION['Rdv_Supp']="";
                    $_SESSION["Type"] = get_radio();
                    $_SESSION["Num"]= $_POST['Emaillog'];    
 
-                   echo  $_SESSION["Type"];        
                    $data3=$_SESSION['Client'];
 
                    $data1=$_SESSION["Type"];

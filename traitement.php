@@ -123,7 +123,6 @@ function connexion($db_handle,$table)
 
 				$sql="SELECT * FROM $table WHERE email='$email'AND $genre='$mdp' ";
 
-				echo $sql;
 				$res= mysqli_query($db_handle,$sql);
 				if($row=mysqli_num_rows($res)>0)
 				{
@@ -132,7 +131,6 @@ function connexion($db_handle,$table)
 				else
 				{
 					$sql="SELECT * FROM $table WHERE email='$email' ";
-					//echo $sql;
 					$res= mysqli_query($db_handle,$sql);
 					if(mysqli_num_rows($res)>0)
 					{
@@ -179,8 +177,6 @@ function connexion($db_handle,$table)
      		$job=$_SESSION["Specialite"];
 	     	$sql="SELECT * FROM medecin WHERE medjob='$job'";
 			$res= mysqli_query($db_handle,$sql);
-
-			echo $sql;
 
 			while ($row = mysqli_fetch_row($res)) 
 			{
@@ -248,9 +244,6 @@ function ajouter_patient($db_handle,$message)
 
      	}
  }
-
-
-////////////////////// A FAIRE ///////
 
  function ajouter_patient2($db_handle,$message) 
      {
@@ -421,11 +414,6 @@ function ajouter_rdv($db_handle)
      	}
  }
 
-
-
-
-
-
  function supprimer_element($db_handle,$table,$id,$valeur,$message) 
      {
 		if (isset($_POST['Update']))
@@ -443,71 +431,6 @@ function ajouter_rdv($db_handle)
 				}
      	}
  }
-
-
- function Dernier_Rdv($db_handle,$id) 
-     {
-     	if ($_SESSION['Type']=='Admin')
-     	{
-     		$data='adno';
-     	}
-     	else   if ($_SESSION['Type']=='patient')
-     	{
-     		   $data='patno';
-     	}
-		$sql="SELECT * FROM rendez_vous WHERE $data='$id'";
-		$res= mysqli_query($db_handle,$sql);
-		//echo "<div class='modal-body'> <div class='list-group'>";
-
-		if ($_SESSION['Type']=='Admin')
-     	{
-     		$data='adno';
-     	}
-     	else   if ($_SESSION['Type']=='patient')
-     	{
-     		   $data='patno';
-     	} 
-     	else if ($_SESSION['Type']=='medecin') 
-     	{
-
-     	}
-
-		echo " 
-		<table class='table table-striped'>
-			  <thead>
-			    <tr>
-			      <th scope='col'>#</th>
-			      <th scope='col'>Num Medecin </th>
-			      <th scope='col'>Num Patient</th>
-			      <th scope='col'>Date </th>
-			      <th scope='col'>Horaire </th>
-			      <th scope='col'>Localité </th>
-			    </tr>
-			  </thead>  
-
-			  <tbody>
-
- 		 ";
-                       
-		while ($row = mysqli_fetch_row($res)) 
-		{
-
-			echo " 		 
-			    <tr>
-			      <th scope='row'>".utf8_encode($row[0])."</th>
-			      <td>".utf8_encode($row[1])."</td>
-			      <td>".utf8_encode($row[2])."</td>
-			      <td>".utf8_encode($row[3])."</td>
-			      <td>".utf8_encode($row[6])."</td>
-			      <td>".utf8_encode($row[7])."</td>
-			    </tr>
-			    ";
-		}  
-		echo " </tbody></table>";
-                        
- }
-
-
 
 function image_display($db_handle,$id)
 {

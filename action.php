@@ -98,6 +98,23 @@ if (isset($_POST['Id']) && !empty($_POST['Id']))  // Du coup la on verifie bien 
 
 }
 
+if (isset($_POST['Img']) && !empty($_POST['Img']))  // Du coup la on verifie bien qu'on a post MedecinId avec javascript
+{
+    $data=$_POST['Img']; 
+	$query= " SELECT Image AS count FROM medecin WHERE medno='$data'";
+	$result = $con->query($query);
+	$row =$result->fetch_assoc(); 
+	if ($row)
+	{
+		$img = $row['count'];     
+		$_SESSION['Image']=$img;
+
+		echo " <img style='width: 120px' class='img-radius' alt='User-Profile-Image'";
+		echo 'src="data:image/png;base64,'.base64_encode( $row['count'] ).'"/>'."|";
+	}
+			
+}
+
 
 if (isset($_POST['Test']) && !empty($_POST['Test']))  // Du coup la on verifie bien qu'on a post MedecinId avec javascript
 {
@@ -135,7 +152,53 @@ if (isset($_POST['Test']) && !empty($_POST['Test']))  // Du coup la on verifie b
 
 if (isset($_POST['Finition']) && !empty($_POST['Finition']))  // Du coup la on verifie bien qu'on a post MedecinId avec javascript
 { 
-	echo " <h5 class='modal-title' style=' color: #000;' id='mod2Label'>".$_POST['Finition']."</h5> ";  ////
+	if($_SESSION['Type_Rdv']=="Labo")
+	{
+
+			$data=$_POST['Finition']; 
+		    $query = " SELECT * FROM labordv WHERE rdvNo='$data'"; 
+		    echo $query;
+		    $result = $con->query($query);
+		    $row = $result->fetch_assoc();
+
+			echo " <h5 class='modal-title' style=' color: #000;' id='mod2Label'> Numero : ".$_POST['Finition']."</h5> 
+
+			<h5 class='modal-title' style=' color: #000;' id='mod2Label'> Date : ".$row['rdv_date']."</h5> 
+			<h5 class='modal-title' style=' color: #000;' id='mod2Label'> Horaire : ".utf8_encode($row['rdv_horaire'])." h </h5> 
+			"; 
+
+	}
+	else
+	{
+
+
+    $data=$_POST['Finition']; 
+    $query = " SELECT * FROM rendez_vous WHERE rdvno='$data'"; 
+    $result = $con->query($query);
+    $row = $result->fetch_assoc();
+
+	echo " <h5 class='modal-title' style=' color: #000;' id='mod2Label'> Numero : ".$_POST['Finition']."</h5> 
+
+	<h5 class='modal-title' style=' color: #000;' id='mod2Label'> Date : ".$row['rdv_date']."</h5> 
+	<h5 class='modal-title' style=' color: #000;' id='mod2Label'> Horaire : ".utf8_encode($row['rdv_horaire'])." h </h5> 
+	<h5 class='modal-title' style=' color: #000;' id='mod2Label'> Lieu : ".utf8_encode($row['loc'])."</h5> 
+
+	"; 
+	$data=$row['medno']; 
+    $query = " SELECT * FROM medecin WHERE medno='$data'"; 
+    $result = $con->query($query);
+    $row = $result->fetch_assoc();
+
+    echo " <h5 class='modal-title' style=' color: #000;' id='mod2Label'> Medecin  : ".utf8_encode($row['medname'])."</h5> 
+
+	"; 
+
+
+	}
+
+
+
+
 
 	 $_SESSION['Select']=$_POST['Finition'];
 
@@ -197,6 +260,23 @@ if (isset($_POST['Horaire']) && !empty($_POST['Horaire']))  // Du coup la on ver
     {
         echo '<option value="">Aucun Rendez-vous </option>'; 
     }
+}
+
+if (isset($_POST['Img2']) && !empty($_POST['Img2']))  // Du coup la on verifie bien qu'on a post MedecinId avec javascript
+{
+    $data=$_POST['Img2']; 
+	$query= " SELECT Image AS count FROM medecin WHERE medno='$data'";
+	$result = $con->query($query);
+	$row =$result->fetch_assoc(); 
+	if ($row)
+	{
+		$img = $row['count'];     
+		$_SESSION['Image']=$img;
+
+		echo " <img style='width: 120px' class='img-radius' alt='User-Profile-Image'";
+		echo 'src="data:image/png;base64,'.base64_encode( $row['count'] ).'"/>'."|";
+	}
+			
 }
 
 ///////////////////////////////////////////////////////////////////// LABO //////////////////////////////////////////////////////
@@ -347,7 +427,7 @@ if (isset($_POST['Test2']) && !empty($_POST['Test2']))  // Du coup la on verifie
      {
         while ($row = $result->fetch_assoc()) 
         {
-        echo " <a data-bs-toggle='modal' data-target='#fin' href='#fin' class='list-group-item list-group-item-action' aria-current='true' data-id='".$row['laboID']."'value='".$row['rdv_horaire']."'> ".$row['rdv_horaire']."h";
+        echo " <a data-bs-toggle='modal' data-target='#fin' href='#fin' class='list-group-item list-group-item-action' aria-current='true' data-id='".$row['rdvNo']."'value='".$row['rdv_horaire']."'> ".$row['rdv_horaire']."h ";
         }
 
         echo " <script>                 
