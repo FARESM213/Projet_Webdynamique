@@ -18,6 +18,7 @@ $_SESSION["Specialite"] = "";
 $_SESSION["Nom"] = "";
 
 $_SESSION['Rdv_Supp']="";
+$_SESSION['Type_Rdv']="Medecin";
 
 ?>
 
