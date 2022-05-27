@@ -2,23 +2,7 @@
   // Start the session
   session_start();
   include('db_config.php');
-
-?>
-
-<?php
-  // Set session variables (variables globales)
-
-$_SESSION["Client"] = "";
-$_SESSION["IdClient"] = "";
-$_SESSION["MdpClient"]="";
-$_SESSION["LoginClient"]="";
-
-$_SESSION["Type"] = "";
-$_SESSION["Specialite"] = "";
-$_SESSION["Nom"] = "";
-
-$_SESSION['Rdv_Supp']="";
-$_SESSION['Type_Rdv']="Medecin";
+  require_once("Session.php");
 
 ?>
 
@@ -120,20 +104,19 @@ $_SESSION['Type_Rdv']="Medecin";
 
             if(get_radio()!=false)
             {
-              if(connexion($db_handle,get_radio($_SESSION["Num"]))=="Connexion validee")
+              if(connexion($db_handle,get_radio($_SESSION["Client"]))=="Connexion validee")
                 {
                    $_SESSION["Client"] =$_POST['Emaillog'] ;
                    $_SESSION["Type"] = get_radio();
-                   $_SESSION["Num"]= $_POST['Emaillog'];    
 
                    $data3=$_SESSION['Client'];
 
                    $data1=$_SESSION["Type"];
                    $data2="";
                    $data4="";
-                    $data5="";
-                    $data6="";
-
+                   $data5="";
+                   $data6="";
+                   $data7="";
 
 
                      if($_SESSION["Type"]=='medecin')
@@ -141,7 +124,9 @@ $_SESSION['Type_Rdv']="Medecin";
                              $data2="medno";
                              $data4="medpassword";
                              $data5="medlogin";
-                            $data6="medname";
+                             $data6="medname";
+                             $data7="NumTel";
+
 
 
                      } 
@@ -150,7 +135,9 @@ $_SESSION['Type_Rdv']="Medecin";
                              $data2="patno";
                              $data4="patpassword";
                              $data5="patlogin";
-                            $data6="patname";
+                             $data6="patname";
+                             $data7="Telephone";
+
 
 
                      }
@@ -160,6 +147,8 @@ $_SESSION['Type_Rdv']="Medecin";
                       $data4="adpassword";
                       $data5="adlogin";
                       $data6="adname";
+                      $data7="numTel";
+
 
 
                      }          
@@ -172,6 +161,8 @@ $_SESSION['Type_Rdv']="Medecin";
                         $_SESSION["MdpClient"]=$row[$data4];
                         $_SESSION["LoginClient"]=$row[$data5];
                         $_SESSION["Nom"] = $row[$data6];
+                        $_SESSION['Tel']=$row[$data7];
+
                     }   
 
                 header("Location: toutparc.php");

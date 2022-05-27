@@ -28,7 +28,7 @@
 		$_SESSION["Specialite"] = "";
 	    $_SESSION["Num"] = "";
 	    $_SESSION["Nom"] = "";
-
+	    $_SESSION['name']=""; // delete any specific session only
 
 	 ?>
 

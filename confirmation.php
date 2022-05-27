@@ -10,6 +10,7 @@ $data1=$_SESSION['Select'];
 $data2=$_SESSION['Id'];
 $data3=$_SESSION["IdClient"];
 
+
 $sql="";
 
 if ($_SESSION['Type_Rdv']=="Medecin")
@@ -85,7 +86,17 @@ if($res)
                           </div>
 
                       </div>
-                      <a href="#contactUs" class="nav-item nav-link">Contact</a>
+                      
+                      <?php 
+                                      if($_SESSION['Client']!="")
+                                      {
+                                        echo "<a href='chat.php' class='nav-item nav-link'>Contact</a> ' ";//// 
+                                      }  
+                                      else
+                                      {                                        
+                                        echo "<a href='Login.php' class='nav-item nav-link'>Contact</a> ' ";//// 
+                                      }
+                              ?>
                   </div>
                   <button type="button" class="btn text-dark" data-bs-toggle="modal" data-bs-target="#searchModal"><i class="fa fa-search"></i></button>
 

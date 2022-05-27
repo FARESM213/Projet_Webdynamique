@@ -10,10 +10,10 @@ session_start();
 	require("traitement.php");
 	include('db_config.php');
 
-	$_SESSION['NomCreation']="";
+	/*$_SESSION['NomCreation']="";
 	$_SESSION['PseudoCreation']="";
 	$_SESSION['MailCreation']="";
-	$_SESSION['MdpCreation']="";
+	$_SESSION['MdpCreation']="";*/
 
 
 ?>

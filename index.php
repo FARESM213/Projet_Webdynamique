@@ -1,10 +1,8 @@
 <?php
-
-// Start the session
 session_start();
 require("traitement.php");
 header( 'content-type: text/html; charset=utf-8' );
-
+include('db_config.php');
 
 ?>
 <!doctype html>
@@ -61,7 +59,17 @@ header( 'content-type: text/html; charset=utf-8' );
                           </div>
 
                       </div>
-                      <a href="#contactUs" class="nav-item nav-link">Contact</a>
+                     
+                      <?php 
+                                      if($_SESSION['Client']!="")
+                                      {
+                                        echo "<a href='chat.php' class='nav-item nav-link'>Contact</a> '" ;//// 
+                                      }  
+                                      else
+                                      {                                        
+                                        echo "<a href='Login.php' class='nav-item nav-link'>Contact</a> '";//// 
+                                      }
+                              ?>
                   </div>
                   <button type="button" class="btn text-dark" data-bs-toggle="modal" data-bs-target="#searchModal"><i class="fa fa-search"></i></button>
 

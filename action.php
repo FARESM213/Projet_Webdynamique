@@ -115,6 +115,18 @@ if (isset($_POST['Img']) && !empty($_POST['Img']))  // Du coup la on verifie bie
 			
 }
 
+if (isset($_POST['Num']) && !empty($_POST['Num']))  // Du coup la on verifie bien qu'on a post MedecinId avec javascript
+{
+
+	$data=$_POST['Num']; 
+    $query = " SELECT * FROM medecin WHERE medno='$data'"; 
+	$result = $con->query($query);
+	$row = $result->fetch_assoc();
+	 echo $row['NumTel']."|";
+
+}
+
+
 
 if (isset($_POST['Test']) && !empty($_POST['Test']))  // Du coup la on verifie bien qu'on a post MedecinId avec javascript
 {
@@ -157,7 +169,6 @@ if (isset($_POST['Finition']) && !empty($_POST['Finition']))  // Du coup la on v
 
 			$data=$_POST['Finition']; 
 		    $query = " SELECT * FROM labordv WHERE rdvNo='$data'"; 
-		    echo $query;
 		    $result = $con->query($query);
 		    $row = $result->fetch_assoc();
 
@@ -165,6 +176,16 @@ if (isset($_POST['Finition']) && !empty($_POST['Finition']))  // Du coup la on v
 
 			<h5 class='modal-title' style=' color: #000;' id='mod2Label'> Date : ".$row['rdv_date']."</h5> 
 			<h5 class='modal-title' style=' color: #000;' id='mod2Label'> Horaire : ".utf8_encode($row['rdv_horaire'])." h </h5> 
+
+			"; 
+
+			$data=$row['laboID']; 
+		    $query = " SELECT * FROM labo WHERE laboID='$data'"; 
+		    $result = $con->query($query);
+		    $row = $result->fetch_assoc();
+
+		    echo " <h5 class='modal-title' style=' color: #000;' id='mod2Label'> Laboratoire  : ".utf8_encode($row['nomLab'])."</h5> 
+		    		<h5 class='modal-title' style=' color: #000;' id='mod2Label'> Prix : 25.99 $ </h5>
 			"; 
 
 	}
@@ -190,9 +211,18 @@ if (isset($_POST['Finition']) && !empty($_POST['Finition']))  // Du coup la on v
     $row = $result->fetch_assoc();
 
     echo " <h5 class='modal-title' style=' color: #000;' id='mod2Label'> Medecin  : ".utf8_encode($row['medname'])."</h5> 
-
+    	   <h5 class='modal-title' style=' color: #000;' id='mod2Label'> Specialité  : ".utf8_encode($row['medjob'])."</h5> 
 	"; 
 
+	if($row['medjob']=="Generale")
+	{
+		  echo " <h5 class='modal-title' style=' color: #000;' id='mod2Label'> Prix : 39.99 $ </h5> ";
+	}
+	else
+	{
+		 echo " <h5 class='modal-title' style=' color: #000;' id='mod2Label'> Prix : 50.99 $ </h5> ";
+
+	}
 
 	}
 
@@ -279,6 +309,17 @@ if (isset($_POST['Img2']) && !empty($_POST['Img2']))  // Du coup la on verifie b
 			
 }
 
+if (isset($_POST['Num2']) && !empty($_POST['Num2']))  // Du coup la on verifie bien qu'on a post MedecinId avec javascript
+{
+
+	$data=$_POST['Num2']; 
+    $query = " SELECT * FROM medecin WHERE medno='$data'"; 
+	$result = $con->query($query);
+	$row = $result->fetch_assoc();
+	 echo $row['NumTel']."|";
+
+}
+
 ///////////////////////////////////////////////////////////////////// LABO //////////////////////////////////////////////////////
 
 
@@ -341,8 +382,7 @@ if (isset($_POST['getLabo1']) && !empty($_POST['getLabo1']))  // Du coup la on v
 
 if (isset($_POST['Info3']) && !empty($_POST['Info3']))  // Du coup la on verifie bien qu'on a post MedecinId avec javascript
 {
-		$_SESSION['Type_Rdv']="Labo";
-
+	$_SESSION['Type_Rdv']="Labo";
 	$data=$_POST['Info3']; 
 	$query = " SELECT * FROM labo WHERE laboID='$data'"; 
 	$result = $con->query($query);
@@ -375,6 +415,18 @@ if (isset($_POST['Mail3']) && !empty($_POST['Mail3']))  // Du coup la on verifie
 	$result = $con->query($query);
 	$row = $result->fetch_assoc();
 	 echo $row['email']."|";
+
+}
+
+if (isset($_POST['Num3']) && !empty($_POST['Num3']))  // Du coup la on verifie bien qu'on a post MedecinId avec javascript
+{
+	$_SESSION['Type_Rdv']="Labo";
+
+	$data=$_POST['Num3']; 
+	$query = " SELECT * FROM labo WHERE laboID='$data'"; 
+	$result = $con->query($query);
+	$row = $result->fetch_assoc();
+	 echo $row['numTel']."|";
 
 }
 

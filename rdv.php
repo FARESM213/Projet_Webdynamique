@@ -5,9 +5,8 @@ session_start();
 require("traitement.php");
 header( 'content-type: text/html; charset=utf-8' );
 include('db_config.php');
-$_SESSION['Id']="";
-$_SESSION['Select']="Void";
-$_SESSION['Type_Rdv']="Medecin";
+/*$_SESSION['Id']="";
+$_SESSION['Select']="Void";*/
 
 
 ?>
@@ -91,7 +90,7 @@ $_SESSION['Type_Rdv']="Medecin";
                       url :"action.php",           // Valeur va etre renvoyée a action.php
                       type:"POST",                 
                       cache:false,                          // jsp ce que c'est 
-                      data:{Info:Info,Nom:Info,Mail:Info,Img:Info},   // la en gros bah quand on va essayer de recuperer la valeur dans action.php, faudra mettre ca 
+                      data:{Info:Info,Nom:Info,Mail:Info,Img:Info,Num:Info},   // la en gros bah quand on va essayer de recuperer la valeur dans action.php, faudra mettre ca 
                       }).done(function(response) {
                       {
                           var splitted = response.split("|"); // RESULT
@@ -99,6 +98,8 @@ $_SESSION['Type_Rdv']="Medecin";
                            $("#Nom").html(splitted[1]);    // Avoir la valeur renvoyé par action.php de ce que j'ai compris  qu'on met dans horaire
                            $("#Mail").html(splitted[2]);    // Avoir la valeur renvoyé par action.php de ce que j'ai compris  qu'on met dans horaire
                            $("#Img").html(splitted[3]);    // Avoir la valeur renvoyé par action.php de ce que j'ai compris  qu'on met dans horaire
+                           $("#Num").html(splitted[4]);    // Avoir la valeur renvoyé par action.php de ce que j'ai compris  qu'on met dans horaire
+
 
                       }
                   });     
@@ -183,7 +184,7 @@ $_SESSION['Type_Rdv']="Medecin";
                       url :"action.php",           // Valeur va etre renvoyée a action.php
                       type:"POST",                 
                       cache:false,                          // jsp ce que c'est 
-                      data:{Info2:Info2,Nom2:Info2,Mail2:Info2,Img2:Info2},   // la en gros bah quand on va essayer de recuperer la valeur dans action.php, faudra mettre ca 
+                      data:{Info2:Info2,Nom2:Info2,Mail2:Info2,Img2:Info2,Num2:Info2},   // la en gros bah quand on va essayer de recuperer la valeur dans action.php, faudra mettre ca 
                       }).done(function(response) {
                       {
                           var splitted = response.split("|"); // RESULT
@@ -191,6 +192,7 @@ $_SESSION['Type_Rdv']="Medecin";
                            $("#Nom2").html(splitted[1]);    // Avoir la valeur renvoyé par action.php de ce que j'ai compris  qu'on met dans horaire
                            $("#Mail2").html(splitted[2]);    // Avoir la valeur renvoyé par action.php de ce que j'ai compris  qu'on met dans horaire
                            $("#Img2").html(splitted[3]);    // Avoir la valeur renvoyé par action.php de ce que j'ai compris  qu'on met dans horaire
+                           $("#Num2").html(splitted[4]);    // Avoir la valeur renvoyé par action.php de ce que j'ai compris  qu'on met dans horaire
 
                       }
                   });     
@@ -260,13 +262,15 @@ $_SESSION['Type_Rdv']="Medecin";
                       url :"action.php",           // Valeur va etre renvoyée a action.php
                       type:"POST",                 
                       cache:false,                          // jsp ce que c'est 
-                      data:{Info3:Info3,Nom3:Info3,Mail3:Info3},   // la en gros bah quand on va essayer de recuperer la valeur dans action.php, faudra mettre ca 
+                      data:{Info3:Info3,Nom3:Info3,Mail3:Info3,Num3:Info3},   // la en gros bah quand on va essayer de recuperer la valeur dans action.php, faudra mettre ca 
                       }).done(function(response) {
                       {
                           var splitted = response.split("|"); // RESULT
                            $("#Info3").html(splitted[0]);   // Avoir la valeur renvoyé par action.php de ce que j'ai compris  qu'on met dans horaire
                            $("#Nom3").html(splitted[1]);    // Avoir la valeur renvoyé par action.php de ce que j'ai compris  qu'on met dans horaire
                            $("#Mail3").html(splitted[2]);    // Avoir la valeur renvoyé par action.php de ce que j'ai compris  qu'on met dans horaire
+                          $("#Num3").html(splitted[3]);    // Avoir la valeur renvoyé par action.php de ce que j'ai compris  qu'on met dans horaire
+
                       }
                   });     
 
@@ -321,7 +325,17 @@ $_SESSION['Type_Rdv']="Medecin";
                           </div>
 
                       </div>
-                      <a href="#contactUs" class="nav-item nav-link">Contact</a>
+                    
+                      <?php 
+                                      if($_SESSION['Client']!="")
+                                      {
+                                        echo "<a href='chat.php' class='nav-item nav-link'>Contact</a> ' ";//// 
+                                      }  
+                                      else
+                                      {                                        
+                                        echo "<a href='Login.php' class='nav-item nav-link'>Contact</a> ' ";//// 
+                                      }
+                              ?>
                   </div>
                   <button type="button" class="btn text-dark" data-bs-toggle="modal" data-bs-target="#searchModal"><i class="fa fa-search"></i></button>
 
@@ -413,7 +427,7 @@ $_SESSION['Type_Rdv']="Medecin";
                                                                                       </div>
                                                                                       <div class="col-sm-12">
                                                                                           <p class="m-b-10 f-w-600">Téléphone</p>
-                                                                                          <h6 class="text-muted f-w-400">06 00 00 00 00</h6>
+                                                                                          <h6 class="text-muted f-w-400" id="Num2">06 00 00 00 00</h6>
                                                                                       </div>
 
                                                                                       <div class="col-sm-12" style="padding-top: 260px; padding-left: 100px;">
@@ -623,7 +637,7 @@ document.getElementById("datefield1").setAttribute("min", today);
                                                                                       </div>
                                                                                       <div class='col-sm-12'>
                                                                                           <p class='m-b-10 f-w-600'>Téléphone</p>
-                                                                                          <h6 class='text-muted f-w-400'>06 00 00 00 00</h6>
+                                                                                          <h6 class='text-muted f-w-400' id="Num">06 00 00 00 00</h6>
                                                                                       </div>
 
                                                                                       <div class='col-sm-12' style='padding-top: 260px; padding-left: 100px;'>
@@ -797,7 +811,7 @@ document.getElementById("datefield1").setAttribute("min", today);
                                                                                       </div>
                                                                                       <div class="col-sm-12">
                                                                                           <p class="m-b-10 f-w-600">Téléphone</p>
-                                                                                          <h6 class="text-muted f-w-400">06 00 00 00 00</h6>
+                                                                                          <h6 class="text-muted f-w-400" id="Num3">06 00 00 00 00</h6>
                                                                                       </div>
 
                                                                                       <div class="col-sm-12" style="padding-top: 260px; padding-left: 100px;">

@@ -5,7 +5,8 @@ session_start();
 require("traitement.php");
 header( 'content-type: text/html; charset=utf-8' );
 
-$_SESSION['Rdv_Supp']="";
+/*$_SESSION['Rdv_Supp']="";*/
+
 
 include('db_config.php');
 
@@ -75,7 +76,7 @@ include('db_config.php');
                                       {                                        
                                          echo " <a href='profil.php'class='dropdown-item'>Mon profil</a> " ;//// 
                                          echo " <a href='mesRdv.php'class='dropdown-item'>Mes Rendez-vous </a> " ;//// 
-                                                                                  echo " <a href='Deconnexion.php'class='dropdown-item'>Se deconnecter </a> " ;//// 
+                                        echo " <a href='Deconnexion.php'class='dropdown-item'>Se deconnecter </a> " ;//// 
 
                                       }
 
@@ -83,7 +84,17 @@ include('db_config.php');
                           </div>
 
                       </div>
-                      <a href="#contactUs" class="nav-item nav-link">Contact</a>
+
+                      <?php 
+                                      if($_SESSION['Client']!="")
+                                      {
+                                        echo "<a href='chat.php' class='nav-item nav-link'>Contact</a> '";
+                                      }  
+                                      else
+                                      {                                        
+                                        echo "<a href='Login.php' class='nav-item nav-link'>Contact</a> '";
+                                      }
+                              ?>
                   </div>
                   <button type="button" class="btn text-dark" data-bs-toggle="modal" data-bs-target="#searchModal"><i class="fa fa-search"></i></button>
 
@@ -131,7 +142,7 @@ include('db_config.php');
                                 </div>
                                 <div class="col-sm-12">
                                     <p class="m-b-10 f-w-600">Telephone</p>
-                                    <h6 class="text-muted f-w-400">06 00 00 00 00</h6>
+                                    <h6 class="text-muted f-w-400"><?php echo $_SESSION['Tel']; ?></h6>
                                 </div>
                             </div>
         </div>
@@ -199,7 +210,7 @@ include('db_config.php');
     <?php 
     while ($row = $result->fetch_assoc()) { ?>
 
-        <li class='list-group-item list-group-item-action' aria-current='true' data-type='Rendez-vous' data-id='<?php echo $row['rdvno'] ?>' value='<?php echo $row['rdv_horaire'] ?> '> <?php echo $row['rdv_horaire'];?> h  <?php echo $row['rdvno'];  ?> </li>
+        <li class='list-group-item list-group-item-action' aria-current='true' data-type='Rendez-vous' data-id='<?php echo $row['rdvno'] ?>' value='<?php echo $row['rdv_horaire'] ?> '> <h6 style="display: inline;">Date :</h6> <?php echo $row['rdv_date'];?> <br><h6 style="display: inline;">Horaire : </h6><?php echo $row['rdv_horaire'];?>h   </li>
         
       <?php }; 
 
@@ -233,7 +244,7 @@ include('db_config.php');
     while ($row = $result->fetch_assoc()) { ?>
 
 
- <li class='list-group-item list-group-item-action' aria-current='true' data-type='Labo' data-id='<?php echo $row['rdvNo'] ?>' value='<?php echo $row['rdv_horaire'] ?> '> <?php echo $row['rdv_horaire'];?> h  <?php echo $row['rdvNo'];  ?> </li> <?php } ?> 
+ <li class='list-group-item list-group-item-action list-group-item-light' aria-current='true' data-type='Labo' data-id='<?php echo $row['rdvNo'] ?>' value='<?php echo $row['rdv_horaire'] ?> '>  <h6 style="display: inline;">Date :</h6> <?php echo $row['rdv_date'];?> <br><h6 style="display: inline;">Horaire : </h6><?php echo $row['rdv_horaire'];?>h</li> <?php } ?> 
 
     </ul>
 
