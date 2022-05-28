@@ -138,28 +138,33 @@
                              $data6="patname";
                              $data7="Telephone";
 
-
-
                      }
                     else
                     {
                       $data2="adno";
                       $data4="adpassword";
-                      $data5="adlogin";
                       $data6="adname";
                       $data7="numTel";
-
 
 
                      }          
                   $query = "SELECT * FROM ".$data1." WHERE email='$data3'"; 
                   $result = $con->query($query);
+                  echo $_SESSION["Type"];
                   if ($result->num_rows> 0)
                    {
                         $row = $result->fetch_assoc();
                         $_SESSION["IdClient"] = $row[$data2]; 
                         $_SESSION["MdpClient"]=$row[$data4];
-                        $_SESSION["LoginClient"]=$row[$data5];
+                        if($_SESSION["Type"]!='admin')
+                        {
+                            $_SESSION["LoginClient"]=$row[$data5];
+                        }
+                        else
+                        {
+                            $_SESSION["LoginClient"]=$row[$data6];
+
+                        }
                         $_SESSION["Nom"] = $row[$data6];
                         $_SESSION['Tel']=$row[$data7];
 

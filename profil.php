@@ -139,27 +139,28 @@ function ResizeImage() {
                       <?php 
                                       if($_SESSION['Client']!="")
                                       {
-                                        echo "<a href='chat.php' class='nav-item nav-link'>Contact</a> ' ";//// 
+                                        echo "<a href='chat.php' class='nav-item nav-link'>Contact</a>";//// 
                                       }  
                                       else
                                       {                                        
-                                        echo "<a href='Login.php' class='nav-item nav-link'>Contact</a> ' ";//// 
+                                        echo "<a href='Login.php' class='nav-item nav-link'>Contact</a>";//// 
                                       }
                               ?>
                   </div>
                   <button type="button" class="btn text-dark" data-bs-toggle="modal" data-bs-target="#searchModal"><i class="fa fa-search"></i></button>
 
-                   <?php 
-                                      if($_SESSION['Client']=="")
+                                 <?php 
+                                    if($_SESSION['Client']=="")
                                       {
                                           echo "<a href='Login.php' class='btn btn-primary py-2 px-4 ms-3'>Prendre un Rendez-vous</a>";
                                       }  
-                                      else
-                                      {                                        
+                                      else if($_SESSION['Type']=="patient") 
+                                      {                           
                                           echo "<a href='rdv.php' class='btn btn-primary py-2 px-4 ms-3'>Prendre un Rendez-vous</a>";
                                       }
 
-                              ?>
+                    ?>
+
 
                   <form class="d-flex" style= "padding-left: 190px;"role="search">
                     <input class="form-control me-2 " type="search" placeholder="Recherche" aria-label="Search">

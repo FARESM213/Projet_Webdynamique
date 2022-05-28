@@ -5,3 +5,5 @@
 	$db = "BDD";
 	$con = mysqli_connect($dbhost, $dbuser, $dbpass , $db) or die($con);
 ?>
+
+

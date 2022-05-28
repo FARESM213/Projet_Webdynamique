@@ -665,40 +665,44 @@ if(isset($_POST["interest"])&& !empty($_POST['interest']))
 
 if(isset($_POST["Supprimer"])&& !empty($_POST['Supprimer']))
 {
-
 	$valeur= $_POST["Supprimer"];		
 	$Type=$_POST["type"];
 
 	if ($Type=="Labo")
 	{
+		$sql="UPDATE labordv SET dispo ='0' WHERE rdvNo='$valeur' ";
+		$res= mysqli_query($db_handle,"UPDATE labordv SET dispo ='1' WHERE rdvNo='$valeur'" );	 
+		$dbhost = "localhost";
+		$dbuser = "root";
+		$dbpass = "";
+		$db = "BDD";
+		$con = mysqli_connect($dbhost, $dbuser, $dbpass , $db) or die($con);
+		$sql="UPDATE labordv SET patNo ='0' WHERE rdvNo='$valeur'";
+		$res= mysqli_query($db_handle,$sql);
+		if($res)
+		{
+			header("Location: mesRdv.php");
+		}
+		else
+		{
 
-	$sql="UPDATE labordv SET dispo ='0' WHERE rdvNo='$valeur'";
-	$res= mysqli_query($db_handle,$sql);
-	if($res)
-	{
-		$message = "Changement effectué ";
-		header("Location: mesRdv.php");
+		}
 	}
 	else
 	{
-		$message= "Changement impossible ";
-	}
-	}
-	else
-	{
-			 
-    $sql="UPDATE rendez_vous SET etat ='0' WHERE rdvno='$valeur'";
-	$res= mysqli_query($db_handle,$sql);
-	if($res)
-	{
-		$message = "Changement effectué ";
-		header("Location: mesRdv.php");
-	}
-	else
-	{
-		$message= "Changement impossible ";
-	}
-
+		    $sql="UPDATE rendez_vous SET etat ='0' WHERE rdvno='$valeur'";
+			$res= mysqli_query($db_handle,$sql);
+			if($res)
+			{
+				$message = "Changement effectué ";
+				header("Location: mesRdv.php");
+			}
+			else
+			{
+				$message= "Changement impossible ";
+			}
+			$sql="UPDATE rendez_vous SET patNo ='0' WHERE rdvNo='$valeur'";
+			$res= mysqli_query($db_handle,$sql);
 
 	}
 

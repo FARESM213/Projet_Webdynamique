@@ -11,31 +11,29 @@ header( 'content-type: text/html; charset=utf-8' );
 include('db_config.php');
 
        if($_SESSION["Type"]=='medecin')
-              {
-                             $data4="medno";
+           {
+              $data4="medno";
+           } 
+           else if ($_SESSION["Type"]=="patient")
+            {
+              $data4="patno";
+            }
+            else
+            {
+              $data4="adno";
+            }    
 
-                     } 
-                      else if ($_SESSION["Type"]=="patient")
-                     {
-                             $data4="patno";
-                     
-                     }
-                    else
-                    {
-                      $data4="adno";
-             
-                     }        
     $data="";
     $data2=$_SESSION['IdClient']; 
     $data3=$_SESSION['Type_Rdv'];
   
-    $dbhost = "localhost";
+  $dbhost = "localhost";
   $dbuser = "root";
   $dbpass = "";
   $db = "BDD";
   $con = mysqli_connect($dbhost, $dbuser, $dbpass , $db) or die($con);
-    $query = " SELECT DISTINCT * FROM rendez_vous WHERE etat='1' AND $data4='$data2' ORDER BY rdv_date ASC,rdv_horaire ASC"; 
-    $result = $con->query($query);
+  $query = " SELECT DISTINCT * FROM rendez_vous  WHERE  $data4='$data2' ORDER BY rdv_date ASC,rdv_horaire ASC"; 
+  $result = $con->query($query);
 
 ?>
 <!doctype html>
@@ -88,27 +86,27 @@ include('db_config.php');
                       <?php 
                                       if($_SESSION['Client']!="")
                                       {
-                                        echo "<a href='chat.php' class='nav-item nav-link'>Contact</a> '";
+                                        echo "<a href='chat.php' class='nav-item nav-link'>Contact</a>";
                                       }  
                                       else
                                       {                                        
-                                        echo "<a href='Login.php' class='nav-item nav-link'>Contact</a> '";
+                                        echo "<a href='Login.php' class='nav-item nav-link'>Contact</a>";
                                       }
                               ?>
                   </div>
                   <button type="button" class="btn text-dark" data-bs-toggle="modal" data-bs-target="#searchModal"><i class="fa fa-search"></i></button>
 
-                   <?php 
-                                      if($_SESSION['Client']=="")
+                                 <?php 
+                                    if($_SESSION['Client']=="")
                                       {
                                           echo "<a href='Login.php' class='btn btn-primary py-2 px-4 ms-3'>Prendre un Rendez-vous</a>";
                                       }  
-                                      else
-                                      {                                        
+                                      else if($_SESSION['Type']=="patient") 
+                                      {                           
                                           echo "<a href='rdv.php' class='btn btn-primary py-2 px-4 ms-3'>Prendre un Rendez-vous</a>";
                                       }
 
-                              ?>
+                    ?>
 
                   <form class="d-flex" style= "padding-left: 190px;"role="search">
                     <input class="form-control me-2 " type="search" placeholder="Recherche" aria-label="Search">
@@ -121,7 +119,7 @@ include('db_config.php');
   </nav>
       <div class="row container d-flex">
         <div class="col-xl-6 col-md-12" style="height: 300px; margin-top: 25px;">
-            <div class="card user-card-full flex-column "  style="height: 300px; width: 300px;">
+            <div class="card user-card-full flex-column "  style="height: 330px; width: 300px;">
                 <div class="row m-l-0 m-r-0">
                     <div class="col-sm-12 bg-c-lite-green user-profile">
                         <div class="card-block text-center text-black">
@@ -181,7 +179,6 @@ include('db_config.php');
       {
           var Supprimer = $('ul#MesRDV').find('li.active').data('id');
           var type= $('ul#MesRDV').find('li.active').data('type');
-
            $.ajax({
                       url :"Traitement.php",           // Valeur va etre renvoyée a action.php
                       type:"POST",                 
@@ -189,6 +186,7 @@ include('db_config.php');
                       data:{Supprimer:Supprimer,type:type},   // la en gros bah quand on va essayer de recuperer la valeur dans action.php, faudra mettre ca 
                       success:function(data)
                       {
+
                             $("#finito2").html(data);           // Avoir la valeur renvoyé par action.php de ce que j'ai compris  qu'on met dans horaire
                                 // Avoir la valeur renvoyé par action.php de ce que j'ai compris  qu'on met dans horaire
                       }
@@ -205,19 +203,26 @@ include('db_config.php');
 <h4> Vous pouvez annuler un rendez vous </h4>
 
 
-  <div >
+  <div style="overflow-y: auto; white-space: nowrap; height: 400px;">
     <ul class="list-group" id="MesRDV" name="MesRDV">
     <?php 
-    while ($row = $result->fetch_assoc()) { ?>
+    while ($row = $result->fetch_assoc()) {  if($row['rdv_date']>date('Y-m-d')) { ?>
 
-        <li class='list-group-item list-group-item-action' aria-current='true' data-type='Rendez-vous' data-id='<?php echo $row['rdvno'] ?>' value='<?php echo $row['rdv_horaire'] ?> '> <h6 style="display: inline;">Date :</h6> <?php echo $row['rdv_date'];?> <br><h6 style="display: inline;">Horaire : </h6><?php echo $row['rdv_horaire'];?>h   </li>
+        <li class='list-group-item list-group-item-action ' aria-current='true' data-type='Rendez-vous' data-id='<?php echo $row['rdvno'] ?>' value='<?php echo $row['rdv_horaire'] ?> '> <h6 style="display: inline;">Date :</h6> <?php echo $row['rdv_date'];?> <br><h6 style="display: inline;">Horaire : </h6><?php echo $row['rdv_horaire'];?>h   </li>
         
-      <?php }; 
+      <?php }
+            else 
+              { ?>
+
+               <li class='list-group-item list-group-item-action list-group-disabled-color disabled' aria-current='true' data-type='Rendez-vous' data-id='<?php echo $row['rdvno'] ?>' value='<?php echo $row['rdv_horaire'] ?> '> <h6 style="display: inline;">Date :</h6> <?php echo $row['rdv_date'];?> <br><h6 style="display: inline;">Horaire : </h6><?php echo $row['rdv_horaire'];?>h   </li>
+
+         <?php  }
+       }
 
 
             if($_SESSION["Type"]=='medecin')
               {
-                             $data4="medno";
+                       $data4="medno";
 
                  } 
                       else if ($_SESSION["Type"]=="patient")
@@ -238,13 +243,26 @@ include('db_config.php');
           $dbpass = "";
           $db = "BDD";
           $con = mysqli_connect($dbhost, $dbuser, $dbpass , $db) or die($con);
-          $query = " SELECT DISTINCT * FROM laboRdv WHERE dispo='1' AND patno='$data2' ORDER BY rdv_date ASC,rdv_horaire ASC"; 
+          $query = " SELECT DISTINCT * FROM laboRdv WHERE patno='$data2' ORDER BY rdv_date ASC,rdv_horaire ASC"; 
           $result = $con->query($query);
     
-    while ($row = $result->fetch_assoc()) { ?>
+    while ($row = $result->fetch_assoc()) {  if($row['rdv_date']>date('Y-m-d'))  {  ?>
+
+ <li class='list-group-item list-group-item-action list-group-item-light' aria-current='true' data-type='Labo' data-id='<?php echo $row['rdvNo'] ?>' value='<?php echo $row['rdv_horaire'] ?> '>  <h6 style="display: inline;">Date :</h6> <?php echo $row['rdv_date'];?> <br><h6 style="display: inline;">Horaire : </h6><?php echo $row['rdv_horaire'];?>h</li> 
 
 
- <li class='list-group-item list-group-item-action list-group-item-light' aria-current='true' data-type='Labo' data-id='<?php echo $row['rdvNo'] ?>' value='<?php echo $row['rdv_horaire'] ?> '>  <h6 style="display: inline;">Date :</h6> <?php echo $row['rdv_date'];?> <br><h6 style="display: inline;">Horaire : </h6><?php echo $row['rdv_horaire'];?>h</li> <?php } ?> 
+    <?php 
+    }
+    else
+    { ?>
+      <li class='list-group-item list-group-item-action list-group-item-dark' aria-current='true' data-type='Labo' data-id='<?php echo $row['rdvNo'] ?>' value='<?php echo $row['rdv_horaire'] ?> '>  <h6 style="display: inline;">Date :</h6> <?php echo $row['rdv_date'];?> <br><h6 style="display: inline;">Horaire : </h6><?php echo $row['rdv_horaire'];?>h</li> 
+
+ <?php 
+    
+    }
+} 
+
+?> 
 
     </ul>
 

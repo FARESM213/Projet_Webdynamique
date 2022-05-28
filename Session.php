@@ -23,7 +23,7 @@ $_SESSION['Rdv_Supp']="";
 $_SESSION['Type_Rdv']="Medecin";
 $_SESSION['Tel']="";
 $_SESSION['comm']="";
-$_SESSION['name']=""; // delete any specific session only
+$_SESSION['name']=""; 
 
 
 
