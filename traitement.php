@@ -671,7 +671,6 @@ if(isset($_POST["interest"])&& !empty($_POST['interest']))
 
 			     }
 
-
 	}
    
 }
@@ -723,6 +722,7 @@ if(isset($_POST["Supprimer"])&& !empty($_POST['Supprimer']))
 }
 
 
+
 function getTableContents ($db_handle) 
     {
        $sql="SELECT * FROM patient";
@@ -732,29 +732,52 @@ function getTableContents ($db_handle)
 		       	if($row[0]!=0)
 		       	{
 		       		  echo "  
-		   <tr>
-		   						<td><input style='width:150px; font-size:0.8em;' type='text' name='idClient' id='idClient' value=".$row[0]." disabled></td>
+								
+		 					<tr style='width=300px;'>
+		   					<td style='width=300px;'> 
 
-                                <td><input style='width:150px; font-size:0.8em;  background-color: #363636; color:white;' type='text' name='nomClient' id='nomClient' value=".$row[1]."></td>
+		   						<form method='POST' action='' >
 
-                                <td><input style='width:150px;font-size:0.8em;'type='text' name='loginClient' id='loginClient' value=".$row[2]."></td>
+		   						    <button  hidden type='submit' value=".utf8_encode($row[0])." name='Delete' onclick='change2(this.id);' id=".utf8_encode($row[0])."><i class='fa-solid fa-trash'></i></button> 
 
-                                <td><input style='width:150px;font-size:0.8em;'type='password' name='passClient' id='passClient' value=".$row[3]." pattern='^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*_=+-]).{8,16}$' required ></td>
+                                  	<button  type='submit' style = 'margin-left:-60px;' value=".utf8_encode($row[0])." name='Delete' onclick='change2(this.id);' id=".utf8_encode($row[0])."><i class='fa-solid fa-trash'></i></button> 
 
-                                <td><input style='width:150px;font-size:0.8em;'type='email' name='mailClient' id='mailClient' value=".$row[4]. " required></td>
+                                </form>
 
-                                <td><input style='width:150px;font-size:0.8em;'type='text' name='adresseClient' id='adresseClient' value=".$row[6]."></td>
+                                <form method='POST' action='' style='margin-left : 100px; margin-top: -44px;' >
 
-                                <td><input style='width:150px;font-size:0.8em;'type='text' name='villeClient' id='villeClient' value=".$row[8]."></td>
+		   							<button type='submit' style = 'margin-left:-30px;' value=".utf8_encode($row[0])." name='Modif' onclick='change(this.id);' id=".utf8_encode($row[0])." ><i class='fa-solid fa-pen-to-square'></i></button> 
 
-                                <td><input style='width:150px;font-size:0.8em;'type='text' name='paysClient' id='paysClient' value=".$row[9]."></td>
+		   						
+		   					</td>
 
-                                <td><input style='width:150px;font-size:0.8em;'type='text' name='codePostal' id='codePostal' value=".$row[10]."></td>
+		   							<td style='width=220px;'><input class='textBoxStyle' type='text' name='idClient' id='idClient' value=".utf8_encode($row[0])." disabled></td>
 
-                                <td><input style='width:150px;font-size:0.8em;'type='tel' name='numeroClient' id='numeroClient' minlength='10' maxlength='10' pattern='[0-9]{2}-[0-9]{2}-[0-9]{2}-[0-9]{2}-[0-9]{2}' required  value=".$row[11]."></td>
+                                	<td style='width=220px;'><input class='textBoxStyle' type='text' name='nomClient' id='nomClient' value=".utf8_encode($row[1])."></td>
 
-								<td><input style='width:150px;font-size:0.8em;'type='text' name='carteVital' id='carteVital' value='".$row[12]."' minlength='15' maxlength='15' required></td>
-								</tr>";
+                                	<td style='width=220px;'><input class='textBoxStyle'type='text' name='loginClient' id='loginClient' value=".utf8_encode($row[2])."></td>
+
+                                	<td style='width=220px;'><input class=' textBoxStyle'type='password' name='passClient' id='passClient' value=".utf8_encode($row[3])." pattern='^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*_=+-]).{8,16}$' required ></td>
+
+                                	<td style='width=220px;'><input class='textBoxStyle' name='mailClient' id='mailClient' value=".utf8_encode($row[4]). " required></td>
+
+                                	<td style='width=220px;'><input class='textBoxStyle'type='text' name='adresseClient' id='adresseClient' value=".utf8_encode($row[6])."></td>
+
+                                	<td style='width=220px;'><input class='textBoxStyle'type='text' name='villeClient' id='villeClient' value=".utf8_encode($row[8])."></td>
+
+                                	<td style='width=220px;'><input class='textBoxStyle'type='text' name='paysClient' id='paysClient' value=".utf8_encode($row[9])."></td>
+
+                                	<td style='width=220px;'><input class='textBoxStyle'type='text' name='codePostal' id='codePostal' value=".utf8_encode($row[10])."></td>
+
+                                	<td style='width=220px;'><input class='textBoxStyle'type='tel' name='numeroClient' id='numeroClient' minlength='10' maxlength='10' pattern='[0-9]{10}' required  value=".utf8_encode($row[11])."></td>
+
+									<td style='width=220px;'><input class='textBoxStyle'type='text' name='carteVital' id='carteVital' value='".utf8_encode($row[12])."' minlength='15' maxlength='15'  pattern='[0-9]{15}'  required></td>
+							</tr>
+								</form>
+
+								";
+
+
 
 		       	}
          
@@ -762,6 +785,65 @@ function getTableContents ($db_handle)
 
    }
 
+if (isset($_POST['Modif']))
+ {
+	$dbhost = "localhost";
+	$dbuser = "root";
+	$dbpass = "";
+	$db = "BDD";
+	$con = mysqli_connect($dbhost, $dbuser, $dbpass , $db) or die($con);
+
+	$nom=$_POST['nomClient'] ;
+    $log=$_POST['loginClient'] ;
+	$pass=$_POST['passClient'] ;
+ 	$mail=$_POST['mailClient'] ;
+ 	$adress=$_POST['adresseClient'] ;
+ 	$ville=$_POST['villeClient'] ;
+ 	$pays=$_POST['paysClient'];
+ 	$code=$_POST['codePostal'] ;
+ 	$num=$_POST['numeroClient'] ;
+ 	$carte=$_POST['carteVital'];
+ 	$id=$_POST['Modif'];
+
+ 	$sql=" UPDATE patient SET
+ 	patname='$nom',
+    patlogin='$log',
+	patpassword='$pass' ,
+ 	email='$mail',
+ 	addresse1='$adress',
+ 	ville='$ville' ,
+ 	Pays='$pays',
+ 	CodePostal='$code',
+ 	Telephone='$num' ,
+ 	CarteVitale='$carte'
+ 	WHERE patno='$id';
+ 	";
+	$res= mysqli_query($db_handle,$sql);
+
+	header("Location: admin.php");
+
+ }
+
+
+if (isset($_POST['Delete']))
+ {
+	$dbhost = "localhost";
+	$dbuser = "root";
+	$dbpass = "";
+	$db = "BDD";
+	$con = mysqli_connect($dbhost, $dbuser, $dbpass , $db) or die($con);
+ 	$id=$_POST['Delete'];
+ 	$sql=" DELETE FROM patient WHERE patno='$id'";
+	$res= mysqli_query($db_handle,$sql);
+	$sql=" DELETE FROM rendez_vous WHERE patno='$id'";
+	$res= mysqli_query($db_handle,$sql);
+
+	$sql=" DELETE FROM labordv WHERE patNo='$id'";
+	$res= mysqli_query($db_handle,$sql);
+
+	header("Location: admin.php");
+
+ }
 
 function getTableContents2 ($db_handle) 
 {
@@ -770,26 +852,99 @@ function getTableContents2 ($db_handle)
        while ($row = mysqli_fetch_row($res)) 
        {
            echo "
-				<tr>
-				<td><input style='width:150px; font-size:0.8em;' type='text' name='idMedecin' id='idMedecin' value=".$row[0]." disabled></td>
+		 						<tr style='width=300px;'>
+		   						<td style='width=300px;'> 
 
-				<td><input style='width:150px; font-size:0.8em;' type='text' name='nomDocteur' id='nomDocteur' value=".$row[1]."></td>
+		   						<form method='POST' action='' >
 
-				<td><input style='width:150px;font-size:0.8em;'  type='text' name='loginDocteur' id='loginDocteur' value=".$row[2]."></td>
+		   						    <button  hidden type='submit'  value=".utf8_encode($row[0])." name='Delete1' onclick='change2(this.id);' id=".utf8_encode($row[0])."><i class='fa-solid fa-trash'></i></button> 
 
-				<td><input style='width:150px;font-size:0.8em;'  type='password' name='passDocteur' id='passDocteur' value=".$row[3]."  pattern='^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*_=+-]).{8,16}$' required ></td>
+                                  	<button  type='submit' style = 'margin-left:-60px;' value=".utf8_encode($row[0])." name='Delete1' onclick='change2(this.id);' id=".utf8_encode($row[0])."><i class='fa-solid fa-trash'></i></button> 
 
-				<td><input style='width:150px;font-size:0.8em;'  type='text' name='speDoc' id='speDoc' value=".$row[4]."></td>
-				
-				<td><input style='width:150px;font-size:0.8em;'  type='email' name='mailDocteur' id='mailDocteur' value=".$row[5]."></td>
+                                </form>
 
-				<td><input style='width:150px;font-size:0.8em;'  type='text' name='hopitalDoc' id='hopitalDoc' value=".utf8_encode($row[7])."></td>
+                                <form method='POST' action='' style='margin-left : 100px; margin-top: -44px;' >
 
-				<td><input style='width:150px;font-size:0.8em;' type='tel' name='tel' id='tel' minlength='10' maxlength='10' pattern='[0-9]{2}-[0-9]{2}-[0-9]{2}-[0-9]{2}-[0-9]{2}' required  value=".$row[8]."></td>
-				</tr>";
+		   						<button type='submit' style = 'margin-left:-30px;' value=".utf8_encode($row[0])." name='Modif1' onclick='change(this.id);' id=".utf8_encode($row[0])." ><i class='fa-solid fa-pen-to-square'></i></button> 
+
+		   						
+		   						</td>
+
+		   						<td style='width=220px;'><input class='textBoxStyle' type='text' name='idMedecin' id='idMedecin' value=".utf8_encode($row[0])." disabled></td>
+
+                                <td style='width=220px;'><input class='textBoxStyle' type='text' name='nomDocteur' id='nomDocteur' value=".utf8_encode($row[1])."></td>
+
+                                <td style='width=220px;'><input class='textBoxStyle'type='text' name='loginDocteur' id='loginDocteur' value=".utf8_encode($row[2])."></td>
+
+                                <td style='width=220px;'><input class=' textBoxStyle'type='password' name='passDocteur' id='passDocteur' value=".utf8_encode($row[3])." pattern='^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*_=+-]).{8,16}$' required ></td>
+
+                                <td style='width=220px;'><input class='textBoxStyle' name='speDoc' id='speDoc' value=".utf8_encode($row[4]). " required></td>
+
+                                <td style='width=220px;'><input class='textBoxStyle'type='text' name='mailDocteur' id='mailDocteur' value=".utf8_encode($row[5])."></td>
+
+                                <td style='width=220px;'><input class='textBoxStyle'type='text' name='hopitalDoc' id='hopitalDoc' value=".utf8_encode($row[7])."></td>
+
+                                <td style='width=220px;'><input class='textBoxStyle'type='text' name='teldoc' id='teldoc'  minlength='10' maxlength='10' pattern='[0-9]{10}' required  value=".utf8_encode($row[8])."></td>
+                                </td>
+								</tr>
+								</form>";
        }
 
 }
+
+
+
+if (isset($_POST['Modif1']))
+ {
+	$dbhost = "localhost";
+	$dbuser = "root";
+	$dbpass = "";
+	$db = "BDD";
+	$con = mysqli_connect($dbhost, $dbuser, $dbpass , $db) or die($con);
+
+	$nom=$_POST['nomDocteur'] ;
+    $log=$_POST['loginDocteur'] ;
+	$pass=$_POST['passDocteur'] ; 	
+	$spe=$_POST['speDoc'] ;
+ 	$mail=$_POST['mailDocteur'] ;
+ 	$hospital=$_POST['hopitalDoc'] ;
+ 	$tel=$_POST['teldoc'];
+ 	$id=$_POST['Modif1'];
+
+ 	$sql=" UPDATE medecin SET
+ 	medname='$nom',
+    medlogin='$log',
+	medpassword='$pass' ,
+ 	email='$mail',
+ 	medjob='$spe',
+ 	hopital='$hospital' ,
+ 	numTel='$tel'
+ 	WHERE medno='$id';
+ 	";
+	$res= mysqli_query($db_handle,$sql);
+
+	header("Location: admin.php");
+
+ }
+
+
+if (isset($_POST['Delete1']))
+ {
+	$dbhost = "localhost";
+	$dbuser = "root";
+	$dbpass = "";
+	$db = "BDD";
+	$con = mysqli_connect($dbhost, $dbuser, $dbpass , $db) or die($con);
+ 	$id=$_POST['Delete1'];	
+ 	$sql=" DELETE FROM rendez_vous WHERE medno='$id'";
+	$res= mysqli_query($db_handle,$sql);
+
+ 	$sql=" DELETE FROM medecin WHERE medno='$id'";
+	$res= mysqli_query($db_handle,$sql);
+
+	header("Location: admin.php");
+
+ }
 
 function getTableContents3 ($db_handle) 
 {
@@ -798,17 +953,88 @@ function getTableContents3 ($db_handle)
        while ($row = mysqli_fetch_row($res)) 
        {
 
-           echo "  
-		   <tr>
-		 		<td><input style='width:150px; font-size:0.8em;' type='text' name='idLabo' id='idLabo' value=".$row[0]." disabled/></td>
-                <td><input style='width:150px; font-size:0.8em;' type='text' name='nomLabo' id='nomLabo' value=".$row[1]."/></td>
-                <td><input style='width:150px;font-size:0.8em;'type='email' name='mailLabo' id='mailLabo' value=".$row[2]."/></td>
-				<td><input style='width:150px;font-size:0.8em;' type='tel' name='tellabo' id='tellabo' minlength='10' maxlength='10' pattern='[0-9]{2}-[0-9]{2}-[0-9]{2}-[0-9]{2}-[0-9]{2}' required  value=".$row[3]."/></td>
-                <td><input style='width:150px;font-size:0.8em;'type='text' name='typeLabo' id='typeLabo' value=".$row[4]."/></td>
-            </tr>";
-       }
+       	   echo "  
+       	   <tr style='width=300px;'>
+		   						<td style='width=300px;'> 
 
+		   						<form method='POST' action='' >
+
+		   						    <button  hidden type='submit'  value=".utf8_encode($row[0])." name='Delete2' onclick='change2(this.id);' id=".utf8_encode($row[0])."><i class='fa-solid fa-trash'></i></button> 
+
+                                	<button  type='submit' style = 'margin-left:-60px;' value=".utf8_encode($row[0])." name='Delete2' onclick='change2(this.id);' id=".utf8_encode($row[0])."><i class='fa-solid fa-trash'></i></button> 
+
+                                  </form>
+
+                                <form method='POST' action='' style='margin-left : 100px; margin-top: -44px;' >
+
+		   						<button type='submit' style = 'margin-left:-30px;' value=".utf8_encode($row[0])." name='Modif2' onclick='change(this.id);' id=".utf8_encode($row[0])." ><i class='fa-solid fa-pen-to-square'></i></button> 
+
+		   						
+		   						</td>
+
+		   						<td style='width=220px;'><input class='textBoxStyle' type='text' name='idLabo' id='idLabo' value=".utf8_encode($row[0])." disabled></td>
+
+                                <td style='width=220px;'><input class='textBoxStyle' type='text' name='nomLabo' id='nomLabo' value=".utf8_encode($row[1])."></td>
+
+                                <td style='width=220px;'><input class='textBoxStyle'type='email' name='mailLabo' id='mailLabo' value=".utf8_encode($row[2])."></td>
+
+								 <td style='width=220px;'><input class='textBoxStyle' type='tel' name='tellabo' id='tellabo' minlength='10' maxlength='10' pattern='[0-9]{10}' required  value=".utf8_encode($row[3])."></td>
+
+                                  <td style='width=220px;'><input class='textBoxStyle' type='text' name='typeLabo' id='typeLabo' value=".utf8_encode($row[4])."></td>
+
+								</tr>
+								</form>";
+       }
 }
+
+
+
+
+
+if (isset($_POST['Modif2']))
+ {
+	$dbhost = "localhost";
+	$dbuser = "root";
+	$dbpass = "";
+	$db = "BDD";
+	$con = mysqli_connect($dbhost, $dbuser, $dbpass , $db) or die($con);
+
+	$nom=$_POST['nomLabo'] ;
+ 	$mail=$_POST['mailLabo'] ;
+ 	$type=$_POST['typeLabo'] ;
+ 	$tel=$_POST['tellabo'];
+
+ 	$id=$_POST['Modif2'];
+
+ 	$sql=" UPDATE labo SET
+ 	nomLab='$nom',
+ 	email='$mail',
+ 	type='$type' ,
+ 	numTel='$tel'
+ 	WHERE laboID='$id';
+ 	";
+	$res= mysqli_query($db_handle,$sql);
+
+	header("Location: admin.php");
+
+ }
+
+
+if (isset($_POST['Delete2']))
+ {
+	$dbhost = "localhost";
+	$dbuser = "root";
+	$dbpass = "";
+	$db = "BDD";
+	$con = mysqli_connect($dbhost, $dbuser, $dbpass , $db) or die($con);
+ 	$id=$_POST['Delete2'];	
+ 	$sql=" DELETE FROM labordv WHERE laboID='$id'";
+	$res= mysqli_query($db_handle,$sql);
+ 	$sql=" DELETE FROM labo WHERE laboID='$id'";
+	$res= mysqli_query($db_handle,$sql);
+	header("Location: admin.php");
+
+ }
 
 
 
