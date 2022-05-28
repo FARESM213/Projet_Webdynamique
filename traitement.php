@@ -637,9 +637,15 @@ if(isset($_POST["interest"])&& !empty($_POST['interest']))
 			   if ($result->num_rows > 0)
 			     {
 			     	  while ($row = $result->fetch_assoc()) 
-			        {
+			          {
+					$data=$row['laboID'];
 
-			     		echo " Ecrire les infotmations de la meme maniere que Horaire : ".$row['rdv_horaire']. " h ";
+					$query = "SELECT DISTINCT * FROM labo WHERE laboID='$data'"; 
+					$result = $con->query($query);
+					  while ($row2 = $result->fetch_assoc()) 
+			       		 {
+			        	echo "<h5> Horaire : ".$row['rdv_horaire']. " h </h5> <h5> Date :".$row['rdv_date']." </h5> <h5> Laboratoire : ".$row2['nomLab']." </h5> ";
+			        	}
 			     	}
 
 			  }
@@ -652,8 +658,15 @@ if(isset($_POST["interest"])&& !empty($_POST['interest']))
 			     {
 			     	  while ($row = $result->fetch_assoc()) 
 			        {
+			        	$data=$row['medno'];
 
-			     		echo " Ecrire les infotmations de la meme maniere que Horaire : ".$row['rdv_horaire']. " h ";
+			        	$query = "SELECT DISTINCT * FROM medecin WHERE medno='$data'"; 
+						$result = $con->query($query);
+					    while ($row2 = $result->fetch_assoc()) 
+			       		 {
+			        	echo "<h5> Horaire : ".$row['rdv_horaire']. " h </h5> <h5> Date : ".$row['rdv_date']." </h5> <h5> Medecin : ".$row2['medname']."  </h5> <h5> Specialite : ".$row2['medjob']. "</h5> ";
+			        	}
+
 			     	}
 
 			     }
@@ -706,6 +719,94 @@ if(isset($_POST["Supprimer"])&& !empty($_POST['Supprimer']))
 
 	}
 
+
+}
+
+
+function getTableContents ($db_handle) 
+    {
+       $sql="SELECT * FROM patient";
+       $res= mysqli_query($db_handle,$sql);
+       while ($row = mysqli_fetch_row($res)) 
+       {
+		       	if($row[0]!=0)
+		       	{
+		       		  echo "  
+		   <tr>
+		   						<td><input style='width:150px; font-size:0.8em;' type='text' name='idClient' id='idClient' value=".$row[0]." disabled></td>
+
+                                <td><input style='width:150px; font-size:0.8em;  background-color: #363636; color:white;' type='text' name='nomClient' id='nomClient' value=".$row[1]."></td>
+
+                                <td><input style='width:150px;font-size:0.8em;'type='text' name='loginClient' id='loginClient' value=".$row[2]."></td>
+
+                                <td><input style='width:150px;font-size:0.8em;'type='password' name='passClient' id='passClient' value=".$row[3]." pattern='^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*_=+-]).{8,16}$' required ></td>
+
+                                <td><input style='width:150px;font-size:0.8em;'type='email' name='mailClient' id='mailClient' value=".$row[4]. " required></td>
+
+                                <td><input style='width:150px;font-size:0.8em;'type='text' name='adresseClient' id='adresseClient' value=".$row[6]."></td>
+
+                                <td><input style='width:150px;font-size:0.8em;'type='text' name='villeClient' id='villeClient' value=".$row[8]."></td>
+
+                                <td><input style='width:150px;font-size:0.8em;'type='text' name='paysClient' id='paysClient' value=".$row[9]."></td>
+
+                                <td><input style='width:150px;font-size:0.8em;'type='text' name='codePostal' id='codePostal' value=".$row[10]."></td>
+
+                                <td><input style='width:150px;font-size:0.8em;'type='tel' name='numeroClient' id='numeroClient' minlength='10' maxlength='10' pattern='[0-9]{2}-[0-9]{2}-[0-9]{2}-[0-9]{2}-[0-9]{2}' required  value=".$row[11]."></td>
+
+								<td><input style='width:150px;font-size:0.8em;'type='text' name='carteVital' id='carteVital' value='".$row[12]."' minlength='15' maxlength='15' required></td>
+								</tr>";
+
+		       	}
+         
+       }
+
+   }
+
+
+function getTableContents2 ($db_handle) 
+{
+       $sql="SELECT * FROM medecin";
+       $res= mysqli_query($db_handle,$sql);
+       while ($row = mysqli_fetch_row($res)) 
+       {
+           echo "
+				<tr>
+				<td><input style='width:150px; font-size:0.8em;' type='text' name='idMedecin' id='idMedecin' value=".$row[0]." disabled></td>
+
+				<td><input style='width:150px; font-size:0.8em;' type='text' name='nomDocteur' id='nomDocteur' value=".$row[1]."></td>
+
+				<td><input style='width:150px;font-size:0.8em;'  type='text' name='loginDocteur' id='loginDocteur' value=".$row[2]."></td>
+
+				<td><input style='width:150px;font-size:0.8em;'  type='password' name='passDocteur' id='passDocteur' value=".$row[3]."  pattern='^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*_=+-]).{8,16}$' required ></td>
+
+				<td><input style='width:150px;font-size:0.8em;'  type='text' name='speDoc' id='speDoc' value=".$row[4]."></td>
+				
+				<td><input style='width:150px;font-size:0.8em;'  type='email' name='mailDocteur' id='mailDocteur' value=".$row[5]."></td>
+
+				<td><input style='width:150px;font-size:0.8em;'  type='text' name='hopitalDoc' id='hopitalDoc' value=".utf8_encode($row[7])."></td>
+
+				<td><input style='width:150px;font-size:0.8em;' type='tel' name='tel' id='tel' minlength='10' maxlength='10' pattern='[0-9]{2}-[0-9]{2}-[0-9]{2}-[0-9]{2}-[0-9]{2}' required  value=".$row[8]."></td>
+				</tr>";
+       }
+
+}
+
+function getTableContents3 ($db_handle) 
+{
+       $sql="SELECT * FROM labo";
+       $res= mysqli_query($db_handle,$sql);
+       while ($row = mysqli_fetch_row($res)) 
+       {
+
+           echo "  
+		   <tr>
+		 		<td><input style='width:150px; font-size:0.8em;' type='text' name='idLabo' id='idLabo' value=".$row[0]." disabled/></td>
+                <td><input style='width:150px; font-size:0.8em;' type='text' name='nomLabo' id='nomLabo' value=".$row[1]."/></td>
+                <td><input style='width:150px;font-size:0.8em;'type='email' name='mailLabo' id='mailLabo' value=".$row[2]."/></td>
+				<td><input style='width:150px;font-size:0.8em;' type='tel' name='tellabo' id='tellabo' minlength='10' maxlength='10' pattern='[0-9]{2}-[0-9]{2}-[0-9]{2}-[0-9]{2}-[0-9]{2}' required  value=".$row[3]."/></td>
+                <td><input style='width:150px;font-size:0.8em;'type='text' name='typeLabo' id='typeLabo' value=".$row[4]."/></td>
+            </tr>";
+       }
 
 }
 
