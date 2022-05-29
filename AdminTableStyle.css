@@ -11,21 +11,23 @@
 body {
     font-family: 'Poppins', sans-serif;
     overflow: hidden;
-    background: #e8eded;
+    background: #094646;
 }
 
 .table {
     width: 600px;
-    background-color: #587292;
+    
+    background-color: #7d9d9e;
 }
 
 .table_header {
+    margin-top:5px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     flex-wrap: wrap;
     padding: 20px;
-    background-color: rgb(240, 240, 240);
+    background-color: #7d9d9e;
 }
 
 
@@ -64,10 +66,22 @@ td button:nth-child(2) {
     background-color: none;
     border: 4px #677583 ;
     border-radius: 8px;
-    color: #587292;
+    color: #000000;
     padding-left: 3px;
     padding-right: 3px;
-    font-weight:10px;
+    font-weight: 3px;
+}
+
+.searchBox {
+    height: 40px;
+    text-align: center;
+    width: 250px;
+    border: 3px solid #356059;
+    color:#094646;
+    color:#070524;
+    border-radius:4px;
+    font-weight:12px;
+    
 }
 
 
@@ -137,7 +151,7 @@ tr:hover td {
 }
 
 ::placeholder {
-    color: #0298cf;
+    color: #444e57;
 }
 
 ::-webkit-scrollbar {
