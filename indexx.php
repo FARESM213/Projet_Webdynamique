@@ -89,8 +89,9 @@ include('db_config.php');
                                       }
                               ?>
                   </div>
-                  <button type="button" class="btn text-dark" data-bs-toggle="modal" data-bs-target="#searchModal"><i class="fa fa-search"></i></button>
 
+                  <button type="button" class="btn text-dark" data-bs-toggle="modal" data-bs-target="#searchModal"><i class="fa fa-search"></i></button>
+                
                            <?php 
                                     if($_SESSION['Client']=="")
                                       {
@@ -102,11 +103,12 @@ include('db_config.php');
                                       }
 
                     ?>
-
+  <div style="margin-left:200px;">
                   <form class="d-flex" style= "padding-left: 190px;"role="search">
                     <a href="indexx.php" class="btn btn-outline-success" type="submit">Rechercher</a>
                   </form>
               </div>
+</div>
           </nav>
               
   <br />
