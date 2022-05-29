@@ -187,11 +187,11 @@
 					$experience2->appendChild($job_exp2);
 
 					$from_exp2 = $xml->createAttribute('from');
-					$from_exp2->value = "DE : ".$form4;
+					$from_exp2->value =$form4;
 					$experience2->appendChild($from_exp2);
 
 					$to_exp2 = $xml->createAttribute('to');
-					$to_exp2->value = " A : ".$to4;
+					$to_exp2->value =$to4;
 					$experience2->appendChild($to_exp2);
 
 			$description2 = $xml->createElement("description",$Description2);

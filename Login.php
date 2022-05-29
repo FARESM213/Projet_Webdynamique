@@ -190,19 +190,18 @@
                     }   
                 unset($_SESSION['name']); // delete any specific session only
 
-                if ($_SESSION['Type']=='admin')
-                {
-                     header("Location: admin.php");
-                    die();
+                    if ($_SESSION['Type']=='admin')
+                    {
+                         header("Location: admin.php");
+                        die();
 
-                }
-                else
-                {
-                    header("Location: toutparc.php");
-                    die();
+                    }
+                    else
+                    {
+                        header("Location: toutparc.php");
+                        die();
 
-                }
-
+                    }
 
                 }
                 else if (!vide(['Emaillog','Mdplog']))

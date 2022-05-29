@@ -77,7 +77,7 @@ include('db_config.php');
                                        
                             <div class="row" style="margin-left:9px;">
                                 <div class="col-12">
-                                    <input type="text" style="margin-top:5px; width: 825px; height:125px; " class="form-control" name="Nom" id="Nom" placeholder="A propos de vous... "/>   
+                                    <input type="text" style="margin-top:5px; width: 825px; height:125px; " class="form-control" name="Intro" id="Intro" placeholder="A propos de vous... "/>   
                                 </div>
                             </div>
                         </div>
@@ -129,7 +129,7 @@ include('db_config.php');
                                 <input type="text" class="form-control" style="margin-top:10px; width: 200px; height:25px;" name="Entreprise1"  id="Entreprise1" placeholder="Entreprise"/>
                                 <div class="row justify-content-around">
                                     <div class="col">
-                                        <input type="text" class="form-control" style="margin-top:10px; width: 85px; height:25px;" name="from3"  id="from3" placeholder="Du"/>
+                                        <input type="text" class="form-control" style="margin-top:10px; width: 85px; height:25px;" name="form3"  id="form3" placeholder="Du"/>
                                     </div>
                                 
                                     <div class="col">    
@@ -152,7 +152,7 @@ include('db_config.php');
                                 <input type="text" class="form-control" style="margin-top:10px; width: 200px; height:25px;" name="Entreprise2"  id="Entreprise2" placeholder="Entreprise "/>
                                 <div class="row justify-content-around">
                                     <div class="col">
-                                        <input type="text" class="form-control" style="margin-top:10px; width: 85px; height:25px;" name="from4"  id="from4" placeholder="Du"/>
+                                        <input type="text" class="form-control" style="margin-top:10px; width: 85px; height:25px;" name="form4"  id="form4" placeholder="Du"/>
                                     </div>
                                 
                                     <div class="col">    

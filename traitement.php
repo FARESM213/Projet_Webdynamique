@@ -20,6 +20,11 @@ $data="";
 if(verification($adress,$db_id,$db_mdp,$db,$db_handle,$data) )
 {
 
+	//ajouter_patient($db_handle);
+	//ajouter_medecin($db_handle);
+	//connexion($db_handle,'Admin');
+	//update_element($db_handle,'patient','patlogin','fares.messaoudi@edu.ece.fr','fafff');
+
 }
 
 
@@ -718,7 +723,10 @@ if(isset($_POST["Supprimer"])&& !empty($_POST['Supprimer']))
 		{
 			header("Location: mesRdv.php");
 		}
+		else
+		{
 
+		}
 	}
 	else
 	{
