@@ -27,8 +27,8 @@ include('db_config.php');
         <body>          
 
             <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
-
-            <nav class="navbar navbar-expand-lg bg-white navbar-light shadow-sm px-5 py-3 py-lg-0">
+           
+          <nav class="navbar navbar-expand-lg bg-white navbar-light shadow-sm px-5 py-3 py-lg-0">
               <a href="index.php" class="navbar-brand p-0">
                   <img src="logo2.PNG" alt="" width="270" height="70">
               </a>
@@ -87,8 +87,7 @@ include('db_config.php');
                     ?>
 
                   <form class="d-flex" style= "padding-left: 190px;"role="search">
-                    <input class="form-control me-2 " type="search" placeholder="Recherche" aria-label="Search">
-                    <button class="btn btn-outline-success" type="submit">Rechercher</button>
+                    <a href="indexx.php" class="btn btn-outline-success" type="submit">Rechercher</a>
                   </form>
               </div>
           </nav>

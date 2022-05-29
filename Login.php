@@ -168,6 +168,25 @@
                         $_SESSION["Nom"] = $row[$data6];
                         $_SESSION['Tel']=$row[$data7];
 
+
+                     if($_SESSION["Type"]=='medecin')
+                     {
+
+                        $_SESSION['Job']=$row['medjob'];
+                        $_SESSION['Hospital']=$row['hopital'];
+
+                     }
+                     else if ($_SESSION["Type"]=='patient')
+                     {
+
+                        $_SESSION["Add1"] = $row['addresse1'];
+                        $_SESSION['Add2']=$row['adresse2'];
+                        $_SESSION['Ville']=$row['ville'];
+                        $_SESSION["Pays"] =$row['Pays'];
+                        $_SESSION['CodePostal']=$row['CodePostal'];
+                        $_SESSION['Vitale']=$row['CarteVitale'];
+                     }
+
                     }   
 
                 header("Location: toutparc.php");

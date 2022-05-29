@@ -14,14 +14,26 @@ $_SESSION["Client"] = "";
 $_SESSION["IdClient"] = "";
 $_SESSION["MdpClient"]="";
 $_SESSION["LoginClient"]="";
+$_SESSION["Nom"] = "";
+$_SESSION['Tel']="";
+$_SESSION["Add1"] = "";
+$_SESSION['Add2']="";
+$_SESSION["Pays"] = "";
+$_SESSION['CodePostal']="";
+$_SESSION['Ville']="";
+$_SESSION['Vitale']="";
+
+
+$_SESSION['Job']="";
+$_SESSION['Hospital']="";
+
+
 
 $_SESSION["Type"] = "";
 $_SESSION["Specialite"] = "";
-$_SESSION["Nom"] = "";
 
 $_SESSION['Rdv_Supp']="";
 $_SESSION['Type_Rdv']="Medecin";
-$_SESSION['Tel']="";
 $_SESSION['comm']="";
 $_SESSION['name']=""; 
 

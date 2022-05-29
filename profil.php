@@ -163,98 +163,102 @@ function ResizeImage() {
 
 
                   <form class="d-flex" style= "padding-left: 190px;"role="search">
-                    <input class="form-control me-2 " type="search" placeholder="Recherche" aria-label="Search">
-                    <button class="btn btn-outline-success" type="submit">Rechercher</button>
+                    <a href="indexx.php" class="btn btn-outline-success" type="submit">Rechercher</a>
                   </form>
               </div>
           </nav>
 
-    <div class="page-content page-container" id="page-content" style="margin-top: 50px; margin-left: 250px;">
-        <div class="padding">
-            <div class="row container d-flex justify-content-center">
-                        <div class="col-xl-6 col-md-12">
-                                                    <div class="card user-card-full">
-                                                        <div class="row m-l-0 m-r-0">
-                                                            <div class="col-sm-4 bg-c-lite-green user-profile">
-                                                                <div class="card-block text-center text-white">
-                                                                    <div class="m-b-25" id="Image">  
-
-                                                                        <?php image_display($db_handle,$id); ?> <br> <br>
-                                                                     
-                                                                    </div>
-                                                                    <h6 class="f-w-600">NOM Prenom</h6>
-                                                                    <i class=" mdi mdi-square-edit-outline feather icon-edit m-t-10 f-16"></i>
-                                                                </div>
-                                                            </div>
-
-
-                                                            <div class="col-sm-8">
-                                                                <div class="card-block">
-                                                                    <h6 class="m-b-20 p-b-5 b-b-default f-w-600">Information</h6>
-                                                                    <div class="row">
-                                                                        <div class="col-sm-6">
-                                                                            <p class="m-b-10 f-w-600">Email</p>
-                                                                            <h6 class="text-muted f-w-400"><?php echo $_SESSION['Client'];?></h6>
-                                                                        </div>
-                                                                        <div class="col-sm-6">
-                                                                            <p class="m-b-10 f-w-600">Telephone</p>
-                                                                            <h6 class="text-muted f-w-400">06 00 00 00 00</h6>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="row">
-                                                                        <div class="col-sm-6">
-                                                                        </div>
-                                                                    </div>
-                                                                    <ul class="social-link list-unstyled m-t-40 m-b-10">
-                                                                        <li><a href="#!" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="facebook" data-abc="true"><i class="mdi mdi-facebook feather icon-facebook facebook" aria-hidden="true"></i></a></li>
-                                                                        <li><a href="#!" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="twitter" data-abc="true"><i class="mdi mdi-twitter feather icon-twitter twitter" aria-hidden="true"></i></a></li>
-                                                                        <li><a href="#!" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="instagram" data-abc="true"><i class="mdi mdi-instagram feather icon-instagram instagram" aria-hidden="true"></i></a></li>
-                                                                            </ul>
-                                                        </div>
-                                                    </div>
-                                        </div>
-                                    </div>
-                                </div>
-            </div>
-        </div>
-
-
-
     <form action="" method="post" enctype="multipart/form-data">
 
-        <label> Login : </label>
-        <input type="text" name="Login"  value="<?php echo $_SESSION['LoginClient'];?>"> <br>
-        <label> Mot de passe :</label>
+
+<div class="container rounded bg-white mt-5 mb-5">
+    <div class="row">
+        <div class="col-md-6 border-right">
+            <div class="d-flex flex-column align-items-center text-center p-3 py-5"><?php image_display($db_handle,$id); ?>  <div> </div>
+<span class="font-weight-bold"><?php echo $_SESSION['LoginClient'];?></span><span class="text-black-50"><?php echo $_SESSION['Client'];?></span><span> </span></div>
+
+  <input name="userImage" type="file" class="imageFile"  accept="image/*"   id="userImage " onchange="ResizeImage()"/> 
 
 
-  <input type="password" name="password" id="password" value="<?php echo $_SESSION['MdpClient'];?>" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*_=+-]).{8,16}$">
 
-  <br> <br> <a  href="Supp.php" class="btn btn-primary py-2 px-4 ms-3">Modifier informations supplementaire</a>
+  <?php 
+
+     if($_SESSION['Type']=='patient') {
+
+   ?>
+
+/// Faire un if avec tout les champs pour medecin ou patient + + ajouter changement dans traitement 
+        </div>
+        <div class="col-md-5 border-right">
+            <div class="p-3 py-5">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h4 class="text-right">Profile Settings</h4>
+                </div>
+
+                <div class="row mt-2">
+                    <div class="col-md-6"><label class="labels">Nom </label><input type="text" class="form-control"  name="Nom" placeholder="first name"value="<?php echo $_SESSION['Nom'];?>"></div>
+                    <div class="col-md-6"><label class="labels">Login</label><input type="text" class="form-control" name="Login" value="<?php echo $_SESSION['LoginClient'];?>"></div> 
+                </div>
+
+                <div class="row mt-3">
+                    <div class="col-md-12"><label class="labels">Mot de passe </label><input type="password" class="form-control"  name="password" id="password" value="<?php echo $_SESSION['MdpClient'];?>" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*_=+-]).{8,16}$"></div>
+
+                    <div class="col-md-12"><label class="labels">Address Line 1</label><input  type="text"  name="Add1" class="form-control" placeholder="enter address line 1" value="<?php echo $_SESSION['Add1'];?>"></div>
+                    <div class="col-md-12"><label class="labels">Address Line 2</label><input type="text"  name="Add2" class="form-control" placeholder="enter address line 2" value="<?php echo $_SESSION['Add2'];?>"></div>
+                    <div class="col-md-12"><label class="labels">Ville</label><input type="text" class="form-control"  name="Ville" placeholder="enter address line 2" value="<?php echo $_SESSION['Ville'];?>"></div>
+                    <div class="col-md-12"><label class="labels">Pays</label><input type="text" class="form-control"  name="Pays" placeholder="enter address line 2" value="<?php echo $_SESSION['Pays'];?>"></div>
+                    <div class="col-md-12"><label class="labels">CodePostal</label><input type="text" class="form-control"  name="CodePostal" placeholder="enter address line 2" value="<?php echo $_SESSION['CodePostal'];?>"></div>
+                <div class="col-md-12"><label class="labels">Telephone</label><input type="text" class="form-control"  name="Telephone" placeholder="enter email id" value="<?php echo $_SESSION['Client'];?>" > </div>
+                    <div class="col-md-12"><label class="labels">Carte Vitale </label><input type="text"  name="Vitale" class="form-control" placeholder="education" value="<?php echo       $_SESSION['Vitale'];?>"></div>
+                </div>
+
+                <div class="mt-5 text-center"> <input  class="btn btn-primary py-2 px-4 ms-3"  type="submit" value="Modifier" name="Upload" id ="Modifier" onchange="ResizeImage()"> </input> </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 
-        <!--
-        <label> Adresse :</label>
-        <input type="text" name="Login"><br>
-        <label> Ville :</label>
-        <input type="text" name="Login"><br>
-        <label> Code Postal :</label>
-        <input type="text" name="Login"><br>
-        <label> Pays:</label>
-        <input type="text" name="Login"><br> 
-        <label> Numero telephone:</label>
-        <input type="text" name="Login"><br> 
-        <label> Carte Vitale:</label>
-        <input type="text" name="Login"><br> -->
+  <?php 
+
+     } else { ?>
 
 
-        
-   
-    <img src="" id="preview">
+         </div>
+        <div class="col-md-5 border-right">
+            <div class="p-3 py-5">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h4 class="text-right">Profile Settings</h4>
+                </div>
+
+                <div class="row mt-2">
+                    <div class="col-md-6"><label class="labels">Nom </label><input type="text" class="form-control" name="Nom"  placeholder="first name"value="<?php echo $_SESSION['Nom'];?>"></div>
+                    <div class="col-md-6"><label class="labels">Login</label><input type="text" class="form-control" name="Login" value="<?php echo $_SESSION['LoginClient'];?>"></div> 
+                </div>
+
+                <div class="row mt-3">
+                    <div class="col-md-12"><label class="labels">Mot de passe </label><input type="password" class="form-control"  name="password" id="password" value="<?php echo $_SESSION['MdpClient'];?>" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*_=+-]).{8,16}$"></div>
+
+                    <div class="col-md-12"><label class="labels">Specialité</label><input type="text" name="Specialite" class="form-control" placeholder="Specialité" value="<?php echo $_SESSION['Job'];?>"></div>
+                    <div class="col-md-12"><label class="labels">Hospital</label><input type="text" name="Hospital" class="form-control" placeholder="Hospital" value="<?php echo $_SESSION['Hospital'];?>"></div>
+                <div class="col-md-12"><label class="labels">Telephone</label><input type="text"  name="Telephone" class="form-control" placeholder="Telephone" value="<?php echo $_SESSION['Tel'];?>" > </div>
+
+                <div class="mt-5 text-center"> <input  class="btn btn-primary py-2 px-4 ms-3"  type="submit" value="Modifier" name="Upload" id ="Modifier" onchange="ResizeImage()"> </input> </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 
-        <input name="userImage" type="file" class="imageFile"  accept="image/*"   id="userImage " onchange="ResizeImage()"/> 
+   <?php 
 
-        <input  class="btn btn-primary py-2 px-4 ms-3"  type="submit" value="Modifier" name="Upload" id ="Modifier" onchange="ResizeImage()"> </input>
+      }
+
+
+    ?>
+
+    
+
 
     </form>
 

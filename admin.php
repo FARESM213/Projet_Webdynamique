@@ -11,6 +11,11 @@ header( 'content-type: text/html; charset=utf-8' );
 <html lang="en">
     <wrapper>
 
+      <style>
+        body {
+         
+        }
+        </style>
 
         <head>
             <meta charset="utf-8">
@@ -26,7 +31,7 @@ header( 'content-type: text/html; charset=utf-8' );
         
         <body>          
 
-        <style>
+            <style>
         *{
             margin: 0;
             padding: 0;
@@ -43,7 +48,7 @@ header( 'content-type: text/html; charset=utf-8' );
         }
         .sidebar{
             position: fixed;
-            width: 275px;
+            width: 300px;
             height: 100%;
             background: #a2b9ba;
             padding: 20px 0;
@@ -79,7 +84,7 @@ header( 'content-type: text/html; charset=utf-8' );
         } 
         .sidebar ul li a .far{
             width: 30px;
-            color: black ;
+            color: #bdb8d7 ;
         }
         .sidebar ul li:hover{
             background: #7d9d9e;
@@ -124,20 +129,20 @@ header( 'content-type: text/html; charset=utf-8' );
               
        
     <div class="wrapper d-flex">
-	    <div class="sidebar">
-        <div class="row" >
+	<div class="sidebar">
+    <div class="row" >
             <div class="col-lg-3">
-                <ul class="nav nav-tabs flex-column" role="tablist">
-                    <li class="nav-item" role="presentation" style="width:300px;">
-                        <a class="nav-link" data-bs-toggle="tab" href="#tab-1" aria-selected="true" role="tab" style="color:#070524; font-size:20px;font-weight: 900;">Informations Clients</a>
-                    </li>
-                    <li class="nav-item" role="presentation">
-                        <a class="nav-link" data-bs-toggle="tab" href="#tab-2" aria-selected="false" tabindex="-1" role="tab" style="color:#070524; font-size:20px;font-weight: 900;">Informations Docteurs</a>
-                    </li>
-                    <li class="nav-item" role="presentation">
-                        <a class="nav-link" data-bs-toggle="tab" href="#tab-3" aria-selected="false" tabindex="-1" role="tab" style="color:#070524; font-size:20px;font-weight: 900;">Informations Laboratoires</a>
-                    </li>
-                </ul>
+              <ul class="nav nav-tabs flex-column" role="tablist">
+                <li class="nav-item" role="presentation" style="width:300px;">
+                  <a class="nav-link" data-bs-toggle="tab" href="#tab-1" aria-selected="true" role="tab">Informations Clients</a>
+                </li>
+                <li class="nav-item" role="presentation">
+                  <a class="nav-link" data-bs-toggle="tab" href="#tab-2" aria-selected="false" tabindex="-1" role="tab">Informations Docteurs</a>
+                </li>
+                <li class="nav-item" role="presentation">
+                  <a class="nav-link" data-bs-toggle="tab" href="#tab-3" aria-selected="false" tabindex="-1" role="tab">Informations Laboratoires</a>
+                </li>
+              </ul>
             </div>
         </div>
     </div>
@@ -145,28 +150,23 @@ header( 'content-type: text/html; charset=utf-8' );
 
         <div class="tab-content" style="margin-left:320px; overflow-x: auto; white-space: nowrap;width:1500px; height: 770px;">
         <div class="tab-pane" id="tab-1" role="tabpanel">
-            <div class="row justify-content">
-                <div class="table_header" style="margin-bottom:5px;">
-                    <div>  <button class="add_new BTN-bleu" style="margin-left:50px; ">+ Add New</button>  <input placeholder="Search" class="searchBox"style="margin-left:400px; "/> </div> 
-                </div><br>      
+            <div class="row justify-content">      
                 <div class="tableScroll">    
                     <table class="table  table-bordered table-hover">
                         <thead>
                             <tr>
-
-                                <th scope="col" class="table-light" style="width : 150px; color: black;">Commands</th>
-                                <th scope="col" class="table-light" style="width : 200px; color: black;">#</th>
-                                <th scope="col" class="table-light" style="width : 200px; color: black;">Nom</th>
-                                <th scope="col" class="table-light" style="width : 200px; color: black;">Login</th>
-                                <th scope="col" class="table-light" style="width : 200px; color: black;">Mot de Passe</th>
-                                <th scope="col" class="table-light" style="width : 200px; color: black;">Email</th>
-                                <th scope="col" class="table-light" style="width : 200px; color: black;">Adresse</th>
-                                <th scope="col" class="table-light" style="width : 200px; color: black;">Ville</th>
-                                <th scope="col" class="table-light" style="width : 200px; color: black;">Pays</th>
-                                <th scope="col" class="table-light" style="width : 200px; color: black;">Code Postal</th>
-                                <th scope="col" class="table-light" style="width : 200px; color: black;">Telephone</th> 
-                                <th scope="col" class="table-light" style="width : 200px; color: black;">Carte vitale</th>
-
+                            <th scope="col" style="width : 300px; color: white;">Commands</th>
+                            <th scope="col" style="width : 300px; color: white;">#</th>
+                            <th scope="col" style="width : 300px; color: white;">Nom</th>
+                            <th scope="col" style="width : 300px; color: white;">Login</th>
+                            <th scope="col" style="width : 300px; color: white;">Mot de Passe</th>
+                            <th scope="col" style="width : 300px; color: white;">Email</th>
+                            <th scope="col" style="width : 300px; color: white;">Adresse</th>
+                            <th scope="col" style="width : 300px; color: white;">Ville</th>
+                            <th scope="col" style="width : 300px; color: white;">Pays</th>
+                            <th scope="col" style="width : 300px; color: white;">Code Postal</th>
+                            <th scope="col" style="width : 300px; color: white;">Telephone</th> 
+                            <th scope="col" style="width : 300px; color: white;">Carte vitale</th>
                             </tr>
                         </thead>
                             <tbody>
@@ -180,59 +180,57 @@ header( 'content-type: text/html; charset=utf-8' );
 
             <div class="tab-pane" id="tab-2" role="tabpanel">
                 <div class="row justify-content">
-                    <div class="table_header" style="margin-bottom:5px;">
-                        <div>  <button class="add_new BTN-bleu" style="margin-left:50px; ">+ Add New</button>  <input placeholder="Search" class="searchBox"style="margin-left:400px; "/> </div> 
-                    </div><br> 
-                        <div class="tableScroll">       
-                            <table class="table table-secondary table-bordered table-hover" >
+                    <div class="col-md-12">
+                        <div class="tableScroll" style="width:100%; height:770px; overflow-x: auto;white-space: nowrap;">    
+                            <table class="table table-light table-bordered table-hover" >
                                 <thead>
                                       <tr>
-                                        <th scope="col" class="table-light" style="width : 150px; color: black;">Commands</th>
-                                        <th scope="col" class="table-light" style="width : 200px; color: black;">#</th>
-                                        <th scope="col" class="table-light" style="width : 200px; color: black;">Nom</th>
-                                        <th scope="col" class="table-light" style="width : 200px; color: black;">Login</th>
-                                        <th scope="col" class="table-light" style="width : 200px; color: black;">Mot de Passe</th>
-                                        <th scope="col" class="table-light" style="width : 200px; color: black;">Specialite</th>
-                                        <th scope="col" class="table-light" style="width : 200px; color: black;">Mail</th>
-                                        <th scope="col" class="table-light" style="width : 200px; color: black;">Hospital</th>
-                                        <th scope="col" class="table-light" style="width : 200px; color: black;">Telephone</th>
+                                        <th scope="col" style="width : 300px; color: black;">Commands</th>
+                                        <th scope="col" style="width : 300px; color: black;">#</th>
+                                        <th scope="col" style="width : 300px; color: black;">Nom</th>
+                                        <th scope="col" style="width : 300px; color: black;">Login</th>
+                                        <th scope="col" style="width : 300px; color: black;">Mot de Passe</th>
+                                        <th scope="col" style="width : 300px; color: black;">Specialite</th>
+                                        <th scope="col" style="width : 300px; color: black;">Mail</th>
+                                        <th scope="col" style="width : 300px; color: black;">Hospital</th>
+                                        <th scope="col" style="width : 300px; color: black;">Telephone</th>
                                         </tr>
                                 </thead>
                                 <tbody>
                                     <?php getTableContents2($db_handle);  ?>  
                                 </tbody>
-                            </table>
+                                </table>
+                            </div>
                         </div>
                     </div>
                 </div>
 
                 <div class="tab-pane" id="tab-3" role="tabpanel">
                     <div class="row justify-content">
-                        <div class="table_header" style="margin-bottom:5px;">
-                            <div>  <button class="add_new BTN-bleu" style="margin-left:50px; ">+ Add New</button>  <input placeholder="Search" class="searchBox"style="margin-left:400px; "/> </div> 
-                        </div><br> 
-                            <div class="tableScroll">       
+                        <div class="col-xl-12">
+                        <div class="tableScroll" style="width:100%; height:770px; overflow-x: auto;white-space: nowrap;">    
                                 <table class="table  table-dark table-bordered table-hover">
                                     <thead>
                                         <tr>
 
-                                        <th scope="col" style="width : 150px;color: white;">Commands</th>
-                                        <th scope="col" style="width : 200px;color: white;">#</th>
-                                        <th scope="col" style="width : 200px;color: white;">Nom</th>
-                                        <th scope="col" style="width : 200px;color: white;">Email</th>
-                                        <th scope="col" style="width : 200px;color: white;">Numero de Telephone</th>
-                                        <th scope="col" style="width : 200px;color: white;">Type</th>
+                                        <th scope="col" style="width : 300px; color: white;">Commands</th>
+                                        <th scope="col" style="width : 300px;color: white;">#</th>
+                                        <th scope="col" style="width : 300px;color: white;">Nom</th>
+                                        <th scope="col" style="width : 300px;color: white;">Email</th>
+                                        <th scope="col" style="width : 300px;color: white;">Numero de Telephone</th>
+                                        <th scope="col" style="width : 300px;color: white;">Type</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <?php getTableContents3($db_handle);?>  
                                     </tbody>
-                                </table>
-                             </div>
+                                    </table>
                         </div>
                     </div>
-                </body>
-            </wrapper>   
+                </div>
+            </div>
+        </body>
+    </wrapper>   
 
 
         <script type="text/javascript">

@@ -504,5 +504,18 @@ if (isset($_POST['Test2']) && !empty($_POST['Test2']))  // Du coup la on verifie
 
 
 
+if(isset($_POST["Modifier"])&& !empty($_POST['Modifier']))
+{
+
+	$pizza=$_POST["Modifier"];
+	$pieces=explode("-",$pizza);
+	echo $pieces[0];
+	echo $pieces[1];
+
+}
+
+
+
+
 
 ?>

@@ -113,8 +113,7 @@ if($res)
                     ?>
 
                   <form class="d-flex" style= "padding-left: 190px;"role="search">
-                    <input class="form-control me-2 " type="search" placeholder="Recherche" aria-label="Search">
-                    <button class="btn btn-outline-success" type="submit">Rechercher</button>
+                    <a href="indexx.php" class="btn btn-outline-success" type="submit">Rechercher</a>
                   </form>
               </div>
           </nav>

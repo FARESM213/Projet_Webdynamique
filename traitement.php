@@ -495,14 +495,12 @@ if(isset($_POST["Upload"])&& !empty($_POST['Upload']))
                              $data5="patlogin";
                              $data6="patno";
 
-
                      }
                     else
                     {
                       $data4="adpassword";
                       $data5="adlogin";
                       $data6="adno";
-
 
                      }       
 
@@ -536,17 +534,47 @@ if(isset($_POST["Upload"])&& !empty($_POST['Upload']))
 
 			}
 
-			  
-
-          $message="";
-
+	     
 		 update_element($db_handle,$_SESSION['Type'],$data5,$_SESSION['Client'],$_POST['Login'],$message);
 		 update_element($db_handle,$_SESSION['Type'],$data4,$_SESSION['Client'],$_POST['password'],$message);
+
 		 $_SESSION['LoginClient']=$_POST['Login'];
 		 $_SESSION['MdpClient']=$_POST['password'];
 
+		$_SESSION["Nom"] =$_POST['Nom'] ;
+		$_SESSION['Tel']=$_POST['Telephone'];
 
-		  
+
+		if( $_SESSION['Type']=='patient')
+		{
+
+
+		$_SESSION["Add1"] = $_POST['Add1'];
+		$_SESSION['Add2']=$_POST['Add2'];
+		$_SESSION["Pays"] = $_POST['Pays'];
+		$_SESSION['CodePostal']=$_POST['CodePostal'];
+		$_SESSION['Ville']=$_POST['Ville'];
+		$_SESSION['Vitale']=$_POST['Vitale'];
+
+		 update_element($db_handle,$_SESSION['Type'],'addresse1',$_SESSION['Client'],$_POST['Add1'],$message);
+		 update_element($db_handle,$_SESSION['Type'],'addresse2',$_SESSION['Client'],$_POST['Add2'],$message);
+		 update_element($db_handle,$_SESSION['Type'],'Pays',$_SESSION['Client'],$_POST['Pays'],$message);
+		 update_element($db_handle,$_SESSION['Type'],'CodePostal',$_SESSION['Client'],$_POST['CodePostal'],$message);
+		 update_element($db_handle,$_SESSION['Type'],'ville',$_SESSION['Client'],$_POST['Ville'],$message);
+		 update_element($db_handle,$_SESSION['Type'],'CarteVitale',$_SESSION['Client'],$_POST['Vitale'],$message);
+
+
+		}
+		else if ( $_SESSION['Type']=='medecin')
+		{
+		$_SESSION['Job']=$_POST['Specialite'];
+		$_SESSION['Hospital']=$_POST['Hospital'];
+
+		 update_element($db_handle,$_SESSION['Type'],'medjob',$_SESSION['Client'],$_POST['Specialite'],$message);
+		 update_element($db_handle,$_SESSION['Type'],'Hospital',$_SESSION['Client'],$_POST['Hospital'],$message);
+
+		}
+
 }
 
 
@@ -732,47 +760,46 @@ function getTableContents ($db_handle)
 		       	if($row[0]!=0)
 		       	{
 		       		  echo "  
-								
-		 					<tr style='width=300px;'>
-		   					<td style='width=300px;'> 
+		 						<tr style='width=300px;'>
+		   						<td style='width=300px;'> 
 
 		   						<form method='POST' action='' >
 
-		   						    <button  hidden type='submit' value=".utf8_encode($row[0])." name='Delete' onclick='change2(this.id);' id=".utf8_encode($row[0])."><i class='fa-solid fa-trash'></i></button> 
+		   						    <button  hidden type='submit' value=".$row[0]." name='Delete' onclick='change2(this.id);' id=".$row[0]."><i class='fa-solid fa-trash' style = 'margin-left:5px;'></i></button> 
 
-                                  	<button  type='submit' style = 'margin-left:-60px;' value=".utf8_encode($row[0])." name='Delete' onclick='change2(this.id);' id=".utf8_encode($row[0])."><i class='fa-solid fa-trash'></i></button> 
+                                  <button  type='submit' value=".$row[0]." name='Delete' onclick='change2(this.id);' id=".$row[0]."><i class='fa-solid fa-trash' style = 'margin-left:5px;'></i></button> 
 
-                                </form>
+                                  </form>
 
                                 <form method='POST' action='' style='margin-left : 100px; margin-top: -44px;' >
 
-		   							<button type='submit' style = 'margin-left:-30px;' value=".utf8_encode($row[0])." name='Modif' onclick='change(this.id);' id=".utf8_encode($row[0])." ><i class='fa-solid fa-pen-to-square'></i></button> 
+		   						<button type='submit' value=".$row[0]." name='Modif' onclick='change(this.id);' id=".$row[0]." ><i class='fa-solid fa-pen-to-square' style = 'margin-right:5px;'></i></button> 
 
 		   						
-		   					</td>
+		   						</td>
 
-		   							<td style='width=220px;'><input class='textBoxStyle' type='text' name='idClient' id='idClient' value=".utf8_encode($row[0])." disabled></td>
+		   						<td style='width=220px;'><input class='textBoxStyle' type='text' name='idClient' id='idClient' value=".$row[0]." disabled></td>
 
-                                	<td style='width=220px;'><input class='textBoxStyle' type='text' name='nomClient' id='nomClient' value=".utf8_encode($row[1])."></td>
+                                <td style='width=220px;'><input class='textBoxStyle' type='text' name='nomClient' id='nomClient' value=".$row[1]."></td>
 
-                                	<td style='width=220px;'><input class='textBoxStyle'type='text' name='loginClient' id='loginClient' value=".utf8_encode($row[2])."></td>
+                                <td style='width=220px;'><input class='textBoxStyle'type='text' name='loginClient' id='loginClient' value=".$row[2]."></td>
 
-                                	<td style='width=220px;'><input class=' textBoxStyle'type='password' name='passClient' id='passClient' value=".utf8_encode($row[3])." pattern='^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*_=+-]).{8,16}$' required ></td>
+                                <td style='width=220px;'><input class=' textBoxStyle'type='password' name='passClient' id='passClient' value=".$row[3]." pattern='^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*_=+-]).{8,16}$' required ></td>
 
-                                	<td style='width=220px;'><input class='textBoxStyle' name='mailClient' id='mailClient' value=".utf8_encode($row[4]). " required></td>
+                                <td style='width=220px;'><input class='textBoxStyle' name='mailClient' id='mailClient' value=".$row[4]. " required></td>
 
-                                	<td style='width=220px;'><input class='textBoxStyle'type='text' name='adresseClient' id='adresseClient' value=".utf8_encode($row[6])."></td>
+                                <td style='width=220px;'><input class='textBoxStyle'type='text' name='adresseClient' id='adresseClient' value=".$row[6]."></td>
 
-                                	<td style='width=220px;'><input class='textBoxStyle'type='text' name='villeClient' id='villeClient' value=".utf8_encode($row[8])."></td>
+                                <td style='width=220px;'><input class='textBoxStyle'type='text' name='villeClient' id='villeClient' value=".$row[8]."></td>
 
-                                	<td style='width=220px;'><input class='textBoxStyle'type='text' name='paysClient' id='paysClient' value=".utf8_encode($row[9])."></td>
+                                <td style='width=220px;'><input class='textBoxStyle'type='text' name='paysClient' id='paysClient' value=".$row[9]."></td>
 
-                                	<td style='width=220px;'><input class='textBoxStyle'type='text' name='codePostal' id='codePostal' value=".utf8_encode($row[10])."></td>
+                                <td style='width=220px;'><input class='textBoxStyle'type='text' name='codePostal' id='codePostal' value=".$row[10]."></td>
 
-                                	<td style='width=220px;'><input class='textBoxStyle'type='tel' name='numeroClient' id='numeroClient' minlength='10' maxlength='10' pattern='[0-9]{10}' required  value=".utf8_encode($row[11])."></td>
+                                <td style='width=300px;'><input class='textBoxStyle'type='tel' name='numeroClient' id='numeroClient' minlength='10' maxlength='10' pattern='[0-9]{10}' required  value=".$row[11]."></td>
 
-									<td style='width=220px;'><input class='textBoxStyle'type='text' name='carteVital' id='carteVital' value='".utf8_encode($row[12])."' minlength='15' maxlength='15'  pattern='[0-9]{15}'  required></td>
-							</tr>
+								<td style='width=300px;'><input class='textBoxStyle'type='text' name='carteVital' id='carteVital' value='".$row[12]."' minlength='15' maxlength='15'  pattern='[0-9]{15}'  required></td>
+								</tr>
 								</form>
 
 								";
@@ -857,34 +884,34 @@ function getTableContents2 ($db_handle)
 
 		   						<form method='POST' action='' >
 
-		   						    <button  hidden type='submit'  value=".utf8_encode($row[0])." name='Delete1' onclick='change2(this.id);' id=".utf8_encode($row[0])."><i class='fa-solid fa-trash'></i></button> 
+		   						    <button  hidden type='submit' value=".$row[0]." name='Delete1' onclick='change2(this.id);' id=".utf8_encode($row[0])."><i class='fa-solid fa-trash' style = 'margin-left:5px;'></i></button> 
 
-                                  	<button  type='submit' style = 'margin-left:-60px;' value=".utf8_encode($row[0])." name='Delete1' onclick='change2(this.id);' id=".utf8_encode($row[0])."><i class='fa-solid fa-trash'></i></button> 
+                                  <button  type='submit' value=".$row[0]." name='Delete1' onclick='change2(this.id);' id=".$row[0]."><i class='fa-solid fa-trash' style = 'margin-left:5px;'></i></button> 
 
-                                </form>
+                                  </form>
 
                                 <form method='POST' action='' style='margin-left : 100px; margin-top: -44px;' >
 
-		   						<button type='submit' style = 'margin-left:-30px;' value=".utf8_encode($row[0])." name='Modif1' onclick='change(this.id);' id=".utf8_encode($row[0])." ><i class='fa-solid fa-pen-to-square'></i></button> 
+		   						<button type='submit' value=".$row[0]." name='Modif1' onclick='change(this.id);' id=".$row[0]." ><i class='fa-solid fa-pen-to-square' style = 'margin-right:5px;'></i></button> 
 
 		   						
 		   						</td>
 
-		   						<td style='width=220px;'><input class='textBoxStyle' type='text' name='idMedecin' id='idMedecin' value=".utf8_encode($row[0])." disabled></td>
+		   						<td style='width=220px;'><input class='textBoxStyle' type='text' name='idMedecin' id='idMedecin' value=".$row[0]." disabled></td>
 
-                                <td style='width=220px;'><input class='textBoxStyle' type='text' name='nomDocteur' id='nomDocteur' value=".utf8_encode($row[1])."></td>
+                                <td style='width=220px;'><input class='textBoxStyle' type='text' name='nomDocteur' id='nomDocteur' value=".$row[1]."></td>
 
-                                <td style='width=220px;'><input class='textBoxStyle'type='text' name='loginDocteur' id='loginDocteur' value=".utf8_encode($row[2])."></td>
+                                <td style='width=220px;'><input class='textBoxStyle'type='text' name='loginDocteur' id='loginDocteur' value=".$row[2]."></td>
 
-                                <td style='width=220px;'><input class=' textBoxStyle'type='password' name='passDocteur' id='passDocteur' value=".utf8_encode($row[3])." pattern='^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*_=+-]).{8,16}$' required ></td>
+                                <td style='width=220px;'><input class=' textBoxStyle'type='password' name='passDocteur' id='passDocteur' value=".$row[3]." pattern='^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*_=+-]).{8,16}$' required ></td>
 
-                                <td style='width=220px;'><input class='textBoxStyle' name='speDoc' id='speDoc' value=".utf8_encode($row[4]). " required></td>
+                                <td style='width=220px;'><input class='textBoxStyle' name='speDoc' id='speDoc' value=".$row[4]. " required></td>
 
-                                <td style='width=220px;'><input class='textBoxStyle'type='text' name='mailDocteur' id='mailDocteur' value=".utf8_encode($row[5])."></td>
+                                <td style='width=220px;'><input class='textBoxStyle'type='text' name='mailDocteur' id='mailDocteur' value=".$row[5]."></td>
 
-                                <td style='width=220px;'><input class='textBoxStyle'type='text' name='hopitalDoc' id='hopitalDoc' value=".utf8_encode($row[7])."></td>
+                                <td style='width=220px;'><input class='textBoxStyle'type='text' name='hopitalDoc' id='hopitalDoc' value=".$row[7]."></td>
 
-                                <td style='width=220px;'><input class='textBoxStyle'type='text' name='teldoc' id='teldoc'  minlength='10' maxlength='10' pattern='[0-9]{10}' required  value=".utf8_encode($row[8])."></td>
+                                <td style='width=220px;'><input class='textBoxStyle'type='text' name='teldoc' id='teldoc'  minlength='10' maxlength='10' pattern='[0-9]{10}' required  value=".$row[8]."></td>
                                 </td>
 								</tr>
 								</form>";
@@ -959,28 +986,28 @@ function getTableContents3 ($db_handle)
 
 		   						<form method='POST' action='' >
 
-		   						    <button  hidden type='submit'  value=".utf8_encode($row[0])." name='Delete2' onclick='change2(this.id);' id=".utf8_encode($row[0])."><i class='fa-solid fa-trash'></i></button> 
+		   						    <button  hidden type='submit' value=".$row[0]." name='Delete2' onclick='change2(this.id);' id=".utf8_encode($row[0])."><i class='fa-solid fa-trash' style = 'margin-left:5px;'></i></button> 
 
-                                	<button  type='submit' style = 'margin-left:-60px;' value=".utf8_encode($row[0])." name='Delete2' onclick='change2(this.id);' id=".utf8_encode($row[0])."><i class='fa-solid fa-trash'></i></button> 
+                                  <button  type='submit' value=".$row[0]." name='Delete2' onclick='change2(this.id);' id=".$row[0]."><i class='fa-solid fa-trash' style = 'margin-left:5px;'></i></button> 
 
                                   </form>
 
                                 <form method='POST' action='' style='margin-left : 100px; margin-top: -44px;' >
 
-		   						<button type='submit' style = 'margin-left:-30px;' value=".utf8_encode($row[0])." name='Modif2' onclick='change(this.id);' id=".utf8_encode($row[0])." ><i class='fa-solid fa-pen-to-square'></i></button> 
+		   						<button type='submit' value=".$row[0]." name='Modif2' onclick='change(this.id);' id=".$row[0]." ><i class='fa-solid fa-pen-to-square' style = 'margin-right:5px;'></i></button> 
 
 		   						
 		   						</td>
 
-		   						<td style='width=220px;'><input class='textBoxStyle' type='text' name='idLabo' id='idLabo' value=".utf8_encode($row[0])." disabled></td>
+		   						<td style='width=220px;'><input class='textBoxStyle' type='text' name='idLabo' id='idLabo' value=".$row[0]." disabled></td>
 
-                                <td style='width=220px;'><input class='textBoxStyle' type='text' name='nomLabo' id='nomLabo' value=".utf8_encode($row[1])."></td>
+                                <td style='width=220px;'><input class='textBoxStyle' type='text' name='nomLabo' id='nomLabo' value=".$row[1]."></td>
 
-                                <td style='width=220px;'><input class='textBoxStyle'type='email' name='mailLabo' id='mailLabo' value=".utf8_encode($row[2])."></td>
+                                <td style='width=220px;'><input class='textBoxStyle'type='email' name='mailLabo' id='mailLabo' value=".$row[2]."></td>
 
-								 <td style='width=220px;'><input class='textBoxStyle' type='tel' name='tellabo' id='tellabo' minlength='10' maxlength='10' pattern='[0-9]{10}' required  value=".utf8_encode($row[3])."></td>
+								 <td style='width=220px;'><input class='textBoxStyle' type='tel' name='tellabo' id='tellabo' minlength='10' maxlength='10' pattern='[0-9]{10}' required  value=".$row[3]."></td>
 
-                                  <td style='width=220px;'><input class='textBoxStyle' type='text' name='typeLabo' id='typeLabo' value=".utf8_encode($row[4])."></td>
+                                  <td style='width=220px;'><input class='textBoxStyle' type='text' name='typeLabo' id='typeLabo' value=".$row[4]."></td>
 
 								</tr>
 								</form>";
