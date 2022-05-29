@@ -908,7 +908,10 @@ document.getElementById("datefield3").setAttribute("min", today);
   <div class="text-center p-3" style="background-color: rgb(164, 231, 252);">
     © 2022 Copyright:
     <a class="text-dark" href="index.php">OMNESSante.com</a>
+  </div>
   <!-- Copyright -->
         </div>
 </footer>
+
+
 </html>

@@ -136,7 +136,35 @@ include('db_config.php');
 
 
  </body>
+ <footer class="fixed-bottom bg-light" style="padding-bottom:10px;">
+  <!-- Grid container -->
+  <div class="container" style="margin-top:10px;">
+    <!--Grid row-->
+    <div class="row"style="margin-bottom:10px;">
+      <!--Grid column-->
+      <div class="col-lg-4 col-md-6 mb-4 mb-md-0">
+          <a href="mailto:omnessante@omnes.com" class="text-dark" >Mail : omnessante@omnes.com</a>
+      </div>
+      <div class="col-lg-4 col-md-6 mb-4 mb-md-0">        
+          <a href="https://www.google.com/maps/place/ECE+Paris/@48.8517668,2.2864819,15z/data=!4m2!3m1!1s0x0:0x167f5a60fb94aa76?sa=X&ved=2ahUKEwjq5cC_s_T3AhUP_4UKHX_KATsQ_BJ6BQi_ARAF!" class="text-dark">Adresse : 37 Quai de Grenelle, 75015 Paris</a>
+      </div> 
+      <div class="col-lg-4 col-md-6 mb-4 mb-md-0">
+          <a href="#!" class="text-dark">Telephone : 01 00 00 00 00</a>    
+      </div>
+    </div> 
+      <!--Grid column-->
+
+  <!-- Copyright -->
+  <div class="text-center p-3" style="background-color: rgb(164, 231, 252);">
+    © 2022 Copyright:
+    <a class="text-dark" href="index.php">OMNESSante.com</a>
+  </div>
+  <!-- Copyright -->
+        </div>
+</footer>
+
 </html>
+
 
 
 <script>

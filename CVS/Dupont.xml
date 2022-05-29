@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<cv>
+  <me name="aaaaa" address="" telephone="" email="">dddasdasd</me>
+  <education>
+    <qualification establishment="" type="" from="" to=""/>
+    <qualification establishment="" type="" from="" to=""/>
+  </education>
+  <employment>
+    <experience establishment="" job_title="" from="" to="">
+      <description/>
+      <achievement/>
+      <achievement/>
+      <achievement/>
+    </experience>
+    <experience establishment="" job_title="" from="" to="123123">
+      <description/>
+      <achievement/>
+      <achievement/>
+      <achievement/>
+    </experience>
+  </employment>
+  <hobandint/>
+  <references>
+    <contact email="" telephone="" relationship=""/>
+  </references>
+</cv>
