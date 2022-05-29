@@ -102,13 +102,13 @@ include('db_config.php');
                   </div>   
                 <div class="carousel-inner">
                   <div class="carousel-item active">
-                    <img src="stockMed.jpg" style="width:600px;height:500px" class="d-block w-100" alt="...">
+                    <img src="stockMed.jpg" style="width:400px;height:500px" class="d-block w-100" alt="...">
                   </div>
                   <div class="carousel-item">
-                    <img src="stockMed2.jpg" style="width:600px;height: 500px;" class="d-block w-100" alt="...">
+                    <img src="stockMed2.jpg" style="width:400px;height: 500px;" class="d-block w-100" alt="...">
                   </div>
                   <div class="carousel-item">
-                    <img src="eiffel.jpg" style="width:600px;height: 500px;" class="d-block w-100" alt="...">
+                    <img src="eiffel.jpg" style="width:400px;height: 500px;" class="d-block w-100" alt="...">
                   </div>
                 </div>
                 <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
@@ -138,7 +138,7 @@ include('db_config.php');
      
 
       <div>
-        <iframe style=" margin-left: 17%; border:6px black; width: 70%; height: 450px;" src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d10501.351575571427!2d2.2864819!3d48.8517668!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x167f5a60fb94aa76!2sECE%20Paris!5e0!3m2!1sen!2sfr!4v1653345405470!5m2!1sen!2sfr" frameborder="0" allowfullscreen=""></iframe>
+        <iframe style="border:0; width: 100%; height: 350px;" src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d10501.351575571427!2d2.2864819!3d48.8517668!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x167f5a60fb94aa76!2sECE%20Paris!5e0!3m2!1sen!2sfr!4v1653345405470!5m2!1sen!2sfr" frameborder="0" allowfullscreen=""></iframe>
       </div>
 
       <div class="container">
@@ -197,22 +197,27 @@ include('db_config.php');
     </section>
 </body>
         
-<footer class="fixed-bottom bg-light" style="padding-bottom:10px;">
+<footer class="fixed-bottom bg-light">
   <!-- Grid container -->
-  <div class="container" style="margin-top:10px;">
+  <div class="container p-4">
     <!--Grid row-->
-    <div class="row"style="margin-bottom:10px;">
+    <div class="row">
       <!--Grid column-->
-      <div class="col-lg-4 col-md-6 mb-4 mb-md-0">
-          <a href="mailto:omnessante@omnes.com" class="text-dark" >Mail : omnessante@omnes.com</a>
+      <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+        <h5 class="text-uppercase">A propos de nous</h5>
+
+        <ul class="list-unstyled mb-0">
+          <li>
+            <a href="omnessante@omnes.com!" class="text-dark">Mail : omnessante@omnes.com</a>
+          </li>
+          <li>
+            <a href="#!" class="text-dark">Telephone : 01 00 00 00 00</a>
+          </li>
+          <li>
+            <a href="https://www.google.com/maps/place/ECE+Paris/@48.8517668,2.2864819,15z/data=!4m2!3m1!1s0x0:0x167f5a60fb94aa76?sa=X&ved=2ahUKEwjq5cC_s_T3AhUP_4UKHX_KATsQ_BJ6BQi_ARAF!" class="text-dark">Adresse : 37 Quai de Grenelle, 75015 Paris</a>
+          </li>
+        </ul>
       </div>
-      <div class="col-lg-4 col-md-6 mb-4 mb-md-0">        
-          <a href="https://www.google.com/maps/place/ECE+Paris/@48.8517668,2.2864819,15z/data=!4m2!3m1!1s0x0:0x167f5a60fb94aa76?sa=X&ved=2ahUKEwjq5cC_s_T3AhUP_4UKHX_KATsQ_BJ6BQi_ARAF!" class="text-dark">Adresse : 37 Quai de Grenelle, 75015 Paris</a>
-      </div> 
-      <div class="col-lg-4 col-md-6 mb-4 mb-md-0">
-          <a href="#!" class="text-dark">Telephone : 01 00 00 00 00</a>    
-      </div>
-    </div> 
       <!--Grid column-->
 
   <!-- Copyright -->
@@ -221,7 +226,6 @@ include('db_config.php');
     <a class="text-dark" href="index.php">OMNESSante.com</a>
   </div>
   <!-- Copyright -->
-        </div>
 </footer>
     </wrapper> 
     
