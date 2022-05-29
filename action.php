@@ -58,7 +58,9 @@ if (isset($_POST['Info']) && !empty($_POST['Info']))  // Du coup la on verifie b
 	$_SESSION['Type_Rdv']="Medecin";
 
 	$result = $con->query($query);
-	$row = $result->fetch_assoc();
+	$row = $result->fetch_assoc();	
+	$_SESSION['Nom_CV']=$row['medname'];
+
 	echo "  <h5 class='modal-title' style=' color: #000;' id='mod2Label'>".$row['medname']." ".$row['medjob']."</h5> |";
 	$_SESSION['Id']=$data;
                    
@@ -518,7 +520,6 @@ if (isset($_POST['strUser']) && !empty($_POST['strUser']))  // Du coup la on ver
 {
 	$_SESSION['typeCarte']=$_POST['strUser'];
 }
-
 
 
 

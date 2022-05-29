@@ -5,8 +5,7 @@ session_start();
 require("traitement.php");
 header( 'content-type: text/html; charset=utf-8' );
 include('db_config.php');
-/*$_SESSION['Id']="";
-$_SESSION['Select']="Void";*/
+$_SESSION['Nom_CV']="";
 
 
 ?>
@@ -430,7 +429,7 @@ $_SESSION['Select']="Void";*/
                                                                                       </div>
 
                                                                                       <div class="col-sm-12" style="padding-top: 260px; padding-left: 100px;">
-                                                                                        <button type="button" class="btn btn-info">Contact</button>
+                                                                                        <button type="button" class="btn btn-info">Voir Cv</button>
                                                                                     </div>
                                                                                   </div>
                                                               </div>
@@ -640,7 +639,7 @@ document.getElementById("datefield1").setAttribute("min", today);
                                                                                       </div>
 
                                                                                       <div class='col-sm-12' style='padding-top: 260px; padding-left: 100px;'>
-                                                                                        <button type='button' class='btn btn-info'>Contact</button>
+                                                                                        <a href="Affich_CV.php" target="_blank" type='button' class='btn btn-info'>Consulter Cv</a>
                                                                                     </div>
                                                                                   </div>
                                                               </div>
@@ -814,7 +813,6 @@ document.getElementById("datefield1").setAttribute("min", today);
                                                                                       </div>
 
                                                                                       <div class="col-sm-12" style="padding-top: 260px; padding-left: 100px;">
-                                                                                        <button type="button" class="btn btn-info">Contact</button>
                                                                                     </div>
                                                                                   </div>
                                                               </div>
@@ -911,7 +909,6 @@ document.getElementById("datefield3").setAttribute("min", today);
   <div class="text-center p-3" style="background-color: rgb(164, 231, 252);">
     © 2022 Copyright:
     <a class="text-dark" href="index.php">OMNESSante.com</a>
-  </div>
   <!-- Copyright -->
         </div>
 </footer>

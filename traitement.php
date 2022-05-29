@@ -878,16 +878,11 @@ function getTableContents2 ($db_handle)
 		 						<tr style='width=300px;'>
 		   						<td style='width=300px;'> 
 		   						<form method='POST' action='' >
-		   						    <button  type='submit' style='width: 1px; height: 1px;' value=".utf8_encode($row[0])." name='Delete1' onclick='change2(this.id);' id=".utf8_encode($row[0])."></i></button> 
-                                  	<button  type='submit' style = 'margin-left:-110px;' value=".utf8_encode($row[0])." name='Delete1' onclick='change2(this.id);' id=".utf8_encode($row[0])."><i class='fa-solid fa-trash'></i></button> 
-                                </form>
-								<form method='POST' action='CreatCv.php' style=' margin-top:-34px;' action='' >
-		   						    <button   disabaled style='width: 1px; height: 1px;margin-right:100px; margin-left:-100px; margin-top:-100px;' ></button> 
-									<button   disabaled style='width: 1px; height: 1px;margin-right:100px;margin-left:-145px; margin-top:-100px;' </button> 
-									<button type='submit' value=".utf8_encode($row[0])." name='CvBtn' style ='margin-top:-100px;' id=".utf8_encode($row[0])."><i class='fa-solid fa-file'></i></button> 
+		   						    <button  hidden type='submit'  value=".utf8_encode($row[0])." name='Delete1' onclick='change2(this.id);' id=".utf8_encode($row[0])."><i class='fa-solid fa-trash'></i></button> 
+                                  	<button  type='submit' style = 'margin-left:-60px;' value=".utf8_encode($row[0])." name='Delete1' onclick='change2(this.id);' id=".utf8_encode($row[0])."><i class='fa-solid fa-trash'></i></button> 
                                 </form>
                                 <form method='POST' action='' style='margin-left : 100px; margin-top: -44px;' >
-		   						<button type='submit' style = 'margin-left:-15px;' value=".utf8_encode($row[0])." name='Modif1' onclick='change(this.id);' id=".utf8_encode($row[0])." ><i class='fa-solid fa-pen-to-square'></i></button> 
+		   						<button type='submit' style = 'margin-left:-30px;' value=".utf8_encode($row[0])." name='Modif1' onclick='change(this.id);' id=".utf8_encode($row[0])." ><i class='fa-solid fa-pen-to-square'></i></button> 
 		   						
 		   						</td>
 		   						<td style='width=220px;'><input class='textBoxStyle' type='text' name='idMedecin' id='idMedecin' value='".utf8_encode($row[0])."' disabled></td>
@@ -1094,7 +1089,6 @@ if (isset($_POST['Delete2']))
                                 	<button  type='submit' style = 'margin-left:-60px;' value=".utf8_encode($row[0])." name='Delete3' onclick='change2(this.id);' id=".utf8_encode($row[0])."><i class='fa-solid fa-trash'></i></button> 
 
                                   </form>
-								  
 
                                 <form method='POST' action='' style='margin-left : 100px; margin-top: -44px;' >
 

@@ -8,7 +8,7 @@ $_SESSION['NomCreation']="";
 $_SESSION['PseudoCreation']="";
 $_SESSION['MailCreation']="";
 $_SESSION['MdpCreation']="";
-
+$_SESSION['Nom_CV']="";
 
 $_SESSION["Client"] = "";
 $_SESSION["IdClient"] = "";
