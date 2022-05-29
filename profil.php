@@ -268,7 +268,7 @@ function ResizeImage() {
 
 </body>
 
-<footer class="fixed-bottom bg-light">
+<footer class="fixed-bottom bg-light" style="margin-top:100px;">
     <!-- Grid container -->
     <div class="container p-4">
       <!--Grid row-->

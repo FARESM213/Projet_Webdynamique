@@ -113,7 +113,7 @@ include('db_config.php');
   <br />
   <div class="container">   <br />
 
-   <h3 align="center">Recherche d'un medecin par son nom</h3>
+   <h3 align="center">Recherche d'un medecin par son nom / spécialité</h3>
    <br />
    <div class="row">
     <div class="col-md-3"></div>
