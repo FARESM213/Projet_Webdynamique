@@ -159,29 +159,34 @@ require("traitement.php");
 
     </body>
 
-<footer class="fixed-bottom bg-light" style="padding-bottom:10px;">
+<footer class="fixed-bottom bg-light">
   <!-- Grid container -->
-  <div class="container" style="margin-top:10px;">
+  <div class="container p-4">
     <!--Grid row-->
-    <div class="row"style="margin-bottom:10px;">
+    <div class="row">
       <!--Grid column-->
-      <div class="col-lg-4 col-md-6 mb-4 mb-md-0">
-          <a href="mailto:omnessante@omnes.com" class="text-dark" >Mail : omnessante@omnes.com</a>
+      <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+        <h5 class="text-uppercase">A propos de nous</h5>
+
+        <ul class="list-unstyled mb-0">
+          <li>
+            <a href="omnessante@omnes.com!" class="text-dark">Mail : omnessante@omnes.com</a>
+          </li>
+          <li>
+            <a href="#!" class="text-dark">Telephone : 01 00 00 00 00</a>
+          </li>
+          <li>
+            <a href="https://www.google.com/maps/place/ECE+Paris/@48.8517668,2.2864819,15z/data=!4m2!3m1!1s0x0:0x167f5a60fb94aa76?sa=X&ved=2ahUKEwjq5cC_s_T3AhUP_4UKHX_KATsQ_BJ6BQi_ARAF!" class="text-dark">Adresse : 37 Quai de Grenelle, 75015 Paris</a>
+          </li>
+        </ul>
       </div>
-      <div class="col-lg-4 col-md-6 mb-4 mb-md-0">        
-          <a href="https://www.google.com/maps/place/ECE+Paris/@48.8517668,2.2864819,15z/data=!4m2!3m1!1s0x0:0x167f5a60fb94aa76?sa=X&ved=2ahUKEwjq5cC_s_T3AhUP_4UKHX_KATsQ_BJ6BQi_ARAF!" class="text-dark">Adresse : 37 Quai de Grenelle, 75015 Paris</a>
-      </div> 
-      <div class="col-lg-4 col-md-6 mb-4 mb-md-0">
-          <a href="#!" class="text-dark">Telephone : 01 00 00 00 00</a>    
-      </div>
-    </div> 
       <!--Grid column-->
 
   <!-- Copyright -->
   <div class="text-center p-3" style="background-color: rgb(164, 231, 252);">
     © 2022 Copyright:
     <a class="text-dark" href="index.php">OMNESSante.com</a>
+  </div>
   <!-- Copyright -->
-        </div>
 </footer>
 </html>
