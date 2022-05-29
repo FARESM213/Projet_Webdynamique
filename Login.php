@@ -188,6 +188,7 @@
                      }
 
                     }   
+                unset($_SESSION['name']); // delete any specific session only
 
                 header("Location: toutparc.php");
                 die();
