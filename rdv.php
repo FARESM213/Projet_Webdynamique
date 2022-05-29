@@ -18,36 +18,18 @@ $_SESSION['Select']="Void";*/
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Rendez-vous</title>
-
-
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.css" />
- 
-  <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
-  <!-- Bootstrap Css -->
-  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
-
     <script src="
     https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js">
         </script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
   </head>
 
-  <script type="text/javascript">
-  $(function() {
-     $( "#term" ).autocomplete({
-       source: 'action.php',
-     });
-  });
-</script>
-
-
-
   <script type='text/javascript'>
 
 
   $(document).ready(function()
    {
+
           $('#clear').on('click', function(event) {
 
           const  ul = document.getElementById("Rdv");
@@ -307,55 +289,6 @@ $_SESSION['Select']="Void";*/
 
     
   </script>
-
-  <script>
-$(document).ready(function(){
-  
- $('#gsearchsimple').keyup(function(){
-  var query = $('#gsearchsimple').val();
-  $('#detail').html('');
-  $('.list-group').css('display', 'block');
-  if(query.length == 2)
-  {
-   $.ajax({
-    url:"fetch.php",
-    method:"POST",
-    data:{query:query},
-    success:function(data)
-    {
-     $('.list-group').html(data);
-    }
-   })
-  }
-  if(query.length == 0)
-  {
-   $('.list-group').css('display', 'none');
-  }
- });
-
- $('#localSearchSimple').jsLocalSearch({
-  action:"Show",
-  html_search:true,
-  mark_text:"marktext"
- });
-
- $(document).on('click', '.gsearch', function(){
-  var email = $(this).text();
-  $('#gsearchsimple').val(email);
-  $('.list-group').css('display', 'none');
-  $.ajax({
-   url:"fetch.php",
-   method:"POST",
-   data:{email:email},
-   success:function(data)
-   {
-    $('#detail').html(data);
-   }
-  })
- });
-});
-</script>
-
 
   <body>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
