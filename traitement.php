@@ -827,18 +827,19 @@ if (isset($_POST['Modif']))
 		 	";
 			$res= mysqli_query($db_handle,$sql);
 
-		if(($res))
-		{	
-			echo "<script type='text/javascript'>alert('Modification reussie !');window.location.href='admin.php';</script>";
-		}
+			if(($res))
+			{	
+				echo "<script type='text/javascript'>alert('Modification reussie !');window.location.href='admin.php';</script>";
+			}
 		
 		
 
-	}else
-		{
+	}
+	else
+	{
 			echo "<script type='text/javascript'>alert('Ce changement ne peux pas etre effectué !');</script>";
 
-		}
+	}
 
  }
 
@@ -927,24 +928,25 @@ if (isset($_POST['Modif1']))
 	{
       
 
- 	$sql=" UPDATE medecin SET
- 	medname='$nom',
-    medlogin='$log',
-	medpassword='$pass' ,
- 	email='$mail',
- 	medjob='$spe',
- 	hopital='$hospital' ,
- 	numTel='$tel'
- 	WHERE medno='$id';
- 	";
-	$res= mysqli_query($db_handle,$sql);
-	if($res)
-	{	
-		echo "<script type='text/javascript'>alert('Modification reussie !');window.location.href='admin.php';</script>";
-	}
+	 	$sql=" UPDATE medecin SET
+	 	medname='$nom',
+	    medlogin='$log',
+		medpassword='$pass' ,
+	 	email='$mail',
+	 	medjob='$spe',
+	 	hopital='$hospital' ,
+	 	numTel='$tel'
+	 	WHERE medno='$id';
+	 	";
+		$res= mysqli_query($db_handle,$sql);
+		if($res)
+		{	
+			echo "<script type='text/javascript'>alert('Modification reussie !');window.location.href='admin.php';</script>";
+		}
 	
 
- }else
+ }
+ else
 	{
 		echo "<script type='text/javascript'>alert('Ce changement ne peux pas etre effectué !');</script>";
 
@@ -1039,7 +1041,6 @@ if (isset($_POST['Modif2']))
 			echo "<script type='text/javascript'>alert('Modification reussie !');window.location.href='admin.php';</script>";
 		}
 	
-
 	}	
 	else
 	{
@@ -1132,12 +1133,7 @@ if (isset($_POST['Modif3']))
 
  	$id=$_POST['Modif3'];
 
- 	$query=" SELECT * FROM rendez_vous WHERE email='$mail' AND patno!='$id'";
-	$result = $con->query($query);
 
-      
-	if ($result->num_rows ==0)
-	{
 
 	 	$sql=" UPDATE rendez_vous SET
 	 	rdvno='$id',
@@ -1159,8 +1155,6 @@ if (isset($_POST['Modif3']))
 		{	
 			echo "<script type='text/javascript'>alert('Modification reussi !');window.location.href='admin.php';</script>";
 		}
-
-	}
 
  }
 
