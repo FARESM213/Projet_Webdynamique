@@ -735,7 +735,7 @@ document.getElementById("datefield1").setAttribute("min", today);
 
                                       <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                         <a href="confirmation.php" class="btn btn-info " id="Confirmer" name="Confirmer">Prendre Rendez-vous</a>
+                                         <a href="formCarte.php" class="btn btn-info " id="Confirmer" name="Confirmer">Prendre Rendez-vous</a>
                                         </div>
                                     </div>
                        </div>

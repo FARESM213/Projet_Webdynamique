@@ -514,6 +514,10 @@ if(isset($_POST["Modifier"])&& !empty($_POST['Modifier']))
 
 }
 
+if (isset($_POST['strUser']) && !empty($_POST['strUser']))  // Du coup la on verifie bien qu'on a post MedecinId avec javascript
+{
+	$_SESSION['typeCarte']=$_POST['strUser'];
+}
 
 
 

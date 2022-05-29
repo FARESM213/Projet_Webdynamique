@@ -20,11 +20,6 @@ $data="";
 if(verification($adress,$db_id,$db_mdp,$db,$db_handle,$data) )
 {
 
-	//ajouter_patient($db_handle);
-	//ajouter_medecin($db_handle);
-	//connexion($db_handle,'Admin');
-	//update_element($db_handle,'patient','patlogin','fares.messaoudi@edu.ece.fr','fafff');
-
 }
 
 
@@ -723,10 +718,7 @@ if(isset($_POST["Supprimer"])&& !empty($_POST['Supprimer']))
 		{
 			header("Location: mesRdv.php");
 		}
-		else
-		{
 
-		}
 	}
 	else
 	{
@@ -813,25 +805,41 @@ if (isset($_POST['Modif']))
  	$carte=$_POST['carteVital'];
  	$id=$_POST['Modif'];
 
- 	$sql=" UPDATE patient SET
- 	patname='$nom',
-    patlogin='$log',
-	patpassword='$pass' ,
- 	email='$mail',
- 	addresse1='$adress',
- 	ville='$ville' ,
- 	Pays='$pays',
- 	CodePostal='$code',
- 	Telephone='$num' ,
- 	CarteVitale='$carte'
- 	WHERE patno='$id';
- 	";
-	$res= mysqli_query($db_handle,$sql);
-	if($res)
-	{	
-		echo "<script type='text/javascript'>alert('Modification reussie !');window.location.href='admin.php';</script>";
-	}
-	
+ 	$query=" SELECT * FROM patient WHERE email='$mail' AND patno!='$id'";
+	$result = $con->query($query);
+
+      
+	if ($result->num_rows ==0)
+	{
+
+		 	$sql=" UPDATE patient SET
+		 	patname='$nom',
+		    patlogin='$log',
+			patpassword='$pass' ,
+		 	email='$mail',
+		 	addresse1='$adress',
+		 	ville='$ville' ,
+		 	Pays='$pays',
+		 	CodePostal='$code',
+		 	Telephone='$num' ,
+		 	CarteVitale='$carte'
+		 	WHERE patno='$id';
+		 	";
+			$res= mysqli_query($db_handle,$sql);
+
+		if(($res))
+		{	
+			echo "<script type='text/javascript'>alert('Modification reussie !');window.location.href='admin.php';</script>";
+		}
+		
+		
+
+	}else
+		{
+			echo "<script type='text/javascript'>alert('Ce changement ne peux pas etre effectué !');</script>";
+
+		}
+
  }
 
 
@@ -910,6 +918,15 @@ if (isset($_POST['Modif1']))
  	$tel=$_POST['teldoc'];
  	$id=$_POST['Modif1'];
 
+
+	$query=" SELECT * FROM medecin WHERE email='$mail' AND medno!='$id'";
+	$result = $con->query($query);
+
+      
+	if ($result->num_rows ==0)
+	{
+      
+
  	$sql=" UPDATE medecin SET
  	medname='$nom',
     medlogin='$log',
@@ -925,8 +942,13 @@ if (isset($_POST['Modif1']))
 	{	
 		echo "<script type='text/javascript'>alert('Modification reussie !');window.location.href='admin.php';</script>";
 	}
+	
 
+ }else
+	{
+		echo "<script type='text/javascript'>alert('Ce changement ne peux pas etre effectué !');</script>";
 
+	}
 
  }
 
@@ -997,19 +1019,34 @@ if (isset($_POST['Modif2']))
 
  	$id=$_POST['Modif2'];
 
- 	$sql=" UPDATE labo SET
- 	nomLab='$nom',
- 	email='$mail',
- 	type='$type' ,
- 	numTel='$tel'
- 	WHERE laboID='$id';
- 	";
-	$res= mysqli_query($db_handle,$sql);
-	$res= mysqli_query($db_handle,$sql);
-	if($res)
-	{	
-		echo "<script type='text/javascript'>alert('Modification reussie !');window.location.href='admin.php';</script>";
+	$query=" SELECT * FROM labo WHERE email='$mail' AND laboID!='$id'";
+	$result = $con->query($query);
+
+      
+	if ($result->num_rows ==0)
+	{
+
+	 	$sql=" UPDATE labo SET
+	 	nomLab='$nom',
+	 	email='$mail',
+	 	type='$type' ,
+	 	numTel='$tel'
+	 	WHERE laboID='$id';
+	 	";
+		$res= mysqli_query($db_handle,$sql);
+		if(($res)&&($res1))
+		{	
+			echo "<script type='text/javascript'>alert('Modification reussie !');window.location.href='admin.php';</script>";
+		}
+	
+
+	}	
+	else
+	{
+			echo "<script type='text/javascript'>alert('Ce changement ne peux pas etre effectué !');</script>";
+
 	}
+
 
  }
 
@@ -1095,25 +1132,34 @@ if (isset($_POST['Modif3']))
 
  	$id=$_POST['Modif3'];
 
- 	$sql=" UPDATE rendez_vous SET
- 	rdvno='$id',
- 	medno='$idMed',
- 	patno='$idPat',
- 	rdv_date='$dateRdv',
-	rdv_motif='$motif',
- 	rdv_duree='$dureeRdv',
- 	rdv_horaire='$heureRdv',
- 	loc='$lieuRdv',
-	etat='$etatRdv',
- 	Type='$typeRdv'
+ 	$query=" SELECT * FROM rendez_vous WHERE email='$mail' AND patno!='$id'";
+	$result = $con->query($query);
 
-	
- 	WHERE rdvno ='$id';
- 	";
-	$res= mysqli_query($db_handle,$sql);
-	if($res)
-	{	
-		echo "<script type='text/javascript'>alert('Modification reussi !');window.location.href='admin.php';</script>";
+      
+	if ($result->num_rows ==0)
+	{
+
+	 	$sql=" UPDATE rendez_vous SET
+	 	rdvno='$id',
+	 	medno='$idMed',
+	 	patno='$idPat',
+	 	rdv_date='$dateRdv',
+		rdv_motif='$motif',
+	 	rdv_duree='$dureeRdv',
+	 	rdv_horaire='$heureRdv',
+	 	loc='$lieuRdv',
+		etat='$etatRdv',
+	 	Type='$typeRdv'
+
+		
+	 	WHERE rdvno ='$id';
+	 	";
+		$res= mysqli_query($db_handle,$sql);
+		if($res)
+		{	
+			echo "<script type='text/javascript'>alert('Modification reussi !');window.location.href='admin.php';</script>";
+		}
+
 	}
 
  }
@@ -1165,6 +1211,10 @@ if(isset($_POST['plusMed']))
 
 	$sql="INSERT INTO `medecin`(`medno`) VALUES ('$id')";
 	$res= mysqli_query($db_handle,$sql);
+	if($res)
+	{	
+		echo "<script type='text/javascript'>alert('Ajout reussi !');</script>";
+	}
 
 	
 }
@@ -1177,6 +1227,10 @@ if(isset($_POST['plusLab']))
 
 	$sql="INSERT INTO `labo`(`laboID`) VALUES ('$id')";
 	$res= mysqli_query($db_handle,$sql);
+	if($res)
+	{	
+		echo "<script type='text/javascript'>alert('Ajout reussi !');</script>";
+	}
 	
 }
 
@@ -1189,8 +1243,119 @@ if(isset($_POST['plusRdv']))
 
 	$sql="INSERT INTO `rendez_vous`(`rdvno`) VALUES ('$id')";
 	$res= mysqli_query($db_handle,$sql);
+	if($res)
+	{	
+		echo "<script type='text/javascript'>alert('Ajout reussi !');</script>";
+	}
 	
 }
 
+
+
+function getNomClient($db_handle, $data)
+{
+	$sql="SELECT * FROM patient WHERE patno = '$data' ";
+	$res= mysqli_query($db_handle,$sql);
+	
+	if ($row = mysqli_fetch_row($res)) 
+	{
+	echo " 
+		<span class='font-weight-bold d-block mt-4'>Bonjour  ".$row[1]. "</span>
+	
+	";
+	}	
+}
+
+function getDateRDV($db_handle, $data)
+{
+	$sql="SELECT * FROM rendez_vous WHERE rdvno = '$data' ";
+	$res= mysqli_query($db_handle,$sql);
+	
+	if ($row = mysqli_fetch_row($res)) 
+	{
+	echo " 
+				<span>    ".$row[3]. "   </span>
+	
+	";
+	}
+}
+
+function getMail($db_handle, $data)
+{
+	$sql="SELECT * FROM patient WHERE patno = '$data' ";
+	$res= mysqli_query($db_handle,$sql);
+	
+	if ($row = mysqli_fetch_row($res)) 
+	{
+	echo " 
+				<span>    ".$row[4]. "   </span>
+	
+	";
+	}
+}
+
+function getDocteurInfo($db_handle, $data)
+{
+	$sql="SELECT * FROM medecin WHERE medno = '$data' ";
+	$res= mysqli_query($db_handle,$sql);
+	
+	if ($row = mysqli_fetch_row($res)) 
+	{
+	echo " 
+			<span class='font-weight-bold'>  ".$row[1]. "   </span>                      
+				<span class='d-block'>   ".$row[4]. "  </span>
+				</td>
+				<td width='20%'>
+				<div class='text-left'>
+				<span class='font-weight-bold'>Total</span>                 
+				</div>
+					<div class='text-right'>
+						<span class='font-weight-bold'>";
+				
+						if($row[4]=='Generale')
+						{
+							echo "$30.99";
+						}
+						else
+						{
+							echo "$50.99";
+						}
+						
+						
+	echo "	</span>
+					</div>
+				</td>
+	
+	";
+	}	
+}
+
+function getRDVHoraire($db_handle, $data)
+{
+	$sql="SELECT * FROM rendez_vous WHERE rdvno = '$data' ";
+	$res= mysqli_query($db_handle,$sql);
+	
+	if ($row = mysqli_fetch_row($res)) 
+	{
+	echo " 
+					<span>Horaire : ".$row[6]. "h </span></br>
+	
+	";
+	}	
+}
+
+function getDocteurInfo2($db_handle, $data)
+{
+	$sql="SELECT * FROM medecin WHERE medno = '$data' ";
+	$res= mysqli_query($db_handle,$sql);
+	
+	if ($row = mysqli_fetch_row($res)) 
+	{
+	echo " 
+					<p>Vous avez pris un rendez-vous avec le Dr.  ".$row[1]. "  !</p>
+	
+	";
+	}	
+}
 
 ?>
