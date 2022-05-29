@@ -1,6 +1,10 @@
 <?php
 	
 	session_start();
+
+	require("traitement.php");
+	header( 'content-type: text/html; charset=utf-8' );
+	include('db_config.php');
 	//--------------------------------RECUPERATION INFORMATIONS PRINCIPALES-----------------------------------------
 	$Nom = isset($_POST["Nom"])? $_POST["Nom"] : "";
 	$Adresse = isset($_POST["Adresse"])? $_POST["Adresse"] : "";	
@@ -228,10 +232,17 @@
 ///////////////////////// Suavegarder le fichier ///////////////////////////////////
 
 
-	//$xml->save($nom_fichier) or die("Error, Unable to create XML file");
+$data=$_SESSION['Nom_create'];
+$nom_fichier= "CVS/".$data.".xml";
 
-$xml->save("1.xml") or die("Error, Unable to create XML file");
+$xml->save($nom_fichier) or die("Error, Unable to create XML file");
 
 ///////////////////////// AFFICHER LE FICHIER XML ///////////////////////////////////
+
+$_SESSION['Nom_create']="";
+ echo '<script>
+						alert("Cv sauvegardé ");
+						window.location.href="admin.php";
+						</script>';	 
 
 ?>

@@ -142,10 +142,10 @@ if($res)
                                                 url :"action.php",           // Valeur va etre renvoyée a action.php
                                                 type:"POST",                 
                                                 cache:false,                          // jsp ce que c'est 
-                                                data:{strUser:strUser},          // la en gros bah quand on va essayer de recuperer la valeur dans action.php, faudra mettre ca 
+                                                data:{strUser:strUser},          // la en gros bah quand on va essayer de recuperer la valeur dans action.php, faudra mettre  
                                                 success:function(data)
                                                 {
-                                                  alert(data);      // Avoir la valeur renvoyé par action.php de ce que j'ai compris  qu'on met dans horaire
+                                                  //alert(data);      // Avoir la valeur renvoyé par action.php de ce que j'ai compris  qu'on met dans horaire
                                                 }
                                             });     
                                         })
@@ -153,10 +153,8 @@ if($res)
 
                     </script>   
 
-
                     <form class="d-flex" style= "padding-left: 190px;"role="search">
-                        <input class="form-control me-2 " type="search" placeholder="Recherche" aria-label="Search">
-                        <button class="btn btn-outline-success" type="submit">Rechercher</button>
+                        <a href="indexx.php" class="btn btn-outline-success" type="submit">Rechercher</a>
                     </form>
                 </div>
             </nav>
@@ -171,7 +169,8 @@ if($res)
             <div class="container mt-5 mb-12">
                 <div class="row d-flex justify-content-center">
                 <h1> Vos informations </h1>
-                            <form>
+                    <form action="" method="post" enctype="multipart/form-data">
+
                             <div class="form-group">
                                 <label for="typeCarte">Type de carte</label>
                                 <select class="form-control" name="typeCarte" id="typeCarte" onchange="disable('typeCarte', 'cvcCarte','numCarte' )">
@@ -179,12 +178,12 @@ if($res)
                                     <option value="1">Carte Vitale</option>
                                     <option value="2">Visa</option>
                                     <option value="3">MasterCard</option>
-                                     <option value="4" >Autre</option>                          
+                                    <option value="4" >Autre</option>                          
                             </select>
                             </div>
                             <div class="form-group" style="width:300px;">
                                 <label for="numCarte">Numero de Carte</label>
-                                <input type="number" class="form-control" id="numCarte" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" type = "number" maxlength = "16">
+                                <input type="number" class="form-control" id="numCarte" name="nameCarte"  oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" type = "number" maxlength = "16">
                             </div>
                             <div class="form-group" style="width:100px;">
                                 <label for="cvcCarte">CVC</label>
@@ -192,41 +191,47 @@ if($res)
                             </div>
                             <div class="form-group"style="width:300px;">
                             <label for="nomClient">Nom</label>
-                                <input type="text" class="form-control" id="nomClient"></br></br></br></br>
+                                <input type="text" class="form-control" name="nomClienttt" id="nomClienttt" ></br></br></br></br>
                             </div>
+
+                                <button class='btn btn-info py-2 px-4 ms-3' onclick="sendTypeCarte('typeCarte')" id="Payement" name="Payement" >Confirmer</button>
+
                             </form>
-                            <a href='confirmation.php' class='btn btn-info py-2 px-4 ms-3' onclick="sendTypeCarte('typeCarte')" id="confirm">Confirmer</a>
                     </div>
             </div>                               
                             
     </body>
             
-   <footer class="fixed-bottom bg-light" style="padding-bottom:10px;">
-  <!-- Grid container -->
-  <div class="container" style="margin-top:10px;">
-    <!--Grid row-->
-    <div class="row"style="margin-bottom:10px;">
-      <!--Grid column-->
-      <div class="col-lg-4 col-md-6 mb-4 mb-md-0">
-          <a href="mailto:omnessante@omnes.com" class="text-dark" >Mail : omnessante@omnes.com</a>
-      </div>
-      <div class="col-lg-4 col-md-6 mb-4 mb-md-0">        
-          <a href="https://www.google.com/maps/place/ECE+Paris/@48.8517668,2.2864819,15z/data=!4m2!3m1!1s0x0:0x167f5a60fb94aa76?sa=X&ved=2ahUKEwjq5cC_s_T3AhUP_4UKHX_KATsQ_BJ6BQi_ARAF!" class="text-dark">Adresse : 37 Quai de Grenelle, 75015 Paris</a>
-      </div> 
-      <div class="col-lg-4 col-md-6 mb-4 mb-md-0">
-          <a href="#!" class="text-dark">Telephone : 01 00 00 00 00</a>    
-      </div>
-    </div> 
-      <!--Grid column-->
+    <footer class="fixed-bottom bg-light">
+    <!-- Grid container -->
+    <div class="container p-4">
+        <!--Grid row-->
+        <div class="row">
+        <!--Grid column-->
+        <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+            <h5 class="text-uppercase">A propos de nous</h5>
 
-  <!-- Copyright -->
-  <div class="text-center p-3" style="background-color: rgb(164, 231, 252);">
-    © 2022 Copyright:
-    <a class="text-dark" href="index.php">OMNESSante.com</a>
-  </div>
-  <!-- Copyright -->
+            <ul class="list-unstyled mb-0">
+            <li>
+                <a href="omnessante@omnes.com!" class="text-dark">Mail : omnessante@omnes.com</a>
+            </li>
+            <li>
+                <a href="#!" class="text-dark">Telephone : 01 00 00 00 00</a>
+            </li>
+            <li>
+                <a href="https://www.google.com/maps/place/ECE+Paris/@48.8517668,2.2864819,15z/data=!4m2!3m1!1s0x0:0x167f5a60fb94aa76?sa=X&ved=2ahUKEwjq5cC_s_T3AhUP_4UKHX_KATsQ_BJ6BQi_ARAF!" class="text-dark">Adresse : 37 Quai de Grenelle, 75015 Paris</a>
+            </li>
+            </ul>
         </div>
-</footer>
+        <!--Grid column-->
+
+    <!-- Copyright -->
+    <div class="text-center p-3" style="background-color: rgb(164, 231, 252);">
+        © 2022 Copyright:
+        <a class="text-dark" href="index.php">OMNESSante.com</a>
+    </div>
+    <!-- Copyright -->
+    </footer>
         </wrapper> 
         
         

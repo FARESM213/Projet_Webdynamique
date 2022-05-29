@@ -2,13 +2,31 @@
 
 // Start the session
 session_start();
+require("traitement.php");
+header( 'content-type: text/html; charset=utf-8' );
+include('db_config.php');
 
 ?>
 
 <?php
 
-	require("traitement.php");
-	include('db_config.php');
+
+ $data=$_SESSION['Nom_create_CV'];
+
+ $query = " SELECT * FROM medecin WHERE medno='$data'"; 
+ $result = $con->query($query);
+ $data2="";
+
+    if ($result->num_rows > 0)
+     {
+        while ($row = $result->fetch_assoc()) 
+        {
+            $data2=$row['medname'];
+
+        }
+    
+    }
+    $_SESSION['Nom_create']=$data2;
 
 ?>
 
@@ -149,7 +167,6 @@ session_start();
                     </div>
                 </div>   
                 <button class="btn btn-outline-success" type="submit"> Creer</button>
-
 
                 </div>
 

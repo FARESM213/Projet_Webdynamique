@@ -878,11 +878,16 @@ function getTableContents2 ($db_handle)
 		 						<tr style='width=300px;'>
 		   						<td style='width=300px;'> 
 		   						<form method='POST' action='' >
-		   						    <button  hidden type='submit'  value=".utf8_encode($row[0])." name='Delete1' onclick='change2(this.id);' id=".utf8_encode($row[0])."><i class='fa-solid fa-trash'></i></button> 
-                                  	<button  type='submit' style = 'margin-left:-60px;' value=".utf8_encode($row[0])." name='Delete1' onclick='change2(this.id);' id=".utf8_encode($row[0])."><i class='fa-solid fa-trash'></i></button> 
+		   						    <button  type='submit' style='width: 1px; height: 1px;' value=".utf8_encode($row[0])." name='Delete1' onclick='change2(this.id);' id=".utf8_encode($row[0])."></i></button> 
+                                  	<button  type='submit' style = 'margin-left:-110px;' value=".utf8_encode($row[0])." name='Delete1' onclick='change2(this.id);' id=".utf8_encode($row[0])."><i class='fa-solid fa-trash'></i></button> 
+                                </form>
+								<form method='POST' style=' margin-top:-34px;' action='' >
+		   						    <button   disabaled style='width: 1px; height: 1px;margin-right:100px; margin-left:-100px; margin-top:-100px;' ></button> 
+									<button   disabaled style='width: 1px; height: 1px;margin-right:100px;margin-left:-145px; margin-top:-100px;' </button> 
+									<button type='submit' value='".utf8_encode($row[0])."' name='CvBtn' style ='margin-top:-100px; background-color: green;' id='".utf8_encode($row[0])."'><i class='fa-solid fa-file'></i></button> 
                                 </form>
                                 <form method='POST' action='' style='margin-left : 100px; margin-top: -44px;' >
-		   						<button type='submit' style = 'margin-left:-30px;' value=".utf8_encode($row[0])." name='Modif1' onclick='change(this.id);' id=".utf8_encode($row[0])." ><i class='fa-solid fa-pen-to-square'></i></button> 
+		   						<button type='submit' style = 'margin-left:-15px;' value=".utf8_encode($row[0])." name='Modif1' onclick='change(this.id);' id=".utf8_encode($row[0])." ><i class='fa-solid fa-pen-to-square'></i></button> 
 		   						
 		   						</td>
 		   						<td style='width=220px;'><input class='textBoxStyle' type='text' name='idMedecin' id='idMedecin' value='".utf8_encode($row[0])."' disabled></td>
@@ -899,7 +904,6 @@ function getTableContents2 ($db_handle)
        }
 
 }
-
 
 
 if (isset($_POST['Modif1']))
@@ -1245,6 +1249,41 @@ if(isset($_POST['plusRdv']))
 }
 
 
+if(isset($_POST['CvBtn']))
+{
+
+$data=$_POST['CvBtn'];
+
+
+$data2="ucdbcudcbdub";
+
+ $query = " SELECT * FROM medecin WHERE medno='$data'"; 
+ $result = $con->query($query);
+
+    if ($result->num_rows > 0)
+     {
+        while ($row = $result->fetch_assoc()) 
+        {
+  			$data2=$row['medno'];
+
+  		}
+	
+	}
+
+   $_SESSION['Nom_create_CV']=$data2;
+
+
+echo '<script>
+			window.location.href="CreatCv.php";
+
+		</script>';	 
+
+
+
+}
+
+
+
 
 function getNomClient($db_handle, $data)
 {
@@ -1351,5 +1390,73 @@ function getDocteurInfo2($db_handle, $data)
 	";
 	}	
 }
+
+
+
+
+if (isset($_POST['Payement']))
+ {
+ 	
+
+	if(isset($_POST['nameCarte']))
+	{
+
+		    $Carte=$_POST['nameCarte'];
+			$client= $_SESSION['Client'];
+			$nom=$_POST['nomClienttt'];
+			$dbhost = "localhost";
+			$dbuser = "root";
+			$dbpass = "";
+			$db = "BDD";
+			$con = mysqli_connect($dbhost, $dbuser, $dbpass , $db) or die($con);
+
+
+			$query=" SELECT * FROM patient WHERE email='$client' AND  CarteVitale='$Carte' AND patname='$nom' ";
+			$result = $con->query($query);
+
+		    if ($result->num_rows > 0)
+		         {
+					echo "<script type='text/javascript'>alert('Paiement accepté ');
+					window.location.href='confirmation.php';
+
+					</script>";
+				}
+				else
+				{
+					echo "<script type='text/javascript'>alert('Paiement Refusé... ');</script>";
+
+				}
+
+	}
+	else
+	{
+			$client= $_SESSION['Client'];
+			$nom=$_POST['nomClienttt'];
+			$dbhost = "localhost";
+			$dbuser = "root";
+			$dbpass = "";
+			$db = "BDD";
+			$con = mysqli_connect($dbhost, $dbuser, $dbpass , $db) or die($con);
+
+			$query=" SELECT * FROM patient WHERE email='$client' AND patname='$nom' ";
+			$result = $con->query($query);
+
+		    if ($result->num_rows > 0)
+		       {
+					echo "<script type='text/javascript'>alert('Paiement accepté ');
+					window.location.href='confirmation.php';
+
+					</script>";
+				}
+				else
+				{
+					echo "<script type='text/javascript'>alert('Paiement Refusé... ');</script>";
+
+				}
+
+	}
+
+ }
+
 
 ?>

@@ -5,7 +5,6 @@ session_start();
 require("traitement.php");
 header( 'content-type: text/html; charset=utf-8' );
 include('db_config.php');
-$_SESSION['Nom_CV']="";
 
 
 ?>

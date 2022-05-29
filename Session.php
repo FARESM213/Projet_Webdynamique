@@ -36,6 +36,8 @@ $_SESSION['Rdv_Supp']="";
 $_SESSION['Type_Rdv']="Medecin";
 $_SESSION['comm']="";
 $_SESSION['name']=""; 
+$_SESSION['Nom_CV']="";
+
 
 
 
